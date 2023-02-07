@@ -4,12 +4,14 @@ library(methods)
 # 
 # handles the common attributes expected across all products
 
+setClassUnion("optional",c("NULL", "character","numeric"))
+
 setClass("BaseProduct",
     slots = c(
         name = "character",
-        brand = "character",
+        brand = "optional",
         # could this be from a discrete set
-        product_category = "character",
+        product_category = "optional",
         product_type = "character",
         units = "character",
         energy_units = "character",
