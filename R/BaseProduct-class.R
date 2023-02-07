@@ -70,3 +70,31 @@ show_BaseProduct <- function(object) {
 setMethod("show", "BaseProduct", function(object) {
     show_BaseProduct(object)
 })
+
+#' 
+#' 
+baseProduct <- function(...) {
+
+    data <- data.frame(...)
+
+    stopifnot("Expected passed dataframe to have a single row" = nrow(data) == 1)
+
+    new("BaseProduct", name = data$name,
+                            brand = data$brand,
+                            product_category = data$product_category,
+                            product_type = data$product_type,
+                            units = data$units,
+                            energy_units = data$energy_units,
+                            energy_measurement = data$energy_measurement,
+                            sugar_measurement = data$sugar_measurement,
+                            fat_measurement = data$fat_measurement,
+                            salt_measurement = data$salt_measurement,
+                            salt_units = data$salt_units,
+                            fibre_measurement = data$fibre_measurement,
+                            fibre_units = data$fibre_units,
+                            protein_measurement = data$protein_measurement,
+                            fruit_nut_measurement = data$fruit_nut_measurement
+                            )
+
+            
+}
