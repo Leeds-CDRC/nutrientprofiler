@@ -31,13 +31,13 @@ sg_food_converter <- function(row) {
 }
 
 sg_liquidfood_converter <- function(row) {
-    
+
     # if food type is not an empty string
     if(row[['food_type']] != "")  {
-    return(SGtab[[ row[['food_type']] ]] * as.numeric(row[['volume_ml']]))
+        return(SGtab[[ row[['food_type']] ]] * as.numeric(row[['volume_ml']]))
     } else {
         return(as.numeric(row[['volume_ml']]))
-}
+    }
 
 }
 
@@ -76,3 +76,14 @@ sg_powd_drink_converter <- function(row) {
     )
 }
 
+
+sg_cord_drink_converter <- function(row) {
+    stopifnot( "The passed data to sg_cord_drink_converter does not have the required columns" = "nutrition_info" %in% names(row))
+
+    switch(tolower(row[['nutrition_info']]),
+            "as consumed" = as.numeric(row[['volume_ml']]) * SGtab[['Cordial/squash ready to drink']],
+            "preparation instructions given" = (as.numeric(row[['volume_water_ml']]) + as.numeric(row[['volume_ml']])) * SGtab[['Cordial/squash ready to drink']],
+            "preparation instructions not given" = as.numeric(row[['volume_ml']]) * SGtab[['Cordial/squash undiluted']],
+            stop(paste0("sg_drink_converter: Unable to determine nutritional information from value: ",row['nutrition_info']," from `nutrition_info` column"))
+    )
+}
