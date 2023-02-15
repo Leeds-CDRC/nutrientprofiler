@@ -66,7 +66,7 @@ sg_ready_drink_converter <- function(row) {
 }
 
 sg_powd_drink_converter <- function(row) {
-    stopifnot( "The passed data to sg_drink_converter does not have the required columns" = "nutrition_info" %in% names(row))
+    stopifnot( "The passed data to sg_powd_drink_converter does not have the required columns" = "nutrition_info" %in% names(row))
 
     switch(tolower(row[['nutrition_info']]),
             "as consumed" = as.numeric(row[['volume_ml']]) * SGtab[['Cordial/squash ready to drink']],
