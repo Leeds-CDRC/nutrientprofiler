@@ -27,7 +27,7 @@ SGConverter <- function(row) {
 
 
 sg_food_converter <- function(row) {
-    return(ifelse(!is.na(row[['weight_g']]), "food", sg_liquidfood_converter(row)))
+    return(ifelse(!is.na(row[['weight_g']]), row[['weight_g']], sg_liquidfood_converter(row)))
 }
 
 sg_liquidfood_converter <- function(row) {
