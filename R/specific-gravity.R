@@ -18,9 +18,9 @@ SGConverter <- function(row) {
 
     stopifnot( "The passed data to SGConverter does not have the required columns" = "product_type" %in% names(row))
 
-    switch(row[['product_type']],
-            "Food" = sg_food_converter(row),
-            "Drink" = "drink drink", #sg_drink_converter(row),
+    switch(tolower(row[['product_type']]),
+            "food" = sg_food_converter(row),
+            "drink" = sg_drink_converter(row),
             stop(paste0("SGConverter: Unable to determine food type from value: ",row['product_type']," from `product_type` column"))
     )
 }
