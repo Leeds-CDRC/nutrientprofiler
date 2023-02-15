@@ -1,5 +1,5 @@
 SGtab <- c('Semi-skimmed milk' = 1.03,
-                'Carbonated drink/fruit juice' = 1.04,
+                'Carbonated/juice drink' = 1.04,
                 'Diet carbonated drink' = 1.00,
                 'Energy drink' = 1.07,
                 'Cordial/squash ready to drink' = 1.03,
