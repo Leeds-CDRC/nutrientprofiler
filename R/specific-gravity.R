@@ -15,27 +15,24 @@ SGtab <- c('Semi-skimmed milk' = 1.03,
 
 
 SGConverter <- function(row) {
-    switch(row['product_type'],
+
+    stopifnot( "The passed data to SGConverter does not have the required columns" = "product_type" %in% names(row))
+
+    switch(row[['product_type']],
             "Food" = sg_food_converter(row),
             "Drink" = "drink drink", #sg_drink_converter(row),
             stop(paste0("SGConverter: Unable to determine food type from value: ",row['product_type']," from `product_type` column"))
     )
-
 }
 
 
 sg_food_converter <- function(row) {
-    switch(row['units'],
-            "g" = "food",
-            "ml" = sg_liquidfood_converter(row),
-            stop(paste0("sg_food_converter: Unable to determine food type from value: ",row['units']," from `units` column"))
-    )
-
+    return(ifelse(!is.na(row[['weight_g']]), "food", sg_liquidfood_converter(row)))
 }
 
 sg_liquidfood_converter <- function(row) {
     
-    return(SGtab[[ row['food_type'] ]] * as.numeric(row['volume']))
+    return(SGtab[[ row[['food_type']] ]] * as.numeric(row[['volume_ml']]))
 }
 
 
