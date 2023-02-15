@@ -50,7 +50,7 @@ sg_drink_converter <- function(row) {
             "ready" = sg_ready_drink_converter(row),
             "powdered" = sg_powd_drink_converter(row),
             "cordial" = sg_cord_drink_converter(row),
-            stop(paste0("sg_drink_converter: Unable to determine food type from value: ",row['drink_format']," from `drink_format` column"))
+            stop(paste0("sg_drink_converter: Unable to determine drink type from value: ",row['drink_format']," from `drink_format` column"))
     )
 }
 
