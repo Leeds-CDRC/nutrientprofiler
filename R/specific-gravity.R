@@ -41,7 +41,18 @@ sg_liquidfood_converter <- function(row) {
 
 }
 
-# sg_food_converter <- function(row) {
+
+sg_drink_converter <- function(row) {
+
+    stopifnot( "The passed data to sg_drink_converter does not have the required columns" = "drink_format" %in% names(row))
+
+    switch(tolower(row[['drink_format']]),
+            "ready" = sg_ready_drink_converter(row),
+            "powdered" = sg_powd_drink_converter(row),
+            "cordial" = sg_cord_drink_converter(row),
+            stop(paste0("sg_drink_converter: Unable to determine food type from value: ",row['drink_format']," from `drink_format` column"))
+    )
+}
 
 #     switch(row$)
 
