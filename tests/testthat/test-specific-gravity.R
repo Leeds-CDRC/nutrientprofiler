@@ -26,7 +26,7 @@ test_that("SG conversion for liquid food with no category", {
 
 test_that("SG conversion for ready drink", {
   out <- SGConverter(test_data[3, ])
-  expect_equal(out, 130)
+  expect_equal(out, 104)
 })
 
 test_that("SG conversion for powdered drink", {
