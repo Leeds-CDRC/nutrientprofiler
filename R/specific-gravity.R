@@ -1,3 +1,4 @@
+#' specific gravity conversion named vector
 SGtab <- c('Semi-skimmed milk' = 1.03,
                 'Carbonated/juice drink' = 1.04,
                 'Diet carbonated drink' = 1.00,
@@ -13,7 +14,16 @@ SGtab <- c('Semi-skimmed milk' = 1.03,
                 'Whipping cream' = 0.96,
                 'Evaporated milk' = 1.07)
 
-
+#' Specific Gravity converter function
+#'
+#' This function is the key entry point for performing specific gravity conversions
+#' It works by processing data from a dataframe row and dispatching based on column values
+#' to a series of additional sub functions
+#' These return back an SG-adjusted number
+#' 
+#' @param row a row from a data.frame object
+#' @return A number.
+#' @export
 SGConverter <- function(row) {
 
     stopifnot( "The passed data to SGConverter does not have the required columns" = "product_type" %in% names(row))
@@ -25,11 +35,23 @@ SGConverter <- function(row) {
     )
 }
 
-
+#' Specific gravity food dispatcher
+#' 
+#' This function is run for data with the `product_type` "food"
+#' It checks if the column `weight_g` contains NA values to assume whether the food is liquid or solid
+#' And if solid returns the weight unadjusted or if liquid dispatches to an additional function
+#' 
 sg_food_converter <- function(row) {
     return(ifelse(!is.na(row[['weight_g']]), row[['weight_g']], sg_liquidfood_converter(row)))
 }
 
+#' Specific gravity liquid converter
+#' 
+#' This function is run for data that is identified by `sg_food_converter` as liquid food
+#' It checks for a value in the `food_type` column and if present retrieves a specific gravity multiplier
+#' which is multiplies against the `volume_ml` column value
+#' If `food_type` is empty is returns an unadjusted `volume_ml` value
+#' 
 sg_liquidfood_converter <- function(row) {
 
     # if food type is not an empty string
@@ -41,7 +63,11 @@ sg_liquidfood_converter <- function(row) {
 
 }
 
-
+#' Specific gravity drink dispatcher
+#' 
+#' This function is run for data with the `product_type` "drink"
+#' It dispatches to additional functions based on the matched value in the `drink_format` column
+#' 
 sg_drink_converter <- function(row) {
 
     stopifnot( "The passed data to sg_drink_converter does not have the required columns" = "drink_format" %in% names(row))
