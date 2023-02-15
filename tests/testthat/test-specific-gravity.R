@@ -6,7 +6,9 @@ zeno's icecream,,,Food,Ice cream,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
 mystic rush,,,Drink,,Ready,Carbonated/juice drink,,,194,11,0,,100,,0,0,0,,100,
 delta ringer drink,,,Drink,,Powdered,,Preparation instructions given,188,,15,0,,100,,0,0.5,3,25,,100
 welter water,,,Drink,,Cordial,,As consumed,,205,19,0,0.1,,,0,0.1,6,,100,
-janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,")
+janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
+beta ringer drink,,,Drink,,Powdered,,As consumed,188,,15,0,,100,,0,0.5,3,,50,
+zeta ringer drink,,,Drink,,Powdered,,Preparation instructions not given,188,,15,0,,100,,0,0.5,3,25,,")
 
 
 test_that("SG conversion for solid food", {
@@ -29,9 +31,19 @@ test_that("SG conversion for ready drink", {
   expect_equal(out, 104)
 })
 
-test_that("SG conversion for powdered drink", {
+test_that("SG conversion for powdered drink with instructions", {
   out <- SGConverter(test_data[4, ])
   expect_equal(out, 128.75)
+})
+
+test_that("SG conversion for powdered drink without instructions", {
+  out <- SGConverter(test_data[8, ])
+  expect_equal(out, 25)
+})
+
+test_that("SG conversion for powdered drink as consumed", {
+  out <- SGConverter(test_data[7, ])
+  expect_equal(out, 51.5)
 })
 
 test_that("SG conversion for cordial drink", {
