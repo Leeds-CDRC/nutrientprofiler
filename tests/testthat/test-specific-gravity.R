@@ -8,7 +8,9 @@ delta ringer drink,,,Drink,,Powdered,,Preparation instructions given,188,,15,0,,
 welter water,,,Drink,,Cordial,,As consumed,,205,19,0,0.1,,,0,0.1,6,,100,
 janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
 beta ringer drink,,,Drink,,Powdered,,As consumed,188,,15,0,,100,,0,0.5,3,,50,
-zeta ringer drink,,,Drink,,Powdered,,Preparation instructions not given,188,,15,0,,100,,0,0.5,3,25,,")
+zeta ringer drink,,,Drink,,Powdered,,Preparation instructions not given,188,,15,0,,100,,0,0.5,3,25,,
+heavyweight water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,20,100
+bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,,,0,0.1,6,,100,")
 
 
 test_that("SG conversion for solid food", {
@@ -46,9 +48,19 @@ test_that("SG conversion for powdered drink as consumed", {
   expect_equal(out, 51.5)
 })
 
-test_that("SG conversion for cordial drink", {
+test_that("SG conversion for cordial drink as consumed", {
   out <- SGConverter(test_data[5, ])
-  expect_equal(out, 130)
+  expect_equal(out, 103)
+})
+
+test_that("SG conversion for cordial drink with instructions", {
+  out <- SGConverter(test_data[9, ])
+  expect_equal(out, 123.6)
+})
+
+test_that("SG conversion for cordial drink without instructions", {
+  out <- SGConverter(test_data[10, ])
+  expect_equal(out, 109)
 })
 
 
