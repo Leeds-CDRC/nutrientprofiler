@@ -32,9 +32,14 @@ sg_food_converter <- function(row) {
 
 sg_liquidfood_converter <- function(row) {
     
+    # if food type is not an empty string
+    if(row[['food_type']] != "")  {
     return(SGtab[[ row[['food_type']] ]] * as.numeric(row[['volume_ml']]))
+    } else {
+        return(as.numeric(row[['volume_ml']]))
 }
 
+}
 
 # sg_food_converter <- function(row) {
 
