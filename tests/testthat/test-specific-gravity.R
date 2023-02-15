@@ -4,8 +4,8 @@ name,brand,product_category,product_type,food_type,drink_format,drink_type,nutri
 lembas,,,Food,,,,,266,,50,3,,0.6,3,,7,0,100,,
 zeno's icecream,,,Food,Ice cream,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
 mystic rush,,,Drink,,Ready,Carbonated/juice drink,,,194,11,0,,100,,0,0,0,,100,
-delta ringer drink,,,Drink,,Powdered,,As consumed,188,,15,0,,100,,0,0.5,3,25,,100
-welter water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,100,
+delta ringer drink,,,Drink,,Powdered,,Preparation instructions given,188,,15,0,,100,,0,0.5,3,25,,100
+welter water,,,Drink,,Cordial,,As consumed,,205,19,0,0.1,,,0,0.1,6,,100,
 janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,")
 
 
