@@ -54,6 +54,16 @@ sg_drink_converter <- function(row) {
     )
 }
 
-#     switch(row$)
+sg_ready_drink_converter <- function(row) {
+
+    # if drink type is not an empty string
+    if(row[['drink_type']] != "")  {
+        return(SGtab[[ row[['drink_type']] ]] * as.numeric(row[['volume_ml']]))
+    } else {
+        return(as.numeric(row[['volume_ml']]))
+    }
+
+}
+
 
 # }
