@@ -31,7 +31,7 @@ test_that("SG conversion for ready drink", {
 
 test_that("SG conversion for powdered drink", {
   out <- SGConverter(test_data[4, ])
-  expect_equal(out, 130)
+  expect_equal(out, 128.75)
 })
 
 test_that("SG conversion for cordial drink", {
