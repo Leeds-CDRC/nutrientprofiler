@@ -8,6 +8,11 @@ delta ringer drink,,,Drink,,Powdered,,As consumed,188,,15,0,,100,,0,0.5,3,25,,10
 welter water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,100,")
 
 
+test_that("SG conversion for solid food", {
+  out <- SGConverter(test_data[1, ])
+  expect_equal(out, 100)
+})
+
 test_that("SG conversion for liquid food", {
   out <- SGConverter(test_data[2, ])
   expect_equal(out, 130)
