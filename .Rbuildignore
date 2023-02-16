@@ -1,3 +1,4 @@
 ^LICENSE\.md$
 ^nutrientprofiler\.Rproj$
 ^\.Rproj\.user$
+^\.devcontainer$
