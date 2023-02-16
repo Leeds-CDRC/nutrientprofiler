@@ -16,7 +16,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R -q -e 'renv::install()'",
+	"postCreateCommand": "R -q -e 'install.packages(\"devtools\", repo=\"https://www.stats.bris.ac.uk/R/\"'",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
