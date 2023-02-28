@@ -30,24 +30,21 @@ NPM_score_function <- function(row, type) {
 #' It iterates over the reversed vector of indexes in the thresholds vector
 #' And checks if the value is less than the threshold value at the itered index 
 #' (comparing from smallest to largest).
-#' If the value is smaller than the threshold it calculates the score as the absolute value
-#' of the index minus the total number of thresholds.
-#' In the case of where the value is never less than the threshold the score equal to the 
-#' length of the thresholds vector is returned.
+#' The threshold score is calculated as the length of the thresholds minus every else branch iter
+#' of the loop.
 #' 
 #' @param value a passed numeric value
 #' @param thresholds a vector of thresholds to use to score against in order of highest to lowest
 scoring_function <- function(value, thresholds) {
     stopifnot("thresholds has no length" = length(thresholds) > 1)
     # TODO: linter warning to use seq_along
-    for (x in rev(1:length(thresholds))) {
-        if (value < thresholds[x]) {
-            score <- abs(x - length(thresholds))
+    score <- length(thresholds)
+    for (x in 1:length(thresholds)) {
+        if (value > thresholds[x]) {
             break
-        } else if (x != 1) {
-            next
         } else {
-            score <- length(thresholds)
+            score <- score - 1
+            next
         }
     }
     return(score)
