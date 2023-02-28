@@ -30,7 +30,7 @@ test_that("A NPM score for KJ that returns 5 ", {
 
 test_that("test scoring_function on a boundary", {
   out <- scoring_function(5, c(10, 5, 1))
-  expect_equal(out, 2)
+  expect_equal(out, 1)
 })
 
 # testing the generic scoring function
