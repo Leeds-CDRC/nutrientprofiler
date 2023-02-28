@@ -11,6 +11,12 @@ test_data_sugar <- data.frame(
   "expected_score" = c(0, 10, 5, 4)
 )
 
+test_data_fat <- data.frame(
+  "sg_adjusted_weight" = c(120, 50, 80, 30),
+  "fat_measurement_g" = c(20, 4, 3.8, 0),
+  "expected_score" = c(10, 7, 4, 0)
+)
+
 # testing NPM A score
 test_that("A NPM score for KJ that returns 0", {
   out <- NPM_score_function(test_data_a[1, ], "a")
@@ -84,3 +90,28 @@ test_that("NPM sugar score that returns 5 ", {
   out <- NPM_score_function(test_data_sugar[4, ], "sugar")
   expect_equal(out, 4)
 })
+
+
+# testing NPM fat score
+test_that("NPM fat score that returns 10", {
+  out <- NPM_score_function(test_data_fat[1, ], "fat")
+  expect_equal(out, test_data_fat[1, "expected_score" ])
+})
+
+test_that("NPM fat score for returns 9", {
+  out <- NPM_score_function(test_data_fat[2, ], "fat")
+  expect_equal(out, test_data_fat[2, "expected_score" ])
+})
+
+test_that("NPM fat score for returns 5", {
+  out <- NPM_score_function(test_data_fat[3, ], "fat")
+  expect_equal(out, test_data_fat[3, "expected_score" ])
+})
+
+test_that("NPM fat score for returns 0", {
+  out <- NPM_score_function(test_data_fat[4, ], "fat")
+  expect_equal(out, test_data_fat[4, "expected_score" ])
+})
+
+
+
