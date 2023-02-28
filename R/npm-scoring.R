@@ -2,7 +2,7 @@
 A_SCORE_THRESHOLDS <- c(3350, 3015, 2680, 2345, 2010, 1675, 1340, 1005, 670, 335)
 SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
 FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
-
+SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 
 #' a generic NPM scoring dispatcher
 #'
@@ -10,13 +10,14 @@ FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 NPM_score_function <- function(row, type) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("a", "sugar","fat")
+            type %in% c("a", "sugar","fat","salt")
     )
 
     score <- switch(tolower(type),
         "a" = scoring_function(a_value_adjuster(row), A_SCORE_THRESHOLDS),
         "sugar" = scoring_function(sugar_adjuster(row), SUGAR_SCORE_THRESHOLDS),
         "fat" = scoring_function(fat_adjuster(row), FAT_SCORE_THRESHOLDS),
+        "salt" = scoring_function(salt_adjuster(row), SODIUM_SCORE_THRESHOLDS),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
@@ -101,4 +102,24 @@ fat_adjuster <- function(row) {
     / row["sg_adjusted_weight"]) * 100
 
     return(fat_adjusted)
+}
+
+#' Function for calculating score for salt content
+#'
+#' @param row a row in a dataframe containing
+#'  "sg_adjusted_measurement" and "salt_measurement_g" or "sodium_measurement_mg" columns
+#' @return a value from 1 to 10
+salt_adjuster <- function(row) {
+    stopifnot(
+        "The passed data to NPM_a_score does not have the required columns" =
+            any(c("salt_measurement_g", "sodium_measurement_mg") %in% names(row))
+    )
+
+    salt_adjusted <- if (!is.na(row[["sodium_measurement_mg"]] | !is.null(row[["sodium_measurement_mg"]]))) {
+        (row["sodium_measurement_mg"] / row["sg_adjusted_weight"]) * 100
+    } else {
+        (( (row["salt_measurement_g"] / 2.5) * 1000) / row["sg_adjusted_weight"]) 
+    }
+
+    return(salt_adjusted)
 }
