@@ -14,38 +14,44 @@ test_data_sugar <- data.frame(
 # testing NPM A score
 test_that("A NPM score for KJ that returns 0", {
   out <- NPM_score_function(test_data_a[1, ], "a")
-  expect_equal(out, 0)
+  expect_equal(out, test_data_a[1, "expected_score"])
 })
 
 test_that("A NPM score for kcal that returns 10", {
   out <- NPM_score_function(test_data_a[2, ], "a")
-  expect_equal(out, 10)
+  expect_equal(out, test_data_a[2, "expected_score"])
 })
 
 
 test_that("A NPM score for KJ that returns 5 ", {
   out <- NPM_score_function(test_data_a[3, ], "a")
-  expect_equal(out, 5)
+  expect_equal(out, test_data_a[3, "expected_score"])
 })
 
-test_that("test scoring_function", {
-  out <- scoring_function(5, c(1, 5, 10))
-  expect_equal(out, 1)
+test_that("test scoring_function on a boundary", {
+  out <- scoring_function(5, c(10, 5, 1))
+  expect_equal(out, 2)
 })
 
 # testing the generic scoring function
 test_that("test scoring_function", {
-  out <- scoring_function(5.5, c(1, 5, 10))
-  expect_equal(out, 2)
+  out <- scoring_function(0, c(10, 5, 1))
+  expect_equal(out, 0)
+})
+
+# testing the generic scoring function
+test_that("test scoring_function", {
+  out <- scoring_function(2, c(10, 5, 1))
+  expect_equal(out, 1)
 })
 
 test_that("test scoring_function", {
-  out <- scoring_function(25, c(1, 5, 10))
+  out <- scoring_function(25, c(10, 5, 1))
   expect_equal(out, 3)
 })
 
 test_that("test scoring_function with vec of length 6", {
-  out <- scoring_function(25, c(1, 5, 10, 15, 20, 25))
+  out <- scoring_function(24, c(25, 20, 15, 10, 5, 1))
   expect_equal(out, 5)
 })
 
