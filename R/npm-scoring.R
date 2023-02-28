@@ -1,6 +1,7 @@
 # define threshold constants
 A_SCORE_THRESHOLDS <- c(3350, 3015, 2680, 2345, 2010, 1675, 1340, 1005, 670, 335)
 SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
+FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
 
 #' a generic NPM scoring dispatcher
@@ -9,12 +10,13 @@ SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
 NPM_score_function <- function(row, type) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("a", "sugar")
+            type %in% c("a", "sugar","fat")
     )
 
     score <- switch(tolower(type),
         "a" = scoring_function(a_value_adjuster(row), A_SCORE_THRESHOLDS),
         "sugar" = scoring_function(sugar_adjuster(row), SUGAR_SCORE_THRESHOLDS),
+        "fat" = scoring_function(fat_adjuster(row), FAT_SCORE_THRESHOLDS),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
@@ -81,4 +83,22 @@ sugar_adjuster <- function(row) {
     / row["sg_adjusted_weight"]) * 100
 
     return(sugar_adjusted)
+}
+
+#' Function for calculating score for fat content
+#'
+#' @param row a row in a dataframe containing
+#'  "sg_adjusted_measurement" and "fat_measurement_g" columns
+#' @return a value from 1 to 10
+fat_adjuster <- function(row) {
+    # could this `sg_adjusted_weight` column be an argument to be more flexible
+    stopifnot(
+        "The passed data to NPM_sugar_score does not have the required columns" =
+            c("sg_adjusted_weight", "fat_measurement_g") %in% names(row)
+    )
+
+    fat_adjusted <- (row["fat_measurement_g"]
+    / row["sg_adjusted_weight"]) * 100
+
+    return(fat_adjusted)
 }
