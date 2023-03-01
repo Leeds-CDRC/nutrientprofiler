@@ -108,15 +108,11 @@ salt_adjuster <- function(value, adjusted_weight, type = "sodium") {
             any(c("sodium", "salt") %in% tolower(type))
     )
 
-    stopifnot(
-        "Cannot divide by zero, please change 'adjusted_weight'" = 
-        adjusted_weight != 0
-    )
-
     salt_adjusted <- if (type == "sodium") {
-        (value / adjusted_weight) * 100
+        generic_adjuster(value, adjusted_weight)
     } else {
-        (( value * 1000) / adjusted_weight) 
+        # x10 here because salt adjustment should multiply value by 1000 not 100
+        generic_adjuster((value * 10), adjusted_weight)  
     }
 
     return(salt_adjusted)
