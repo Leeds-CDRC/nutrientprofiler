@@ -1,25 +1,17 @@
-test_that("salt_adjuster returns correct result with salt measurement in grams", {
-  row <- list("salt_measurement_g" = 2.5, "sodium_measurement_mg" = 1000, "sg_adjusted_weight" = 100)
-  result <- salt_adjuster(row)
-  expect_equal(result, 2.5)
+# Test for valid input
+test_that("salt_adjuster returns the correct output for valid input", {
+  expect_equal(salt_adjuster(50, 1000, "sodium"), 5)
+  expect_equal(salt_adjuster(2, 50, "salt"), 40)
 })
 
-# Test 2: Valid input with salt measurement missing
-test_that("salt_adjuster returns correct result with missing salt measurement", {
-  test_row <- data.frame("sodium_measurement_mg" = 1000, "sg_adjusted_weight" = 100)
-  result <- salt_adjuster(test_row)
-  expect_equal(result, 2.5)
+# Test for invalid type
+test_that("salt_adjuster throws an error for invalid type", {
+  expect_error(salt_adjuster(50, 1000, "invalid_type"), 
+               "Invalid type passed to salt_adjuster, can only be 'salt' or 'sodium'")
 })
 
-# Test 3: Valid input with sodium measurement missing
-test_that("salt_adjuster returns correct result with missing sodium measurement", {
-  test_row <- data.frame("salt_measurement_g" = 2.5, "sg_adjusted_weight" = 100)
-  result <- salt_adjuster(test_row)
-  expect_equal(result, 2500)
-})
-
-# Test 4: Invalid input with missing required columns
-test_that("salt_adjuster throws an error with missing required columns", {
-  test_row <- data.frame("sugar_measurement_g" = 2.5, "sg_adjusted_weight" = 100)
-  expect_error(salt_adjuster(test_row), "The passed data to NPM_a_score does not have the required columns")
+# Test for division by zero
+test_that("salt_adjuster throws an error for zero denominator", {
+  expect_error(salt_adjuster(50, 0, "sodium"), "Cannot divide by zero, please change 'adjusted_weight'")
+  expect_error(salt_adjuster(2, 0, "salt"), "Cannot divide by zero, please change 'adjusted_weight'")
 })
