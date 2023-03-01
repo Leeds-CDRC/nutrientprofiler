@@ -53,16 +53,25 @@ scoring_function <- function(value, thresholds) {
     return(score)
 }
 
-a_value_adjuster <- function(row) {
+
+#' Function for adjusting energy information for A score calculation
+#'
+#' Adjustment is required for calculating scores based on nutritional measurements.
+#'
+#' @param value a numeric value corresponding to a energy measurement in a food/drink
+#' @param adjusted_weight a numeric value corresponding to the total 
+#' weight of the food/drink after specific gravity adjustment
+#' @return a numeric value of adjusted nutritional data
+a_value_adjuster <- function(value, adjusted_weight, type = "kj") {
     stopifnot(
-        "The passed data to NPM_a_score does not have the required columns" =
-            c("energy_measurement_kj", "energy_measurement_kcal") %in% names(row)
+        "Invalid type passed to a_value_adjuster, can only be 'kj' or 'kcal'" =
+            any(c("kj", "kcal") %in% tolower(type))
     )
 
-    a_value <- if (!is.na(row[["energy_measurement_kj"]])) {
-        (row["energy_measurement_kj"] / row["sg_adjusted_weight"]) * 100
+    a_value <- if (type == "kj") {
+        generic_adjuster(value, adjusted_weight)
     } else {
-        ((row["energy_measurement_kcal"] / row["sg_adjusted_weight"]) * 100) * 4.184
+        generic_adjuster((value), adjusted_weight)  * 4.184
     }
 
     return(a_value)
