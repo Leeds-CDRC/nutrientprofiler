@@ -15,3 +15,22 @@ test_that("salt_adjuster throws an error for zero denominator", {
   expect_error(salt_adjuster(50, 0, "sodium"), "Cannot divide by zero, please change 'adjusted_weight'")
   expect_error(salt_adjuster(2, 0, "salt"), "Cannot divide by zero, please change 'adjusted_weight'")
 })
+
+## generic_adjuster tests
+
+# Test for valid input
+test_that("generic_adjuster returns the correct output for valid input", {
+  expect_equal(generic_adjuster(50, 1000), 5)
+  expect_equal(generic_adjuster(2, 50), 4)
+})
+
+# Test for division by zero
+test_that("generic_adjuster throws an error for zero denominator", {
+  expect_error(generic_adjuster(50, 0), "Cannot divide by zero, please change 'adjusted_weight'")
+})
+
+# Test for negative input
+test_that("generic_adjuster throws an error for negative input", {
+  expect_error(generic_adjuster(-50, 100), "Cannot submit a negative value for either 'value' or 'adjusted_weight in generic_adjuster")
+})
+
