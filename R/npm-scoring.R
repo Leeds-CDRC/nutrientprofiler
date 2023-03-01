@@ -98,6 +98,8 @@ generic_adjuster <- function(value, adjusted_weight) {
 #' Adjustments is required for calculating scores and depends on the type of salt measurement provided.
 #'
 #' @param value a numeric value corresponding to a salt measurement in a food/drink
+#' @param adjusted_weight a numeric value corresponding to the total 
+#' weight of the food/drink after specific gravity adjustment
 #' @param type a character of either "salt" or "sodium" to help determine the required adjustment
 #' @return a numeric value with appropriate adjustment made
 salt_adjuster <- function(value, adjusted_weight, type = "sodium") {
