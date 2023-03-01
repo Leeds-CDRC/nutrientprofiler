@@ -68,40 +68,29 @@ a_value_adjuster <- function(row) {
     return(a_value)
 }
 
-#' Function for calculating score for sugar content
+#' Function for generically adjusting nutritional measurement by total weight
 #'
-#' @param row a row in a dataframe containing
-#'  "sg_adjusted_measurement" and "sugar_measurement_g" columns
-#' @return a value from 1 to 10
-sugar_adjuster <- function(row) {
-    # could this `sg_adjusted_weight` column be an argument to be more flexible
+#' Adjustment is required for calculating scores based on nutritional measurements.
+#'
+#' @param value a numeric value corresponding to a nutritional measurement in a food/drink
+#' @param adjusted_weight a numeric value corresponding to the total 
+#' weight of the food/drink after specific gravity adjustment
+#' @return a numeric value of adjusted nutritional data
+generic_adjuster <- function(value, adjusted_weight) {
+
     stopifnot(
-        "The passed data to NPM_sugar_score does not have the required columns" =
-            c("sg_adjusted_weight", "sugar_measurement_g") %in% names(row)
+        "Cannot divide by zero, please change 'adjusted_weight'" = 
+        adjusted_weight != 0
     )
 
-    sugar_adjusted <- (row["sugar_measurement_g"]
-    / row["sg_adjusted_weight"]) * 100
-
-    return(sugar_adjusted)
-}
-
-#' Function for calculating score for fat content
-#'
-#' @param row a row in a dataframe containing
-#'  "sg_adjusted_measurement" and "fat_measurement_g" columns
-#' @return a value from 1 to 10
-fat_adjuster <- function(row) {
-    # could this `sg_adjusted_weight` column be an argument to be more flexible
     stopifnot(
-        "The passed data to NPM_sugar_score does not have the required columns" =
-            c("sg_adjusted_weight", "fat_measurement_g") %in% names(row)
+        "Cannot submit a negative value for either 'value' or 'adjusted_weight in generic_adjuster" = 
+        any(value > 0 & adjusted_weight > 0)
     )
 
-    fat_adjusted <- (row["fat_measurement_g"]
-    / row["sg_adjusted_weight"]) * 100
+    measurement_adj <- (value / adjusted_weight) * 100
 
-    return(fat_adjusted)
+    return(measurement_adj)
 }
 
 #' Function for adjusting the salt input value
