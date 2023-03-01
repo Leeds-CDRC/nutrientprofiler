@@ -104,21 +104,28 @@ fat_adjuster <- function(row) {
     return(fat_adjusted)
 }
 
-#' Function for calculating score for salt content
+#' Function for adjusting the salt input value
 #'
-#' @param row a row in a dataframe containing
-#'  "sg_adjusted_measurement" and "salt_measurement_g" or "sodium_measurement_mg" columns
-#' @return a value from 1 to 10
-salt_adjuster <- function(row) {
+#' Adjustments is required for calculating scores and depends on the type of salt measurement provided.
+#'
+#' @param value a numeric value corresponding to a salt measurement in a food/drink
+#' @param type a character of either "salt" or "sodium" to help determine the required adjustment
+#' @return a numeric value with appropriate adjustment made
+salt_adjuster <- function(value, adjusted_weight, type = "sodium") {
     stopifnot(
-        "The passed data to NPM_a_score does not have the required columns" =
-            any(c("salt_measurement_g", "sodium_measurement_mg") %in% names(row))
+        "Invalid type passed to salt_adjuster, can only be 'salt' or 'sodium'" =
+            any(c("sodium", "salt") %in% tolower(type))
     )
 
-    salt_adjusted <- if (!is.na(row[["sodium_measurement_mg"]] | !is.null(row[["sodium_measurement_mg"]]))) {
-        (row["sodium_measurement_mg"] / row["sg_adjusted_weight"]) * 100
+    stopifnot(
+        "Cannot divide by zero, please change 'adjusted_weight'" = 
+        adjusted_weight != 0
+    )
+
+    salt_adjusted <- if (type == "sodium") {
+        (value / adjusted_weight) * 100
     } else {
-        (( (row["salt_measurement_g"] / 2.5) * 1000) / row["sg_adjusted_weight"]) 
+        (( value * 1000) / adjusted_weight) 
     }
 
     return(salt_adjusted)
