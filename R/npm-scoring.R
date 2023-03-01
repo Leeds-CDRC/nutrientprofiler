@@ -62,13 +62,13 @@ scoring_function <- function(value, thresholds) {
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
 #' @return a numeric value of adjusted nutritional data
-a_value_adjuster <- function(value, adjusted_weight, type = "kj") {
+a_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
     stopifnot(
         "Invalid type passed to a_value_adjuster, can only be 'kj' or 'kcal'" =
-            any(c("kj", "kcal") %in% tolower(type))
+            any(c("kj", "kcal") %in% tolower(adjuster_type))
     )
 
-    a_value <- if (type == "kj") {
+    a_value <- if (adjuster_type == "kj") {
         generic_adjuster(value, adjusted_weight)
     } else {
         generic_adjuster((value), adjusted_weight)  * 4.184
@@ -103,7 +103,7 @@ generic_adjuster <- function(value, adjusted_weight) {
 }
 
 #' Function for adjusting the salt input value
-#'
+#' 
 #' Adjustments is required for calculating scores and depends on the type of salt measurement provided.
 #'
 #' @param value a numeric value corresponding to a salt measurement in a food/drink
@@ -111,13 +111,13 @@ generic_adjuster <- function(value, adjusted_weight) {
 #' weight of the food/drink after specific gravity adjustment
 #' @param type a character of either "salt" or "sodium" to help determine the required adjustment
 #' @return a numeric value with appropriate adjustment made
-salt_adjuster <- function(value, adjusted_weight, type = "sodium") {
+salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
     stopifnot(
         "Invalid type passed to salt_adjuster, can only be 'salt' or 'sodium'" =
-            any(c("sodium", "salt") %in% tolower(type))
+            any(c("sodium", "salt") %in% tolower(adjuster_type))
     )
 
-    salt_adjusted <- if (type == "sodium") {
+    salt_adjusted <- if (adjuster_type == "sodium") {
         generic_adjuster(value, adjusted_weight)
     } else {
         # x10 here because salt adjustment should multiply value by 1000 not 100
