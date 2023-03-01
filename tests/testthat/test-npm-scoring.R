@@ -18,21 +18,23 @@ test_data_fat <- data.frame(
 )
 
 # testing NPM A score
-test_that("A NPM score for KJ that returns 0", {
-  out <- NPM_score_function(test_data_a[1, ], "a")
-  expect_equal(out, test_data_a[1, "expected_score"])
+test_that("A NPM score for KJ data", {
+
+    test_data_a_kj <- test_data_a[!is.na(test_data_a$energy_measurement_kj),]
+
+  out <- NPM_score_function(test_data_a_kj[,"energy_measurement_kj"], test_data_a_kj[,"sg_adjusted_weight"], "a", adjuster_type = "kj")
+  expect_equal(out, test_data_a_kj[, "expected_score"])
 })
 
-test_that("A NPM score for kcal that returns 10", {
-  out <- NPM_score_function(test_data_a[2, ], "a")
-  expect_equal(out, test_data_a[2, "expected_score"])
+test_that("A NPM score for kcal data", {
+
+  test_data_a_kcal <- test_data_a[!is.na(test_data_a$energy_measurement_kcal),]
+
+  out <- NPM_score_function(test_data_a_kcal[,"energy_measurement_kcal"], test_data_a_kcal[,"sg_adjusted_weight"], "a", adjuster_type = "kcal")
+  expect_equal(out, test_data_a_kcal[, "expected_score"])
 })
 
-
-test_that("A NPM score for KJ that returns 5 ", {
-  out <- NPM_score_function(test_data_a[3, ], "a")
-  expect_equal(out, test_data_a[3, "expected_score"])
-})
+### scoring_function tests
 
 test_that("test scoring_function on a boundary", {
   out <- scoring_function(5, c(10, 5, 1))
@@ -69,48 +71,17 @@ test_that("test scoring_function on top end value ", {
 })
 
 
-# testing NPM sugar score
+# testing NPM_score_function for sugar
 test_that("NPM sugar score that returns 0", {
-  out <- NPM_score_function(test_data_sugar[1, ], "sugar")
-  expect_equal(out, 0)
-})
-
-test_that("NPM sugar score for kcal that returns 10", {
-  out <- NPM_score_function(test_data_sugar[2, ], "sugar")
-  expect_equal(out, 10)
+  out <- NPM_score_function(test_data_sugar[, "sugar_measurement_g"], test_data_sugar[,"sg_adjusted_weight"], "sugar")
+  expect_equal(out, test_data_sugar[, "expected_score"])
 })
 
 
-test_that("NPM sugar score that returns 5 ", {
-  out <- NPM_score_function(test_data_sugar[3, ], "sugar")
-  expect_equal(out, 5)
-})
-
-test_that("NPM sugar score that returns 5 ", {
-  out <- NPM_score_function(test_data_sugar[4, ], "sugar")
-  expect_equal(out, 4)
-})
-
-
-# testing NPM fat score
-test_that("NPM fat score that returns 10", {
-  out <- NPM_score_function(test_data_fat[1, ], "fat")
-  expect_equal(out, test_data_fat[1, "expected_score" ])
-})
-
-test_that("NPM fat score for returns 9", {
-  out <- NPM_score_function(test_data_fat[2, ], "fat")
-  expect_equal(out, test_data_fat[2, "expected_score" ])
-})
-
-test_that("NPM fat score for returns 5", {
-  out <- NPM_score_function(test_data_fat[3, ], "fat")
-  expect_equal(out, test_data_fat[3, "expected_score" ])
-})
-
-test_that("NPM fat score for returns 0", {
-  out <- NPM_score_function(test_data_fat[4, ], "fat")
-  expect_equal(out, test_data_fat[4, "expected_score" ])
+# testing NPM_score_function for fat
+test_that("NPM fat score that returns 0", {
+  out <- NPM_score_function(test_data_fat[, "fat_measurement_g"], test_data_fat[,"sg_adjusted_weight"], "fat")
+  expect_equal(out, test_data_fat[, "expected_score"])
 })
 
 
