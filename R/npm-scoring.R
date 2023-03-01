@@ -7,17 +7,17 @@ SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 #' a generic NPM scoring dispatcher
 #'
 #'
-NPM_score_function <- function(row, type) {
+NPM_score_function <- function(value, adjusted_weight, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
             type %in% c("a", "sugar","fat","salt")
     )
 
     score <- switch(tolower(type),
-        "a" = scoring_function(a_value_adjuster(row), A_SCORE_THRESHOLDS),
-        "sugar" = scoring_function(sugar_adjuster(row), SUGAR_SCORE_THRESHOLDS),
-        "fat" = scoring_function(fat_adjuster(row), FAT_SCORE_THRESHOLDS),
-        "salt" = scoring_function(salt_adjuster(row), SODIUM_SCORE_THRESHOLDS),
+        "a" = sapply(a_value_adjuster(value, adjusted_weight, ...), scoring_function, A_SCORE_THRESHOLDS),
+        "sugar" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, SUGAR_SCORE_THRESHOLDS),
+        "fat" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, FAT_SCORE_THRESHOLDS),
+        "salt" = sapply(salt_adjuster(value, adjusted_weight, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
