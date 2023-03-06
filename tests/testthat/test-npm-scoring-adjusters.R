@@ -34,24 +34,24 @@ test_that("generic_adjuster throws an error for negative input", {
   expect_error(generic_adjuster(-50, 100), "Cannot submit a negative value for either 'value' or 'adjusted_weight in generic_adjuster")
 })
 
-### a_value_adjuster tests
+### energy_value_adjuster tests
 
 # Test for valid input with kj
-test_that("a_value_adjuster returns the correct output for valid input with kj", {
-  expect_equal(a_value_adjuster(50, 1000, "kj"), 5)
+test_that("energy_value_adjuster returns the correct output for valid input with kj", {
+  expect_equal(energy_value_adjuster(50, 1000, "kj"), 5)
 })
 
 # Test for valid input with kcal
-test_that("a_value_adjuster returns the correct output for valid input with kcal", {
-  expect_equal(a_value_adjuster(2, 50, "kcal"), 16.736)
+test_that("energy_value_adjuster returns the correct output for valid input with kcal", {
+  expect_equal(energy_value_adjuster(2, 50, "kcal"), 16.736)
 })
 
 # Test for division by zero
-test_that("a_value_adjuster throws an error for zero denominator", {
-  expect_error(a_value_adjuster(50, 0, "kj"), "Cannot divide by zero, please change 'adjusted_weight'")
+test_that("energy_value_adjuster throws an error for zero denominator", {
+  expect_error(energy_value_adjuster(50, 0, "kj"), "Cannot divide by zero, please change 'adjusted_weight'")
 })
 
 # Test for negative input
-test_that("a_value_adjuster throws an error for negative input", {
-  expect_error(a_value_adjuster(-50, 100, "kj"), "Cannot submit a negative value for either 'value' or 'adjusted_weight in generic_adjuster")
+test_that("energy_value_adjuster throws an error for negative input", {
+  expect_error(energy_value_adjuster(-50, 100, "kj"), "Cannot submit a negative value for either 'value' or 'adjusted_weight in generic_adjuster")
 })
