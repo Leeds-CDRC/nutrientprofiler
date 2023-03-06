@@ -1,4 +1,4 @@
-test_data_a <- data.frame(
+test_data_energy <- data.frame(
   "sg_adjusted_weight" = c(123, 100, 30),
   "energy_measurement_kj" = c(250, NA, 550),
   "energy_measurement_kcal" = c(NA, 1000, NA),
@@ -20,18 +20,18 @@ test_data_fat <- data.frame(
 # testing NPM A score
 test_that("A NPM score for KJ data", {
 
-    test_data_a_kj <- test_data_a[!is.na(test_data_a$energy_measurement_kj),]
+    test_data_energy_kj <- test_data_energy[!is.na(test_data_energy$energy_measurement_kj),]
 
-  out <- NPM_score_function(test_data_a_kj[,"energy_measurement_kj"], test_data_a_kj[,"sg_adjusted_weight"], "a", adjuster_type = "kj")
-  expect_equal(out, test_data_a_kj[, "expected_score"])
+  out <- NPM_score_function(test_data_energy_kj[,"energy_measurement_kj"], test_data_energy_kj[,"sg_adjusted_weight"], "energy", adjuster_type = "kj")
+  expect_equal(out, test_data_energy_kj[, "expected_score"])
 })
 
 test_that("A NPM score for kcal data", {
 
-  test_data_a_kcal <- test_data_a[!is.na(test_data_a$energy_measurement_kcal),]
+  test_data_energy_kcal <- test_data_energy[!is.na(test_data_energy$energy_measurement_kcal),]
 
-  out <- NPM_score_function(test_data_a_kcal[,"energy_measurement_kcal"], test_data_a_kcal[,"sg_adjusted_weight"], "a", adjuster_type = "kcal")
-  expect_equal(out, test_data_a_kcal[, "expected_score"])
+  out <- NPM_score_function(test_data_energy_kcal[,"energy_measurement_kcal"], test_data_energy_kcal[,"sg_adjusted_weight"], "energy", adjuster_type = "kcal")
+  expect_equal(out, test_data_energy_kcal[, "expected_score"])
 })
 
 ### scoring_function tests

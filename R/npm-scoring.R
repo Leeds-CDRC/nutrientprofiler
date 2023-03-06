@@ -1,5 +1,5 @@
 # define threshold constants
-A_SCORE_THRESHOLDS <- c(3350, 3015, 2680, 2345, 2010, 1675, 1340, 1005, 670, 335)
+ENERGY_SCORE_THRESHOLDS <- c(3350, 3015, 2680, 2345, 2010, 1675, 1340, 1005, 670, 335)
 SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
 FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
@@ -10,11 +10,11 @@ SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 NPM_score_function <- function(value, adjusted_weight, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("a", "sugar","fat","salt")
+            type %in% c("energy", "sugar","fat","salt")
     )
 
     score <- switch(tolower(type),
-        "a" = sapply(a_value_adjuster(value, adjusted_weight, ...), scoring_function, A_SCORE_THRESHOLDS),
+        "energy" = sapply(energy_value_adjuster(value, adjusted_weight, ...), scoring_function, ENERGY_SCORE_THRESHOLDS),
         "sugar" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, SUGAR_SCORE_THRESHOLDS),
         "fat" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, FAT_SCORE_THRESHOLDS),
         "salt" = sapply(salt_adjuster(value, adjusted_weight, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
@@ -62,12 +62,13 @@ scoring_function <- function(value, thresholds) {
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
 #' @return a numeric value of adjusted nutritional data
-a_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
+energy_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
     stopifnot(
-        "Invalid type passed to a_value_adjuster, can only be 'kj' or 'kcal'" =
+        "Invalid type passed to energy_value_adjuster, can only be 'kj' or 'kcal'" =
             any(c("kj", "kcal") %in% tolower(adjuster_type))
     )
 
+    # set default adjuster_type as kcal
     a_value <- if (adjuster_type == "kj") {
         generic_adjuster(value, adjusted_weight)
     } else {
