@@ -19,6 +19,36 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/index.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_score_function.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGConverter.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGtab.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/energy_value_adjuster.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/generic_adjuster.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/salt_adjuster.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/scoring_function.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_drink_converter.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_food_converter.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_liquidfood_converter.html</loc>
   </url>
 </urlset>
