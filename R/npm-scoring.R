@@ -3,6 +3,7 @@ ENERGY_SCORE_THRESHOLDS <- c(3350, 3015, 2680, 2345, 2010, 1675, 1340, 1005, 670
 SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
 FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
+PROTEIN_SCORE_THRESHOLDS <- c(8, 6.4, 4.8, 3.2, 1.6)
 
 #' a generic NPM scoring dispatcher
 #'
@@ -10,7 +11,7 @@ SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 NPM_score_function <- function(value, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("energy", "sugar","fat","salt","fvn")
+            type %in% c("energy", "sugar","fat","salt","fvn","protein")
     )
 
     score <- switch(tolower(type),
@@ -19,6 +20,7 @@ NPM_score_function <- function(value, type, ...) {
         "fat" = sapply(generic_adjuster(value, ...), scoring_function, FAT_SCORE_THRESHOLDS),
         "salt" = sapply(salt_adjuster(value, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
         "fvn" = sapply(value, fruit_veg_nut_scorer),
+        "protein" = sapply(generic_adjuster(value, ...), scoring_function, PROTEIN_SCORE_THRESHOLDS),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
