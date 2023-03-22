@@ -19,6 +19,8 @@ AOAC_FIBRE_SCORE_THRESHOLDS <- c(4.7, 3.7, 2.8, 1.9, 0.9)
 #' This code is based off the logic within https://github.com/Leeds-CDRC/NPM-Calculator/blob/main/server.R
 #' 
 #' @param value, a numeric value or vector of values to score against
+#' @param type, a character string that specifies the type of the value passed to control scoring logic
+#' @param ..., option named arguments to pass to adjuster functions, most commonly `adjusted_weight`
 #' @returns a numeric score value or vector of scores 
 
 NPM_score_function <- function(value, type, ...) {
