@@ -53,6 +53,27 @@ scoring_function <- function(value, thresholds) {
     return(score)
 }
 
+#' Fruit, Vegetable and nut scorer
+#'
+#' The scoring logic for the percentage of fruit, vegetables and nuts
+#' in a product is different to other scorers. Therefore, we can't use
+#' the generic scoring function and have to write a specific one here.
+#' 
+#' @param value a numeric value of the percentage of fruit, nuts and vegetables
+#' @return a numeric score value
+fruit_veg_nut_scorer <- function(value) {
+    score <- if(value > 80) {
+        5
+    } else if (value > 60) {
+       2 
+    } else if (value > 40) {
+       1
+    } else {
+        0
+    }
+    return(score)
+}
+
 
 #' Function for adjusting energy information for A score calculation
 #'
