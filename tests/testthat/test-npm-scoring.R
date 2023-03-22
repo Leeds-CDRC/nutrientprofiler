@@ -28,6 +28,13 @@ test_data_protein <- data.frame(
   "expected_score" = c(0, 5, 3, 4)
 )
 
+test_data_fibre <- data.frame(
+  "sg_adjusted_weight" = c(120, 100, 180, 200),
+  "nsp_fibre_measurement_g" = c(1.5, NA, 4.2, NA),
+  "aoac_fibre_measurement_g" = c(NA, 4, NA, 1),
+  "expected_score" = c(1, 4, 3, 0)
+)
+
 # testing NPM A score
 test_that("A NPM score for KJ data", {
 
@@ -103,4 +110,21 @@ test_that("NPM scoring function for fruit, nuts and veg", {
 test_that("NPM scoring function for protein", {
   out <- NPM_score_function(test_data_protein[, "protein_measurement_g"], adjusted_weight=test_data_protein[,"sg_adjusted_weight"], "protein")
   expect_equal(out, test_data_protein[, "expected_score"])
+})
+
+# testing fibre scoring
+test_that("A NPM score for nsp fibre data", {
+
+    test_data_nsp <- test_data_fibre[!is.na(test_data_fibre$nsp_fibre_measurement_g),]
+
+  out <- NPM_score_function(test_data_nsp[,"nsp_fibre_measurement_g"], adjusted_weight=test_data_nsp[,"sg_adjusted_weight"], "nsp")
+  expect_equal(out, test_data_nsp[, "expected_score"])
+})
+
+test_that("A NPM score for aoac fibre data", {
+
+    test_data_aoac <- test_data_fibre[!is.na(test_data_fibre$aoac_fibre_measurement_g),]
+
+  out <- NPM_score_function(test_data_aoac[,"aoac_fibre_measurement_g"], adjusted_weight=test_data_aoac[,"sg_adjusted_weight"], "aoac")
+  expect_equal(out, test_data_aoac[, "expected_score"])
 })
