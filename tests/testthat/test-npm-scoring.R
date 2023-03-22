@@ -17,12 +17,17 @@ test_data_fat <- data.frame(
   "expected_score" = c(10, 7, 4, 0)
 )
 
+test_data_fvn <- data.frame(
+  "fruit_veg_nut" = c(88, 40, 70, 43),
+  "expected_score" = c(5, 0, 2, 1)
+)
+
 # testing NPM A score
 test_that("A NPM score for KJ data", {
 
     test_data_energy_kj <- test_data_energy[!is.na(test_data_energy$energy_measurement_kj),]
 
-  out <- NPM_score_function(test_data_energy_kj[,"energy_measurement_kj"], test_data_energy_kj[,"sg_adjusted_weight"], "energy", adjuster_type = "kj")
+  out <- NPM_score_function(test_data_energy_kj[,"energy_measurement_kj"], adjusted_weight=test_data_energy_kj[,"sg_adjusted_weight"], "energy", adjuster_type = "kj")
   expect_equal(out, test_data_energy_kj[, "expected_score"])
 })
 
@@ -30,7 +35,7 @@ test_that("A NPM score for kcal data", {
 
   test_data_energy_kcal <- test_data_energy[!is.na(test_data_energy$energy_measurement_kcal),]
 
-  out <- NPM_score_function(test_data_energy_kcal[,"energy_measurement_kcal"], test_data_energy_kcal[,"sg_adjusted_weight"], "energy", adjuster_type = "kcal")
+  out <- NPM_score_function(test_data_energy_kcal[,"energy_measurement_kcal"], adjusted_weight=test_data_energy_kcal[,"sg_adjusted_weight"], "energy", adjuster_type = "kcal")
   expect_equal(out, test_data_energy_kcal[, "expected_score"])
 })
 
@@ -73,16 +78,19 @@ test_that("test scoring_function on top end value ", {
 
 # testing NPM_score_function for sugar
 test_that("NPM sugar score that returns 0", {
-  out <- NPM_score_function(test_data_sugar[, "sugar_measurement_g"], test_data_sugar[,"sg_adjusted_weight"], "sugar")
+  out <- NPM_score_function(test_data_sugar[, "sugar_measurement_g"], adjusted_weight=test_data_sugar[,"sg_adjusted_weight"], "sugar")
   expect_equal(out, test_data_sugar[, "expected_score"])
 })
 
 
 # testing NPM_score_function for fat
 test_that("NPM fat score that returns 0", {
-  out <- NPM_score_function(test_data_fat[, "fat_measurement_g"], test_data_fat[,"sg_adjusted_weight"], "fat")
+  out <- NPM_score_function(test_data_fat[, "fat_measurement_g"],  "fat", adjusted_weight=test_data_fat[,"sg_adjusted_weight"])
   expect_equal(out, test_data_fat[, "expected_score"])
 })
 
-
+test_that("NPM scoring function for fruit, nuts and veg", {
+  out <- NPM_score_function(test_data_fvn[, "fruit_veg_nut"], "fvn")
+  expect_equal(out, test_data_fvn[, "expected_score"])
+})
 

@@ -7,17 +7,18 @@ SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 #' a generic NPM scoring dispatcher
 #'
 #'
-NPM_score_function <- function(value, adjusted_weight, type, ...) {
+NPM_score_function <- function(value, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("energy", "sugar","fat","salt")
+            type %in% c("energy", "sugar","fat","salt","fvn")
     )
 
     score <- switch(tolower(type),
-        "energy" = sapply(energy_value_adjuster(value, adjusted_weight, ...), scoring_function, ENERGY_SCORE_THRESHOLDS),
-        "sugar" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, SUGAR_SCORE_THRESHOLDS),
-        "fat" = sapply(generic_adjuster(value, adjusted_weight), scoring_function, FAT_SCORE_THRESHOLDS),
-        "salt" = sapply(salt_adjuster(value, adjusted_weight, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
+        "energy" = sapply(energy_value_adjuster(value, ...), scoring_function, ENERGY_SCORE_THRESHOLDS),
+        "sugar" = sapply(generic_adjuster(value, ...), scoring_function, SUGAR_SCORE_THRESHOLDS),
+        "fat" = sapply(generic_adjuster(value, ...), scoring_function, FAT_SCORE_THRESHOLDS),
+        "salt" = sapply(salt_adjuster(value, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
+        "fvn" = sapply(value, fruit_veg_nut_scorer),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
@@ -49,6 +50,27 @@ scoring_function <- function(value, thresholds) {
             score <- score - 1
             next
         }
+    }
+    return(score)
+}
+
+#' Fruit, Vegetable and nut scorer
+#'
+#' The scoring logic for the percentage of fruit, vegetables and nuts
+#' in a product is different to other scorers. Therefore, we can't use
+#' the generic scoring function and have to write a specific one here.
+#' 
+#' @param value a numeric value of the percentage of fruit, nuts and vegetables
+#' @return a numeric score value
+fruit_veg_nut_scorer <- function(value) {
+    score <- if(value > 80) {
+        5
+    } else if (value > 60) {
+       2 
+    } else if (value > 40) {
+       1
+    } else {
+        0
     }
     return(score)
 }
@@ -127,3 +149,4 @@ salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
 
     return(salt_adjusted)
 }
+
