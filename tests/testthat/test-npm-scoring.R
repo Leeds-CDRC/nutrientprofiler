@@ -17,6 +17,11 @@ test_data_fat <- data.frame(
   "expected_score" = c(10, 7, 4, 0)
 )
 
+test_data_fvn <- data.frame(
+  "fruit_veg_nut" = c(88, 40, 70, 43),
+  "expected_score" = c(5, 0, 2, 1)
+)
+
 # testing NPM A score
 test_that("A NPM score for KJ data", {
 
@@ -84,5 +89,8 @@ test_that("NPM fat score that returns 0", {
   expect_equal(out, test_data_fat[, "expected_score"])
 })
 
-
+test_that("NPM scoring function for fruit, nuts and veg", {
+  out <- NPM_score_function(test_data_fvn[, "fruit_veg_nut"], "fvn")
+  expect_equal(out, test_data_fvn[, "expected_score"])
+})
 
