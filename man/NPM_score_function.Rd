@@ -4,7 +4,7 @@
 \alias{NPM_score_function}
 \title{a generic NPM scoring dispatcher}
 \usage{
-NPM_score_function(value, adjusted_weight, type, ...)
+NPM_score_function(value, type, ...)
 }
 \description{
 a generic NPM scoring dispatcher
