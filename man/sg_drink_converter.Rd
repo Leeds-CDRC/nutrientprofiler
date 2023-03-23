@@ -6,6 +6,12 @@
 \usage{
 sg_drink_converter(row)
 }
+\arguments{
+\item{row}{a row from a data.frame object}
+}
+\value{
+dispatches row to another converter function based on value in \code{drink_format} column of row
+}
 \description{
 This function is run for data with the \code{product_type} "drink"
 It dispatches to additional functions based on the matched value in the \code{drink_format} column

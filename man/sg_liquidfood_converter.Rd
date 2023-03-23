@@ -6,6 +6,12 @@
 \usage{
 sg_liquidfood_converter(row)
 }
+\arguments{
+\item{row}{a row from a data.frame object}
+}
+\value{
+a numeric value of the specific gravity adjusted \code{volume_ml} column in \code{row}
+}
 \description{
 This function is run for data that is identified by \code{sg_food_converter} as liquid food
 It checks for a value in the \code{food_type} column and if present retrieves a specific gravity multiplier

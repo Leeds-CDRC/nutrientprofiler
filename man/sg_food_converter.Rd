@@ -6,6 +6,12 @@
 \usage{
 sg_food_converter(row)
 }
+\arguments{
+\item{row}{a row from a data.frame object}
+}
+\value{
+either the value of \code{weight_g} column for row or dispatches row to \code{sg_liquidfood_converter}
+}
 \description{
 This function is run for data with the \code{product_type} "food"
 It checks if the column \code{weight_g} contains NA values to assume whether the food is liquid or solid
