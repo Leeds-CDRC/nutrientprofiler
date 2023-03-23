@@ -7,6 +7,26 @@ PROTEIN_SCORE_THRESHOLDS <- c(8, 6.4, 4.8, 3.2, 1.6)
 NSP_FIBRE_SCORE_THRESHOLDS <- c(3.5, 2.8, 2.1, 1.4, 0.7)
 AOAC_FIBRE_SCORE_THRESHOLDS <- c(4.7, 3.7, 2.8, 1.9, 0.9)
 
+NPMScore <- function(row, sg_adjusted_label) {
+
+    energy_score <- if(!is.na(row[['energy_measurement_kj']])) {
+                        
+                        NPM_score_function(row[['energy_measurement_kj']], "energy", 
+                        adjusted_weight=row[[sg_adjusted_label]], adjuster_type="kj")
+
+                    } else if (!is.na(row[['energy_measurement_kcal']])) {
+                        NPM_score_function(row[['energy_measurement_kcal']], "energy", 
+                        adjusted_weight=row[[sg_adjusted_label]], adjuster_type="kcal")
+
+                    } else {
+                        warning(paste0("Unable to calculate 'energy' score for product ", row[['name']], " defaulting to NA"))
+                        NA
+                    }
+
+    return(energy_score)
+
+}
+
 #' The NPM scoring dispatch function
 #'
 #' This function serves as the main entry point for getting 
