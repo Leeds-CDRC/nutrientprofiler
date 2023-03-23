@@ -4,14 +4,29 @@ SUGAR_SCORE_THRESHOLDS <- c(45, 40, 36, 31, 27, 22.5, 18, 13.5, 9, 4.5)
 FAT_SCORE_THRESHOLDS <- c(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 SODIUM_SCORE_THRESHOLDS <- c(900, 810, 720, 630, 540, 450, 360, 270, 180, 90)
 PROTEIN_SCORE_THRESHOLDS <- c(8, 6.4, 4.8, 3.2, 1.6)
+NSP_FIBRE_SCORE_THRESHOLDS <- c(3.5, 2.8, 2.1, 1.4, 0.7)
+AOAC_FIBRE_SCORE_THRESHOLDS <- c(4.7, 3.7, 2.8, 1.9, 0.9)
 
-#' a generic NPM scoring dispatcher
+#' The NPM scoring dispatch function
 #'
-#'
+#' This function serves as the main entry point for getting 
+#' nutrient profiling model scores. It takes a value (or vector of values) and a type
+#' using the type it determines which scoring function to use based on constant thresholds.
+#' Adjustments to the value passed are also performed for all types except `fvn`.
+#' These adjustments take into account the adjusted_weight of the product (specific gravity transformations)
+#' and calculate a new value which is applied to the scoring thresholds.
+#' `...` is provided to allow the passing of additional arguments for adjuster functions.
+#' This code is based off the logic within https://github.com/Leeds-CDRC/NPM-Calculator/blob/main/server.R
+#' 
+#' @param value, a numeric value or vector of values to score against
+#' @param type, a character string that specifies the type of the value passed to control scoring logic
+#' @param ..., option named arguments to pass to adjuster functions, most commonly `adjusted_weight`
+#' @returns a numeric score value or vector of scores 
+
 NPM_score_function <- function(value, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
-            type %in% c("energy", "sugar","fat","salt","fvn","protein")
+            type %in% c("energy", "sugar","fat","salt","fvn","protein","nsp","aoac")
     )
 
     score <- switch(tolower(type),
@@ -21,6 +36,8 @@ NPM_score_function <- function(value, type, ...) {
         "salt" = sapply(salt_adjuster(value, ...), scoring_function, SODIUM_SCORE_THRESHOLDS),
         "fvn" = sapply(value, fruit_veg_nut_scorer),
         "protein" = sapply(generic_adjuster(value, ...), scoring_function, PROTEIN_SCORE_THRESHOLDS),
+        "nsp" = sapply(generic_adjuster(value, ...), scoring_function, NSP_FIBRE_SCORE_THRESHOLDS),
+        "aoac" = sapply(generic_adjuster(value, ...), scoring_function, AOAC_FIBRE_SCORE_THRESHOLDS),
         stop(paste0(
             "NPM_score_function can't determine thresholds type from ",
             type, " that has been passed"
@@ -85,6 +102,8 @@ fruit_veg_nut_scorer <- function(value) {
 #' @param value a numeric value corresponding to a energy measurement in a food/drink
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
+#' @param adjuster_type a character value of either `kj` or `kcal` to determine 
+#' which adjustment to perform
 #' @return a numeric value of adjusted nutritional data
 energy_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
     stopifnot(
@@ -134,7 +153,7 @@ generic_adjuster <- function(value, adjusted_weight) {
 #' @param value a numeric value corresponding to a salt measurement in a food/drink
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
-#' @param type a character of either "salt" or "sodium" to help determine the required adjustment
+#' @param adjuster_type a character of either "salt" or "sodium" to help determine the required adjustment
 #' @return a numeric value with appropriate adjustment made
 salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
     stopifnot(

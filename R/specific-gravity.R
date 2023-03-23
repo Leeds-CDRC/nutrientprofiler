@@ -40,7 +40,8 @@ SGConverter <- function(row) {
 #' This function is run for data with the `product_type` "food"
 #' It checks if the column `weight_g` contains NA values to assume whether the food is liquid or solid
 #' And if solid returns the weight unadjusted or if liquid dispatches to an additional function
-#' 
+#' @param row a row from a data.frame object
+#' @returns either the value of `weight_g` column for row or dispatches row to `sg_liquidfood_converter`
 sg_food_converter <- function(row) {
     return(ifelse(!is.na(row[['weight_g']]), row[['weight_g']], sg_liquidfood_converter(row)))
 }
@@ -51,7 +52,8 @@ sg_food_converter <- function(row) {
 #' It checks for a value in the `food_type` column and if present retrieves a specific gravity multiplier
 #' which is multiplies against the `volume_ml` column value
 #' If `food_type` is empty is returns an unadjusted `volume_ml` value
-#' 
+#' @param row a row from a data.frame object
+#' @returns a numeric value of the specific gravity adjusted `volume_ml` column in `row`
 sg_liquidfood_converter <- function(row) {
 
     # if food type is not an empty string
@@ -67,7 +69,8 @@ sg_liquidfood_converter <- function(row) {
 #' 
 #' This function is run for data with the `product_type` "drink"
 #' It dispatches to additional functions based on the matched value in the `drink_format` column
-#' 
+#' @param row a row from a data.frame object
+#' @returns dispatches row to another converter function based on value in `drink_format` column of row
 sg_drink_converter <- function(row) {
 
     stopifnot( "The passed data to sg_drink_converter does not have the required columns" = "drink_format" %in% names(row))
@@ -80,6 +83,13 @@ sg_drink_converter <- function(row) {
     )
 }
 
+#' Specific gravity drink converter for ready to consume drinks
+#' 
+#' This function performs a specific gravity conversion for ready to consume drinks
+#' based on the specific gravity value for the value in the `drink_type` column.
+#' If this column is empty it returns the `volume_ml` unadjusted.
+#' @param row a row from a data.frame object
+#' @returns a numeric value of the specific gravity adjusted `volume_ml` column of row based on `drink_type column`
 sg_ready_drink_converter <- function(row) {
 
     # if drink type is not an empty string
@@ -91,6 +101,13 @@ sg_ready_drink_converter <- function(row) {
 
 }
 
+#' Specific gravity drink converter for powdered drinks
+#' 
+#' This function performs a specific gravity conversion for powdered drinks
+#' the conversion performed is based on the value in the `nutrition_info` column.
+#' 
+#' @param row a row from a data.frame object
+#' @returns a numeric value of the specific gravity adjusted volume/mass depending on `nutrition_info` column.
 sg_powd_drink_converter <- function(row) {
     stopifnot( "The passed data to sg_powd_drink_converter does not have the required columns" = "nutrition_info" %in% names(row))
 
@@ -102,7 +119,13 @@ sg_powd_drink_converter <- function(row) {
     )
 }
 
-
+#' Specific gravity drink converter for cordial drinks
+#' 
+#' This function performs a specific gravity conversion for cordial drinks
+#' the conversion performed is based on the value in the `nutrition_info` column.
+#' 
+#' @param row a row from a data.frame object
+#' @returns a numeric value of the specific gravity adjusted volume depending on `nutrition_info` column.
 sg_cord_drink_converter <- function(row) {
     stopifnot( "The passed data to sg_cord_drink_converter does not have the required columns" = "nutrition_info" %in% names(row))
 

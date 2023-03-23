@@ -12,7 +12,7 @@ salt_adjuster(value, adjusted_weight, adjuster_type = "sodium")
 \item{adjusted_weight}{a numeric value corresponding to the total
 weight of the food/drink after specific gravity adjustment}
 
-\item{type}{a character of either "salt" or "sodium" to help determine the required adjustment}
+\item{adjuster_type}{a character of either "salt" or "sodium" to help determine the required adjustment}
 }
 \value{
 a numeric value with appropriate adjustment made

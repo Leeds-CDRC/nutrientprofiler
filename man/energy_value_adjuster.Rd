@@ -11,6 +11,9 @@ energy_value_adjuster(value, adjusted_weight, adjuster_type = "kj")
 
 \item{adjusted_weight}{a numeric value corresponding to the total
 weight of the food/drink after specific gravity adjustment}
+
+\item{adjuster_type}{a character value of either \code{kj} or \code{kcal} to determine
+which adjustment to perform}
 }
 \value{
 a numeric value of adjusted nutritional data
