@@ -102,6 +102,8 @@ fruit_veg_nut_scorer <- function(value) {
 #' @param value a numeric value corresponding to a energy measurement in a food/drink
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
+#' @param adjuster_type a character value of either `kj` or `kcal` to determine 
+#' which adjustment to perform
 #' @return a numeric value of adjusted nutritional data
 energy_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
     stopifnot(
@@ -151,7 +153,7 @@ generic_adjuster <- function(value, adjusted_weight) {
 #' @param value a numeric value corresponding to a salt measurement in a food/drink
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
-#' @param type a character of either "salt" or "sodium" to help determine the required adjustment
+#' @param adjuster_type a character of either "salt" or "sodium" to help determine the required adjustment
 #' @return a numeric value with appropriate adjustment made
 salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
     stopifnot(
