@@ -43,7 +43,7 @@ SGConverter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns either the value of `weight_g` column for row or dispatches row to `sg_liquidfood_converter`
 sg_food_converter <- function(row) {
-    return(ifelse(!is.na(row[['weight_g']]), row[['weight_g']], sg_liquidfood_converter(row)))
+    return(ifelse(!is.na(row[['weight_g']]), as.numeric(row[['weight_g']]), sg_liquidfood_converter(row)))
 }
 
 #' Specific gravity liquid converter
