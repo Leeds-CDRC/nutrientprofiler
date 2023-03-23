@@ -14,7 +14,7 @@ bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,
 
 test_that("test full workflow", {
 
-    test_data['sg_adjusted'] <- apply(test_data, 1, SGConverter)
+    test_data['sg_adjusted'] <- unlist(lapply(seq_len(nrow(test_data)), \(i) SGConverter(test_data[i, ])))
 
     # grateful for help with this function from https://stackoverflow.com/questions/75825126/conditionally-running-a-function-on-a-row-based-on-values-in-another-column-usin/75825163#75825163
     npm_scores <- unlist(lapply(seq_len(nrow(test_data)), \(i) NPMScore(test_data[i,], sg_adjusted_label="sg_adjusted")))
