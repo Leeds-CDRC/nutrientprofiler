@@ -46,6 +46,9 @@
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/scoring_function.html</loc>
   </url>
   <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_cord_drink_converter.html</loc>
+  </url>
+  <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_drink_converter.html</loc>
   </url>
   <url>
@@ -53,5 +56,11 @@
   </url>
   <url>
     <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_liquidfood_converter.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_powd_drink_converter.html</loc>
+  </url>
+  <url>
+    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_ready_drink_converter.html</loc>
   </url>
 </urlset>
