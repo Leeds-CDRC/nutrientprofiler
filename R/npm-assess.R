@@ -3,91 +3,29 @@
 #' NPM assess function
 NPMAssess <- function(row) {
 
+    stopifnot("Score columns not detected. Please ensure you have called NPMScore on your data" = 
+        c("energy_score", "sugar_score", "fat_score", 
+        "protein_score", "fvn_score", "fibre_score") %in% names(row)
+        
+    )
+
     # will use below code as boilerplate
-    # energy_score <- if(!is.na(row[['energy_measurement_kj']])) {
-                        
-    #                     NPM_score_function(row[['energy_measurement_kj']], "energy", 
-    #                     adjusted_weight=row[[sg_adjusted_label]], adjuster_type="kj")
+    A_score <- A_scorer(energy_score = row[['energy_score']],
+                        sugar_score = row[['sugar_score']], 
+                        fat_score = row[['fat_score']], 
+                        sodium_score = row[['sodium_score']])
 
-    #                 } else if (!is.na(row[['energy_measurement_kcal']])) {
-    #                     NPM_score_function(row[['energy_measurement_kcal']], "energy", 
-    #                     adjusted_weight=row[[sg_adjusted_label]], adjuster_type="kcal")
+    C_score <- C_scorer(fvn_score = row[['fvn_score']],
+                        protein_score = row[['protein_score']], 
+                        fibre_score = row[['fibre_score']])   
 
-    #                 } else {
-    #                     warning(paste0("Unable to calculate 'energy' score for product ", row[['name']], " defaulting to NA"))
-    #                     NA
-    #                 }
+    NPM_score <- NPM_total(A_score, C_score, row[['fvn_score']], row[['fibre_score']])
 
-    # sugar_score <- if(!is.na(row[['sugar_measurement_g']])) {
-                    
-    #                 NPM_score_function(row[['sugar_measurement_g']], "sugar", 
-    #                 adjusted_weight=row[[sg_adjusted_label]])
+    NPM_assessment <- NPM_assess(NPM_score, row[['product_type']])
 
-    #              } else {
-    #                 warning(paste0("Unable to calculate 'sugar' score for product ", row[['name']], " defaulting to NA"))
-    #                 NA
-    #             }
+    npm_df <- cbind(A_score, C_score, NPM_score, NPM_assessment)
 
-    # salt_score <- if(!is.na(row[['salt_measurement_g']])) {
-                
-    #                 NPM_score_function(row[['salt_measurement_g']], "salt", 
-    #                 adjusted_weight=row[[sg_adjusted_label]], adjuster_type="salt")
-                
-    #             } else if (!is.na(row[['sodium_measurement_mg']])) {
-    #                     NPM_score_function(row[['sodium_measurement_mg']], "salt", 
-    #                     adjusted_weight=row[[sg_adjusted_label]], adjuster_type="sodium")
-
-    #             } else {
-    #             warning(paste0("Unable to calculate 'salt' score for product ", row[['name']], " defaulting to NA"))
-    #             NA
-    #         }
-
-    # protein_score <- if(!is.na(row[['protein_measurement_g']])) {
-                
-    #             NPM_score_function(row[['protein_measurement_g']], "protein", 
-    #             adjusted_weight=row[[sg_adjusted_label]])
-
-    #             } else {
-    #             warning(paste0("Unable to calculate 'protein' score for product ", row[['name']], " defaulting to NA"))
-    #             NA
-    #         }
-
-    # fibre_score <- if(!is.na(row[['fibre_measurement_nsp']])) {
-                
-    #             NPM_score_function(row[['fibre_measurement_nsp']], "nsp", 
-    #             adjusted_weight=row[[sg_adjusted_label]])
-
-    #             } else if (!is.na(row[['fibre_measurement_aoac']])) {
-    #                     NPM_score_function(row[['fibre_measurement_aoac']], "aoac", 
-    #                     adjusted_weight=row[[sg_adjusted_label]])
-
-    #             } else {
-    #             warning(paste0("Unable to calculate 'fibre' score for product ", row[['name']], " defaulting to NA"))
-    #             NA
-    #         }
-
-    # fat_score <- if(!is.na(row[['fat_measurement_g']])) {
-                
-    #             NPM_score_function(row[['fat_measurement_g']], "fat", 
-    #             adjusted_weight=row[[sg_adjusted_label]])
-
-    #             } else {
-    #             warning(paste0("Unable to calculate 'fat' score for product ", row[['name']], " defaulting to NA"))
-    #             NA
-    #         }
-
-    # fvn_score <- if(!is.na(row[['fruit_nut_measurement_percent']])) {
-                
-    #             NPM_score_function(row[['fruit_nut_measurement_percent']], "fvn")
-
-    #             } else {
-    #             warning(paste0("Unable to calculate 'sugar' score for product ", row[['name']], " defaulting to NA"))
-    #             NA
-    #         }
-
-    # score_df <- cbind(energy_score, sugar_score, fat_score, protein_score, fvn_score, fibre_score)
-
-    # return(score_df)
+    return(npm_df)
 
 }
 
