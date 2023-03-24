@@ -128,3 +128,56 @@ test_that("A NPM score for aoac fibre data", {
   out <- NPM_score_function(test_data_aoac[,"aoac_fibre_measurement_g"], adjusted_weight=test_data_aoac[,"sg_adjusted_weight"], "aoac")
   expect_equal(out, test_data_aoac[, "expected_score"])
 })
+
+## testing NPMScore wrapper function
+
+test_that("NPMScore returns a data frame with correct column names", {
+  row <- list(
+    energy_measurement_kj = 10,
+    sugar_measurement_g = 20,
+    salt_measurement_g = 30,
+    protein_measurement_g = 40,
+    fibre_measurement_nsp = 50,
+    fat_measurement_g = 60,
+    fruit_nut_measurement_percent = 70,
+    adjusted_weight = 104,
+    name = "test product"
+  )
+  
+  # call the function
+  result <- NPMScore(row, "adjusted_weight")
+  
+  # check if the result is a matrix
+  expect_true(is.matrix(result))
+  
+  # check if the column names are correct
+  expect_equal(colnames(result), c("energy_score", "sugar_score", "fat_score", "protein_score", "fvn_score", "fibre_score"))
+})
+
+test_that("NPMScore returns NA for invalid measurements", {
+  # create a sample row with invalid measurements
+  row <- list(
+    energy_measurement_kj = NA,
+    energy_measurement_kcal = NA,
+    sugar_measurement_g = NA,
+    salt_measurement_g = NA,
+    sodium_measurement_mg = NA,
+    protein_measurement_g = NA,
+    fibre_measurement_nsp = NA,
+    fibre_measurement_aoac = NA,
+    fat_measurement_g = NA,
+    fruit_nut_measurement_percent = NA,
+    adjusted_weight = 104,
+    name = "test NA product"
+  )
+
+  # expect warnings
+  expect_warning(NPMScore(row, "adjusted_weight"))
+  
+  # call the function
+  result <- NPMScore(row, "adjusted_weight")
+  
+  # check if the result contains only NA values
+  expect_equal(nrow(result), 1)
+  expect_true(all(is.na(result)))
+})
