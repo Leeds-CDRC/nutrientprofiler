@@ -141,3 +141,29 @@ NPM_total <- function(a_score, c_score, fvn_score, fib_score) {
     }
 }
 
+#' NPM Assess function
+#' 
+#' This function takes an NPM score and returns either "PASS" or "FAIL"
+#' depending on the `type` argument. Where `type` is either "food" or "drink".
+#' 
+#' @param NPM_score, a numeric value for the NPM score
+#' @param type, a character value of either "food" or "drink" to determine how to assess the score
+#' @returns a character value of either "PASS" or "FAIL"
+NPM_assess <- function(NPM_score, type) {
+
+    stopifnot(
+        "The passed type to NPM_assess does not match expected types " =
+            type %in% c("food","drink")
+    )
+
+    assessment <- switch(tolower(type),
+        "food" = ifelse(NPM_score >= 4, "FAIL", "PASS"),
+        "drink" = ifelse(NPM_score >= 1, "FAIL", "PASS"),
+        stop(paste0(
+            "NPM_assess passed invalid type: ",
+            type))
+            )
+
+    return(assessment)
+
+}
