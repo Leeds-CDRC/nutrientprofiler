@@ -5,7 +5,7 @@ test_that("A_scorer returns the sum of all scores", {
 
 # Test for C_score function
 test_that("C_score returns the sum of all scores", {
-    expect_equal(C_score(1, 2, 3), 6)
+    expect_equal(C_scorer(1, 2, 3), 6)
 })
 
 # Test for NPM_total function

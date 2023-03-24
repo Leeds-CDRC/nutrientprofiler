@@ -114,7 +114,7 @@ A_scorer <- function(energy_score, sugar_score, fat_score, sodium_score) {
 #' @param protein_score, numeric value for protein score
 #' @param fibre_score, numeric value for fibre score
 #' @return a numeric value of the C score
-C_score <- function(fvn_score, protein_score, fibre_score) {
+C_scorer <- function(fvn_score, protein_score, fibre_score) {
     return(sum(fvn_score, protein_score, fibre_score))
 }
 
