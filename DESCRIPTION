@@ -1,10 +1,12 @@
 Package: nutrientprofiler
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Nutrient Model Profiler
+Version: 0.1.0
 Authors@R: 
     person("Alex", "Coleman", , "a.coleman1@leeds.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7723-3222"))
-Description: What the package does (one paragraph).
+Description: This package implements functions to help assess 
+    product information against the UK Nutrient Profiling Model (2004/5).
+    These scores can be used as part of scoping HFSS when determining product placement.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -15,6 +15,7 @@ AOAC_FIBRE_SCORE_THRESHOLDS <- c(4.7, 3.7, 2.8, 1.9, 0.9)
 #' expected column names. It expects the specific gravity conversions to already have been performed
 #' and values outputted to a new single column.
 #' 
+#' @export
 #' @param row the row from an NPMCalculator dataframe
 #' @param sg_adjusted_label a character value specifying the name of the specific gravity adjusted column
 #' @return a matrix of NPM scores
@@ -118,6 +119,7 @@ NPMScore <- function(row, sg_adjusted_label) {
 #' `...` is provided to allow the passing of additional arguments for adjuster functions.
 #' This code is based off the logic within https://github.com/Leeds-CDRC/NPM-Calculator/blob/main/server.R
 #' 
+#' @export
 #' @param value, a numeric value or vector of values to score against
 #' @param type, a character string that specifies the type of the value passed to control scoring logic
 #' @param ..., option named arguments to pass to adjuster functions, most commonly `adjusted_weight`
@@ -156,6 +158,7 @@ NPM_score_function <- function(value, type, ...) {
 #' The threshold score is calculated as the length of the thresholds minus every else branch iter
 #' of the loop.
 #' 
+#' @export
 #' @param value a passed numeric value
 #' @param thresholds a vector of thresholds to use to score against in order of highest to lowest
 scoring_function <- function(value, thresholds) {
