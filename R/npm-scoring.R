@@ -18,7 +18,6 @@ AOAC_FIBRE_SCORE_THRESHOLDS <- c(4.7, 3.7, 2.8, 1.9, 0.9)
 #' @param row the row from an NPMCalculator dataframe
 #' @param sg_adjusted_label a character value specifying the name of the specific gravity adjusted column
 #' @return a matrix of NPM scores
-
 NPMScore <- function(row, sg_adjusted_label) {
 
     energy_score <- if(!is.na(row[['energy_measurement_kj']])) {
