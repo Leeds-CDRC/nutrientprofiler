@@ -28,32 +28,38 @@ test_that("NPM_assess assesses the NPM score correctly", {
 
 library(testthat)
 
-# Test 1: Test if the function returns a dataframe
+assess_row <- data.frame(energy_score = c(5, 3, 4, 6),
+                  sugar_score = c(4,4,6, 5), 
+                  fat_score = c(8,1, 0, 2), 
+                  protein_score = c(4,6,0,2), 
+                  fvn_score = c(0,1, 5, 1), 
+                  fibre_score = c(1,8, 5, 3), 
+                  product_type = c("food","food","drink","drink"))
+
+# Test 1: Test if the function returns a matrix
 test_that("NPMAssess should return a dataframe", {
-    row <- data.frame(energy_score = 5, sugar_score = 10, fat_score = 15, protein_score = 20, fvn_score = 25, fibre_score = 30, product_type = "food")
-    expect_is(NPMAssess(row), "matrix")
+    expect_true(is.data.frame(NPMAssess(assess_row[1,])))
 })
 
 # Test 2: Test if the function returns columns named correctly
 test_that("NPMAssess should return a dataframe with columns named correctly", {
-    row <- data.frame(energy_score = 5, sugar_score = 10, fat_score = 15, protein_score = 20, fvn_score = 25, fibre_score = 30, product_type = "food")
-    expect_named(NPMAssess(row), c("A_score", "C_score", "NPM_score", "NPM_assessment"))
+    expect_named(NPMAssess(assess_row[1,]), c("A_score", "C_score", "NPM_score", "NPM_assessment"))
 })
 
 # Test 3: Test if the function correctly calculates the NPM score
 test_that("NPMAssess should correctly calculate the NPM score", {
-    row <- data.frame(energy_score = 5, sugar_score = 10, fat_score = 15, protein_score = 20, fvn_score = 25, fibre_score = 30, product_type = "food")
-    expect_equal(NPMAssess(row)$NPM_score, 90)
+
+    out_df <- do.call("rbind", lapply(seq_len(nrow(assess_row)), function(i) NPMAssess(assess_row[i,])))
+
+    expect_true(identical(out_df$NPM_score, c(16,0,9)))
 })
 
 # Test 4: Test if the function correctly assesses the NPM score for a food
 test_that("NPMAssess should correctly assess the NPM score for a food", {
-    row <- data.frame(energy_score = 5, sugar_score = 10, fat_score = 15, protein_score = 20, fvn_score = 25, fibre_score = 30, product_type = "food")
-    expect_equal(NPMAssess(row)$NPM_assessment, "PASS")
+    expect_equal(NPMAssess(assess_row[2,])$NPM_assessment, "PASS")
 })
 
 # Test 5: Test if the function correctly assesses the NPM score for a drink
 test_that("NPMAssess should correctly assess the NPM score for a drink", {
-    row <- data.frame(energy_score = 5, sugar_score = 10, fat_score = 15, protein_score = 20, fvn_score = 25, fibre_score = 30, product_type = "drink")
-    expect_equal(NPMAssess(row)$NPM_assessment, "FAIL")
+    expect_equal(NPMAssess(assess_row[3,])$NPM_assessment, "PASS")
 })
