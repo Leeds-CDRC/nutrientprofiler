@@ -98,7 +98,7 @@ NPMScore <- function(row, sg_adjusted_label) {
                 NPM_score_function(row[['fruit_nut_measurement_percent']], "fvn")
 
                 } else {
-                warning(paste0("Unable to calculate 'sugar' score for product ", row[['name']], " defaulting to NA"))
+                warning(paste0("Unable to calculate 'fruit/veg/nut' score for product ", row[['name']], " defaulting to NA"))
                 NA
             }
 
