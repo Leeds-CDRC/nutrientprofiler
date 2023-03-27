@@ -17,6 +17,8 @@ test_that("test full workflow", {
     test_data['sg_adjusted'] <- unlist(lapply(seq_len(nrow(test_data)), function(i) SGConverter(test_data[i, ])))
 
     # grateful for help with this function from https://stackoverflow.com/questions/75825126/conditionally-running-a-function-on-a-row-based-on-values-in-another-column-usin/75825163#75825163
-    npm_scores <- unlist(lapply(seq_len(nrow(test_data)), function(i) NPMScore(test_data[i,], sg_adjusted_label="sg_adjusted")))
 
+    npm_scores <- do.call("rbind", lapply(seq_len(nrow(test_data)), function(i) NPMScore(test_data[i,], sg_adjusted_label="sg_adjusted")))
+
+    expect_true(is.data.frame(npm_scores))
 })
