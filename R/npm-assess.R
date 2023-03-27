@@ -23,7 +23,7 @@ NPMAssess <- function(row) {
 
     NPM_assessment <- NPM_assess(NPM_score, row[['product_type']])
 
-    npm_df <- cbind(A_score, C_score, NPM_score, NPM_assessment)
+    npm_df <- as.data.frame(cbind(A_score, C_score, NPM_score, NPM_assessment))
 
     return(npm_df)
 
