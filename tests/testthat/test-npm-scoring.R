@@ -148,7 +148,7 @@ test_that("NPMScore returns a data frame with correct column names", {
   result <- NPMScore(row, "adjusted_weight")
   
   # check if the result is a matrix
-  expect_true(is.matrix(result))
+  expect_true(is.data.frame(result))
   
   # check if the column names are correct
   expect_equal(colnames(result), c("energy_score", "sugar_score", "fat_score", "protein_score", "fvn_score", "fibre_score"))
