@@ -1,6 +1,17 @@
 
 
 #' NPM assess function
+#' 
+#' This function aims to apply the various scoring functions 
+#' across a data.frame on a row by row basis.
+#' It is expected that you would use this function in conjunction with a 
+#' call to `lapply` or on a single row.
+#' The function returns a data.frame containing the A score, C score, 
+#' NPM score and NPM assessment.
+#' 
+#' @export
+#' @param row, the row from an NPMScore call
+#' @return a data.frame containing A score, C score, NPM score, and NPM assessment for each row
 NPMAssess <- function(row) {
 
     stopifnot("Score columns not detected. Please ensure you have called NPMScore on your data" = 
@@ -9,7 +20,6 @@ NPMAssess <- function(row) {
         
     )
 
-    # will use below code as boilerplate
     A_score <- A_scorer(energy_score = row[['energy_score']],
                         sugar_score = row[['sugar_score']], 
                         fat_score = row[['fat_score']], 
