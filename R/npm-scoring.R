@@ -98,11 +98,11 @@ NPMScore <- function(row, sg_adjusted_label) {
                 NPM_score_function(row[['fruit_nut_measurement_percent']], "fvn")
 
                 } else {
-                warning(paste0("Unable to calculate 'sugar' score for product ", row[['name']], " defaulting to NA"))
+                warning(paste0("Unable to calculate 'fruit/veg/nut' score for product ", row[['name']], " defaulting to NA"))
                 NA
             }
 
-    score_df <- cbind(energy_score, sugar_score, fat_score, protein_score, fvn_score, fibre_score)
+    score_df <- as.data.frame(cbind(energy_score, sugar_score, fat_score, protein_score, fvn_score, fibre_score))
 
     return(score_df)
 
