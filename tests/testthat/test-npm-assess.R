@@ -49,7 +49,7 @@ test_that("NPMAssess should correctly calculate the NPM score", {
 
     out_df <- do.call("rbind", lapply(seq_len(nrow(assess_row)), function(i) NPMAssess(assess_row[i,])))
 
-    expect_true(identical(out_df$NPM_score, c(16,0,9)))
+    expect_true(identical(out_df$NPM_score, c(16,-7,0,9)))
 })
 
 # Test 4: Test if the function correctly assesses the NPM score for a food
