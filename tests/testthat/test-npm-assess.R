@@ -26,8 +26,6 @@ test_that("NPM_assess assesses the NPM score correctly", {
 
 ## testing NPMAssess
 
-library(testthat)
-
 assess_row <- data.frame(energy_score = c(5, 3, 4, 6),
                   sugar_score = c(4,4,6, 5), 
                   fat_score = c(8,1, 0, 2), 
