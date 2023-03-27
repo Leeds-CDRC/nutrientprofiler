@@ -172,10 +172,18 @@ test_that("NPMScore returns NA for invalid measurements", {
   )
 
   # expect warnings
-  expect_warning(NPMScore(row, "adjusted_weight"))
-  
+  warns <- capture_warnings(NPMScore(row, "adjusted_weight"))
+
+  expect_match(warns, "Unable to calculate 'energy' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'sugar' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'salt' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'protein' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'fibre' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'fat' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'fruit/veg/nut' score for product test NA product defaulting to NA", all = FALSE)    
+
   # call the function
-  result <- NPMScore(row, "adjusted_weight")
+  result <- suppressWarnings(NPMScore(row, "adjusted_weight"))
   
   # check if the result contains only NA values
   expect_equal(nrow(result), 1)
