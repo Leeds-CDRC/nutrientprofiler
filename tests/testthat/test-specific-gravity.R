@@ -10,7 +10,7 @@ janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
 beta ringer drink,,,Drink,,Powdered,,As consumed,188,,15,0,,100,,0,0.5,3,,50,
 zeta ringer drink,,,Drink,,Powdered,,Preparation instructions not given,188,,15,0,,100,,0,0.5,3,25,,
 heavyweight water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,20,100
-bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,,,0,0.1,6,,100,")
+bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,,,0,0.1,6,,100,", stringsAsFactors=FALSE)
 
 
 test_that("SG conversion for solid food", {
