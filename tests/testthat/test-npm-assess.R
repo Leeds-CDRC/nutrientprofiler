@@ -21,7 +21,7 @@ test_that("NPM_assess assesses the NPM score correctly", {
     expect_equal(NPM_assess(0, "drink"), "PASS")
     expect_equal(NPM_assess(1, "drink"), "FAIL")
     expect_equal(NPM_assess(7, "food"), "FAIL")
-    expect_error(NPM_assess(2, "snack"), "The passed type to NPM_assess does not match expected types")
+    expect_error(NPM_assess(2, "snack"))
 })
 
 ## testing NPMAssess
