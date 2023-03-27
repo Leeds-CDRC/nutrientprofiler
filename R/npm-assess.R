@@ -33,7 +33,8 @@ NPMAssess <- function(row) {
 
     NPM_assessment <- NPM_assess(NPM_score, row[['product_type']])
 
-    npm_df <- data.frame("A_score" = A_score, "C_score" = C_score, "NPM_score" = NPM_score, "NPM_assessment" = NPM_assessment)
+    npm_df <- data.frame("A_score" = A_score, "C_score" = C_score, "NPM_score" = NPM_score, "NPM_assessment" = NPM_assessment, 
+                         stringsAsFactors=FALSE)
 
     return(npm_df)
 
