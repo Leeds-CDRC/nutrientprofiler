@@ -100,11 +100,6 @@ NPM_total <- function(a_score, c_score, fvn_score, fib_score) {
 #' @returns a character value of either "PASS" or "FAIL"
 NPM_assess <- function(NPM_score, type) {
 
-    stopifnot(
-        "The passed type to NPM_assess does not match expected types " =
-            type %in% c("food","drink")
-    )
-
     assessment <- switch(tolower(type),
         "food" = ifelse(NPM_score >= 4, "FAIL", "PASS"),
         "drink" = ifelse(NPM_score >= 1, "FAIL", "PASS"),
