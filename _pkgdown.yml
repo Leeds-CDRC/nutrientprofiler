@@ -2,3 +2,7 @@ url: https://leeds-cdrc.github.io/nutrientprofiler/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [intro, reference, articles]
+    right: [search, github]
