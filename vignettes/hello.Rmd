@@ -1,0 +1,29 @@
+---
+title: "hello-world"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hello-world}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The `nutrientprofiler` package aims to provide a series of R functions that 
+implement UK Nutrient Profiling Model scoring that can be applied across product 
+datasets.
+
+This is broken up into 3 parts within the package: 
+
+- Specific gravity conversions
+- Scoring the different nutritional components of the NPM score
+- Calculating the NPM score and NPM assessment logic
+
+```{r setup}
+library(nutrientprofiler)
+```
