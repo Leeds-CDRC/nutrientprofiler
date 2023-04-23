@@ -35,7 +35,7 @@ quite different to how your real world data might look.
 
 ```{r}
 dim(cdrcdrinks)
-cdrcdrinks
+cdrcdrinks[1, ]
 ```
 
 ## Specific gravity conversions
