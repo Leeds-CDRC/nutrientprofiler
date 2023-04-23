@@ -20,5 +20,8 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://leeds-cdrc.github.io/nutrientprofiler/
+URL: https://leeds-cdrc.github.io/nutrientprofiler/, https://github.com/Leeds-CDRC/nutrientprofiler
 VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)
+LazyData: true
