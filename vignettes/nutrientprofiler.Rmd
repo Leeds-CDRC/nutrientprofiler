@@ -24,6 +24,38 @@ This is broken up into 3 parts within the package:
 - Scoring the different nutritional components of the NPM score
 - Calculating the NPM score and NPM assessment logic
 
+To start we load the package the with command below.
 ```{r setup}
 library(nutrientprofiler)
+```
+
+We can also load some example data to help us with the following examples.
+This data was created specifically for this package and so is potentially 
+quite different to how your real world data might look.
+
+```{r}
+dim(cdrcdrinks)
+cdrcdrinks
+```
+
+## Specific gravity conversions
+
+When trying to determine the NPM score the volume or weight of the product needs
+to be adjusted to account for it's specific gravity. 
+
+To adjust product weights or volumes for specific gravity we use the `SGConverter`
+function. This is a high level function that is designed to operate on each row of 
+a data.frame parsing multiple columns to determine how to calculate the adjusted 
+specific gravity score.
+
+```{r}
+# using dplyr
+library(dplyr)
+cdrcdrinks %>%
+  rowwise() %>%
+  mutate(out = SGConverter(pick(everything()))) %>%
+  select(out)
+
+# using base R
+unlist(lapply(seq_len(nrow(cdrcdrinks)), function(i) SGConverter(cdrcdrinks[i, ])))
 ```
