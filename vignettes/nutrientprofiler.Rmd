@@ -7,6 +7,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -59,3 +61,35 @@ cdrcdrinks %>%
 # using base R
 unlist(lapply(seq_len(nrow(cdrcdrinks)), function(i) SGConverter(cdrcdrinks[i, ])))
 ```
+
+The below figure attempts to outline the hierarchy of function calls that `SGConverter` 
+initiates. The logic for determining how to adjust values for specific gravity is 
+complicated by the potential options around whether a drink is ready-to-drink,
+a powdered preparation, or a cordial, within both the powdered and cordial options
+additional consideration must be given to the preparation instructions that are provided.
+In the below figure each function is named in each node and each column name the function 
+uses to dispatch to underlying functions is specified in single quotes. If a function returns
+a value it is marked with an empty diamond.
+
+```{r diagram-mermaid, fig.align='center', fig.cap="SGConverter logic", fig.dim=c(10, 6), echo=FALSE}
+library(DiagrammeR)
+DiagrammeR::mermaid("
+graph TB;
+  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');
+  1 --> 3(sg_drink_converter<br>'drink_format');
+  3 --> 4(sg_ready_drink_converter<br>'drink_type');
+  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');
+  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');
+  6 --> 7{ };
+  2 --> 10{ };
+  2 --> 11(sg_liquidfood_converter<br>'food_type');
+  11 --> 13{ };
+  4 --> 14{ };
+  5 --> 16{ };
+")
+```
+
+The `SGConverter` function is specifically developed to calculate specific gravity 
+conversions for a data.frame with a number of specificly named columns to help 
+organise the dispatch of appropriate functions.
+
