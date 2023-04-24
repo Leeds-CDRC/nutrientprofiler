@@ -92,6 +92,21 @@ graph TB;
 ")
 ```
 
+## Nutrient profile model scoring
+
+The next part of this package is a series of functions for handling Nutrient
+Profile Model scoring. These specifically look at functions for adjusting units
+into the expected unit as documented for the [Nutrient Profile
+Model](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf),
+a generic scoring function for returning a score for a value given a number of
+thresholds, a scoring dispatcher function that determines what adjuster and
+scoring thresholds to use for a given value and a high level `NPMScore` wrapper
+function that shows the logic for calculating the NPM score across multiple
+nutritional groups for a data.frame of data.
+
+```{r}
+NPMScore(cdrcdrinks[1,], sg_adjusted_label="sg")
+```
 The `SGConverter` function is specifically developed to calculate specific gravity 
 conversions for a data.frame with a number of specificly named columns to help 
 organise the dispatch of appropriate functions.
