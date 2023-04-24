@@ -43,4 +43,6 @@ test_that("test full workflow", {
     )
 
     test_data <- cbind(test_data, npm_assess)
+
+    expect_true(is.data.frame(test_data))
 })
