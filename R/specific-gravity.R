@@ -203,6 +203,7 @@ sg_cord_drink_converter <- function(row) {
 #' @param specific_gravity, a multiplier representing the specific
 #' gravity of the product
 #' @returns a value adjusted by the specific_gravity
+#' @export
 generic_specific_gravity <- function(volume, specific_gravity) {
     return(
         volume * specific_gravity
