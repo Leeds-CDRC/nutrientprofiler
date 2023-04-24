@@ -10,10 +10,11 @@ sg_ready_drink_converter(row)
 \item{row}{a row from a data.frame object}
 }
 \value{
-a numeric value of the specific gravity adjusted \code{volume_ml} column of row based on \verb{drink_type column}
+a numeric value of the specific gravity adjusted \code{volume_ml}
+column of row based on \verb{drink_type column}
 }
 \description{
-This function performs a specific gravity conversion for ready to consume drinks
-based on the specific gravity value for the value in the \code{drink_type} column.
-If this column is empty it returns the \code{volume_ml} unadjusted.
+This function performs a specific gravity conversion for ready to consume
+drinks based on the specific gravity value for the value in the \code{drink_type}
+column. If this column is empty it returns the \code{volume_ml} unadjusted.
 }
