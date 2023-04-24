@@ -1,0 +1,65 @@
+---
+title: "Nutrient Profile Model Scoring"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Nutrient Profile Model Scoring}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+To determine the individual nutritional element scores that can be used in a
+Nutrient Profile Model there are two crucial steps:
+
+- Adjust the nutritional value based on the specific gravity adjusted weight and
+any unit transformations required 
+- Score the adjusted nutritional value based on a set of thresholds
+
+Below we outline the underlying logic for implementing both these steps in the
+`nutrientprofiler` package.
+
+```{r setup}
+library(nutrientprofiler)
+```
+
+## Adjuster functions 
+
+Nutritional values need to be adjusted before scoring to ensure:
+
+- They are standardised based on the specific gravity adjusted weight/volume of
+the product 
+- They are converted into the appropriate unit for scoring thresholds
+
+All adjuster functions are built ontop of the `generic_adjuster` function. 
+
+```{r}
+generic_adjuster(10, 15)
+```
+
+This takes a `value` argument for the amount of a nutritional category and
+divides it by the second argument `adjusted_weight` which corresponds to the
+specific gravity adjusted weight/volume for the product as determined using the
+specific gravity functions above. The output of this is multiplied by 100 to
+give the final adjusted value.
+
+### Energy and salt adjustments
+
+This is enough for adjusting most nutritional values but for both energy and
+salt we need additional steps to properly adjust the value for the appropriate
+units. This is because for energy nutritional information can be in either
+*kcal* or *kJ* and for salt can either be listed as a sodium measurement in *mg*
+or a salt measurement in *g*. The scoring thresholds for the Nutrient Profile
+Model are specified for *kJ* for energy and *mg* of sodium for salt so
+additional steps are needed to properly adjust these values if present in the
+alternate unit.
+
+## Scoring function 
+
+
+
