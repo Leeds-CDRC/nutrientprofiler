@@ -59,7 +59,7 @@ cdrcdrinks %>%
   select(out)
 
 # using base R
-unlist(lapply(seq_len(nrow(cdrcdrinks)), function(i) SGConverter(cdrcdrinks[i, ])))
+cdrcdrinks["sg"] <- unlist(lapply(seq_len(nrow(cdrcdrinks)), function(i) SGConverter(cdrcdrinks[i, ])))
 ```
 
 The below figure attempts to outline the hierarchy of function calls that `SGConverter` 
