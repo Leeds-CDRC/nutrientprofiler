@@ -151,7 +151,7 @@ test_that("NPMScore returns a data frame with correct column names", {
   expect_true(is.data.frame(result))
   
   # check if the column names are correct
-  expect_equal(colnames(result), c("energy_score", "sugar_score", "fat_score", "protein_score", "fvn_score", "fibre_score"))
+  expect_equal(colnames(result), c("energy_score", "sugar_score", "fat_score", "protein_score","salt_score", "fvn_score", "fibre_score"))
 })
 
 test_that("NPMScore returns NA for invalid measurements", {

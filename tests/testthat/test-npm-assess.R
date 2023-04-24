@@ -32,6 +32,7 @@ assess_row <- data.frame(energy_score = c(5, 3, 4, 6),
                   protein_score = c(4,6,0,2), 
                   fvn_score = c(0,1, 5, 1), 
                   fibre_score = c(1,8, 5, 3), 
+                  sodium_score = c(0, 0, 0, 2),
                   product_type = c("food","food","drink","drink"))
 
 # Test 1: Test if the function returns a matrix
@@ -49,7 +50,7 @@ test_that("NPMAssess should correctly calculate the NPM score", {
 
     out_df <- do.call("rbind", lapply(seq_len(nrow(assess_row)), function(i) NPMAssess(assess_row[i,])))
 
-    expect_true(identical(out_df$NPM_score, c(16,-7,0,9)))
+    expect_true(identical(out_df$NPM_score, c(16,-7,0,11)))
 })
 
 # Test 4: Test if the function correctly assesses the NPM score for a food

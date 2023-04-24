@@ -102,7 +102,7 @@ NPMScore <- function(row, sg_adjusted_label) {
                 NA
             }
 
-    score_df <- as.data.frame(cbind(energy_score, sugar_score, fat_score, protein_score, fvn_score, fibre_score))
+    score_df <- as.data.frame(cbind(energy_score, sugar_score, fat_score, protein_score, salt_score, fvn_score, fibre_score))
 
     return(score_df)
 
