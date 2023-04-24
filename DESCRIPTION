@@ -20,6 +20,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     dplyr,
+    tidyr,
     DiagrammeR
 Config/testthat/edition: 3
 URL: https://leeds-cdrc.github.io/nutrientprofiler/, https://github.com/Leeds-CDRC/nutrientprofiler

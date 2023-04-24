@@ -107,7 +107,15 @@ nutritional groups for a data.frame of data.
 ```{r}
 NPMScore(cdrcdrinks[1,], sg_adjusted_label="sg")
 ```
-The `SGConverter` function is specifically developed to calculate specific gravity 
-conversions for a data.frame with a number of specificly named columns to help 
-organise the dispatch of appropriate functions.
+
+```{r}
+library(tidyr)
+
+cdrcdrinks %>% 
+  rowwise() %>% 
+  mutate( sg = SGConverter(pick(everything()))) %>% 
+  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
+  unnest(test) %>% select(energy_score, sugar_score, salt_score, fvn_score,
+  protein_score, fat_score, fibre_score)
+```
 
