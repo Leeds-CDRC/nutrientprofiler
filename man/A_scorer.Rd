@@ -4,7 +4,7 @@
 \alias{A_scorer}
 \title{A score function}
 \usage{
-A_scorer(energy_score, sugar_score, fat_score, sodium_score)
+A_scorer(energy_score, sugar_score, fat_score, salt_score)
 }
 \arguments{
 \item{energy_score, }{numeric value for energy score}
@@ -13,12 +13,12 @@ A_scorer(energy_score, sugar_score, fat_score, sodium_score)
 
 \item{fat_score, }{numeric value for fat score}
 
-\item{sodium_score, }{numeric value for sodium score}
+\item{salt_score, }{numeric value for salt score}
 }
 \value{
 a numeric value of the A score
 }
 \description{
 A scores are defined as the scores for
-energy, sugars, fat and sodium summed together
+energy, sugars, fat and salt summed together
 }
