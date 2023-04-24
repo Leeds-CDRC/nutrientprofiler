@@ -40,7 +40,8 @@
 <p>This document outlines a rough approach for local setup and contributing to this project.</p>
 <div class="section level2">
 <h2 id="local-setup">Local setup<a class="anchor" aria-label="anchor" href="#local-setup"></a></h2>
-<p>To work with this project locally you will need <a href="https://git-scm.com/" class="external-link">Git</a> and <a href="https://www.r-project.org/about.html" class="external-link">R</a> installed locally. It is also recommended that you install <a href="https://www.docker.com/" class="external-link">Docker</a> and <a href="https://code.visualstudio.com/" class="external-link">VSCode</a> to enable you to utilise the <a href="https://code.visualstudio.com/docs/devcontainers/containers" class="external-link">devcontainer</a> setup.</p>
+<p>To work with this project locally you will need <a href="https://git-scm.com/" class="external-link">Git</a> and <a href="https://www.r-project.org/about.html" class="external-link">R</a> installed locally. It is also recommended that you install <a href="https://www.docker.com/" class="external-link">Docker</a> and <a href="https://code.visualstudio.com/" class="external-link">VSCode</a> to enable you to utilise the <a href="https://code.visualstudio.com/docs/devcontainers/containers" class="external-link">devcontainer</a> setup or edit the code directly via GitHub Codespaces.</p>
+<p>If you’re unfamiliar with using <code>git</code> why not check out the fantastic <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Carpentries introductory course</a>.</p>
 <p>To get working on this project you will need the <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> package which you can install with the following R command:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Install devtools from CRAN</span></span>
@@ -48,13 +49,19 @@
 <div class="section level3">
 <h3 id="development-workflow">Development workflow<a class="anchor" aria-label="anchor" href="#development-workflow"></a></h3>
 <p>When working locally you should use the following workflow to help develop the code:</p>
-<ol style="list-style-type: decimal"><li>Open an R session</li>
-<li>Load <code>devtools</code>
+<ol style="list-style-type: decimal"><li>Create a <a href="https://github.com/Leeds-CDRC/nutrientprofiler/fork" class="external-link">fork of the GitHub repository</a> to create your own personal copy of this repository to which you can push changes to</li>
+<li>Locally clone your fork so that you can start working on it</li>
+<li>Open an R session</li>
+<li>Load <code>devtools</code> with: <code>R     library(devtools)</code>
 </li>
 <li>Make a change to the package files</li>
 <li>Test this in your R session by running <code>load_all()</code> to load the package (check here for any errors)</li>
 <li>Check your changes pass tests by running <code>test()</code>
 </li>
+<li>If you’re package passes the tests and you’ve updated the appropriate documentation you should now run <code>check()</code> locally to make sure all appropriate roxygen2 files are created/update and any functions you’ve now tagged with @export are exported to NAMESPACE</li>
+<li>Commit all the changes from the <code>check()</code> run and push these to GitHub</li>
+<li>Open a <a href="https://github.com/Leeds-CDRC/nutrientprofiler/compare" class="external-link">pull request</a> against the <code>main</code> branch from your development branch. This will trigger a GitHub action that also runs the equivalent of <code>check()</code> to make sure you didn’t miss anything and ensure the package still works against different versions of R.</li>
+<li>Once the checks pass on the pull request your changes can be accepted by the maintainer.</li>
 </ol></div>
 </div>
 </div>
