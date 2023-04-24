@@ -71,6 +71,15 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Leeds-CDRC/nutrientprofiler"</span><span class="op">)</span></span></code></pre></div>
+<p>You can also download the package as an archive from GitHub and install them from source using the following steps. The steps below show how to do this directly within R but you can also download an archive of the respository directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub releases</a> page.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># download the repository as a .tar.gz archive</span></span>
+<span><span class="co"># to your current directory</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v0.2.2.tar.gz"</span>,</span>
+<span>              dest <span class="op">=</span> <span class="st">"./nutrientprofiler-v0.2.2.tar.gz"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install the package directly from source</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-v0.2.2.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
