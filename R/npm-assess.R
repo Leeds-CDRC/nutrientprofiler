@@ -16,8 +16,7 @@ NPMAssess <- function(row) {
 
     stopifnot("Score columns not detected. Please ensure you have called NPMScore on your data" = 
         c("energy_score", "sugar_score", "fat_score", 
-        "protein_score", "fvn_score", "fibre_score") %in% names(row)
-        
+        "protein_score", "fvn_score", "fibre_score","sodium_score") %in% names(row)
     )
 
     A_score <- A_scorer(energy_score = row[['energy_score']],
