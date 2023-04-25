@@ -83,12 +83,12 @@ C_scorer <- function(fvn_score, protein_score, fibre_score) {
 #' @param a_score, a numeric value for the A score
 #' @param c_score, a numeric value for the C score
 #' @param fvn_score, a numeric value for the specific score for fruit/veg/nuts percentage
-#' @param fib_score, a numeric value for the fibre score
+#' @param fibre_score, a numeric value for the fibre score
 #' @return a numeric value for the overall NPM score
 #' @export
-NPM_total <- function(a_score, c_score, fvn_score, fib_score) {
+NPM_total <- function(a_score, c_score, fvn_score, fibre_score) {
     npm_score <- if (a_score >= 11 && fvn_score < 5) {
-        a_score - (fvn_score + fib_score)
+        a_score - (fvn_score + fibre_score)
     } else {
         a_score - c_score
     }

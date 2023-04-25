@@ -4,7 +4,7 @@
 \alias{NPM_total}
 \title{NPM_total}
 \usage{
-NPM_total(a_score, c_score, fvn_score, fib_score)
+NPM_total(a_score, c_score, fvn_score, fibre_score)
 }
 \arguments{
 \item{a_score, }{a numeric value for the A score}
@@ -13,7 +13,7 @@ NPM_total(a_score, c_score, fvn_score, fib_score)
 
 \item{fvn_score, }{a numeric value for the specific score for fruit/veg/nuts percentage}
 
-\item{fib_score, }{a numeric value for the fibre score}
+\item{fibre_score, }{a numeric value for the fibre score}
 }
 \value{
 a numeric value for the overall NPM score
