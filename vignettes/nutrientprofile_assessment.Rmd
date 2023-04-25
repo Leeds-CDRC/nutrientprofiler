@@ -1,0 +1,33 @@
+---
+title: "Nutrient Profile Model Assessment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Nutrient Profile Model Assessment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+For assessing individual nutrient scores of a product within the Nutrient
+Profile Model we have to complete the following steps:
+
+- Calculate compound A and C scores 
+- Calculate a total Nutrient Profile Model score using A and C scores 
+taking into account Fibre and fruit, vegetables and nut scores 
+- Determine whether the product passes or fails with thresholds depending on
+whether the product is a food or drink
+
+The `nutrientprofiler` package includes a high level wrapper function
+`NPMAssess` for handling this row-by-row on a data.frame with columns generated
+from `NPMScore`. Below we will explore the component functions of `NPMAssess` to
+understand how this function operates.
+
+```{r setup}
+library(nutrientprofiler)
+```

@@ -2,3 +2,41 @@ url: https://leeds-cdrc.github.io/nutrientprofiler/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [intro, reference, articles]
+    right: [search, github]
+
+reference:
+- title: Specific Gravity Conversion
+  desc: >
+    Functions related to specific gravity conversion
+  contents:
+  - SGConverter
+  - starts_with("sg_")
+  - generic_specific_gravity
+- title: Nutrient Profile Model Scoring
+  desc: >
+    Functions related to Nutrient Profile Model scoring 
+    for specific nutrients
+  contents:
+  - NPMScore
+  - NPM_score_function
+  - scoring_function
+  - fruit_veg_nut_scorer
+  - ends_with("_adjuster")
+- title: Nutrient Profile Model Assessment
+  desc: >
+    Functions relating to Nutrient Profile Model assessment
+  contents:
+  - NPMAssess
+  - NPM_assess
+  - NPM_total
+  - A_scorer
+  - C_scorer
+- title: Miscellaneous
+  desc: >
+    Miscellaneous items included in this package
+  contents:
+  - cdrcdrinks
+  - SGtab
