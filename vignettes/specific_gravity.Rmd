@@ -56,5 +56,30 @@ of named products and their associated specific gravity. This variable is not
 directly accessible to users but is used by other specific gravity functions to
 determine the appropriate specific gravity adjustments.
 
+## Breaking down `SGConverter`
+
+`SGConverter` works by taking the row of a data.frame as it's argument. It
+checks that row for a column called `product_type`. This column is used to
+define whether the product is either a `"food"` or `"drink"`. The value in this
+column is used by `SGConverter` to determine whether to pass the row to either
+an `sg_food_converter` function or a `sg_drink_converter` function.
+
+### Calculating specific gravity for food
+
+If `SGConverter` is passed a `product_type` that is `"food"` it passes the row
+to `sg_food_converter`. This function does a simple test of whether the row
+contains a column called `weight_g`, if this column doesn't contain `NA` it
+returns the value contained in `weight_g` as we don't have to adjust this for a
+specific gravity.
+If the `weight_g` column does contain `NA` the row is dispatches to the
+`sg_liquidfood_converter` function. The `sg_liquidfood_converter` checks for a
+`food_type` column which contains a type value that should match a product
+included in our `SGtab` vector. The `sg_liquidfood_converter` checks if the
+`food_type` column is not an empty string, if this is true it calculates the
+specific gravity adjusted volume by getting the value from the `volume_ml`
+column in the row and multiplying it by the specific gravity value in the
+`SGtab` which is indexed out of the vector using the `food_type` column value
+from the passed row.
+
 
 
