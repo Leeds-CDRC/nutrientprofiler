@@ -46,6 +46,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a>
     <a class="dropdown-item" href="../articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a>
+    <a class="dropdown-item" href="../articles/specific_gravity.html">Specific Gravity Adjustment</a>
   </div>
 </li>
       </ul>
@@ -167,8 +168,8 @@ node and each column name the function uses to dispatch to underlying
 functions is specified in single quotes. If a function returns a value
 it is marked with an empty diamond.</p>
 <div class="figure" style="text-align: center">
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7b185be431a6b7e6e89b" style="width:960px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-7b185be431a6b7e6e89b">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-30b765c9d82077b92bae" style="width:960px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-30b765c9d82077b92bae">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
 SGConverter logic
 </p>
 </div>
