@@ -81,5 +81,67 @@ column in the row and multiplying it by the specific gravity value in the
 `SGtab` which is indexed out of the vector using the `food_type` column value
 from the passed row.
 
+### Calculating specific gravity for drinks 
 
+The logic for calculating specific gravity for drinks is slightly more
+complicated. If the `SGConverter` function found that `"drink"` was specified in
+the `product_type` column it dispatches the row to the `sg_drink_converter`
+function. This checks the row for a column called `drink_format` that specifies
+whether the drink is either: ready to drink, a cordial or a powdered drink
+(`"ready"`, `"cordial"`, `"powdered"`). For each of these options the
+`sg_drink_converter` dispatches the row to an additional function.
 
+For `"ready"` it dispatches to `sg_ready_drink_converter`. This function checks
+if the row contains a `drink_type` column and if that row contains an empty
+string. If it does not contain an empty string it calls the
+`generic_specific_gravity` function passing the `volume_ml` column value and the
+specific gravity multiplier indexed from `SGtab` based on the value in
+`drink_type`. If `drink_type` does contain an empty string it just returns the
+`volume_ml` column value.
+
+For `"cordial"` it dispatches to `sg_cord_drink_converter`. This function checks
+the row for a `nutrition_info` column to help determine how it should proceed.
+This column contains information about how the drink has been consumed, whether
+it has been directly consumed, following some preparation instructions that
+dilute the cordial or if no instructions were provided (`"as consumed"`,
+`"preparation instructions given"`, `"preparation instructions not given"`). 
+If `nutrition_info` is `"as consumed"` the `volume_ml` column value and the
+specific gravity multipler from the `SGtab` for 
+`"Cordial/squash ready to drink"` is passed to the `generic_specific_gravity`
+function. 
+For `"preparation instructions given"` the expectation is that there is an
+additional column in the row `volume_ml_water` that specifies the volume of
+water used to dilute the cordial. If `"preparation instructions given"` is found
+in `nutrition_info` column it computes the sum of `volume_ml` and
+`volume_ml_water` columns and passes those to `generic_specific_gravity` along
+with the specific gravity multipler from the `SGtab` for  `"Cordial/squash ready to drink"`.
+For `"preparation instructions not given"` the `volume_ml` column value is
+passed to `generic_specific_gravity` function along with the specific gravity
+multiplier indexed from `SGtab` for `"Cordial/squash undiluted"`.
+
+If the `drink_format` column value is `"powdered"` it dispatches to the
+`sg_powd_drink_converter` function. This again checks the row for values in the
+`nutrition_info` column to help determine how to compute the specific gravity
+adjustment using the same 3 potential values defined above in the `cordial`
+section. 
+If `nutrition_info` is `"as consumed"` the `volume_ml` column value and the
+specific gravity multipler from the `SGtab` for 
+`"Cordial/squash ready to drink"` is passed to the `generic_specific_gravity`
+function. 
+For `"preparation instructions given"` the expectation is that there is an
+additional column in the row `weight_g` that specifies the weight in grams of
+the powdered drink used. If `"preparation instructions given"` is found
+in `nutrition_info` column it computes the sum of `weight_g` and
+`volume_ml_water` columns and passes those to `generic_specific_gravity` along
+with the specific gravity multipler from the `SGtab` for  `"Cordial/squash ready to drink"`.
+For `"preparation instructions not given"` the `weight_g` column value is
+returned unadjusted.
+
+## Summary
+
+Overall most of the functions in `SGConverter` are quite constrictive. They
+expect particular column names to work and won't just work with any data.
+However, the building blocks to all these functions is the
+`generic_specific_gravity` which can be used to develop your own functions for
+building a specific gravity conversion pipeline. The existing steps shown here
+should serve as a template to build your own specific gravity conversion pipeline.
