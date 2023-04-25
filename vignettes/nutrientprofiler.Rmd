@@ -104,9 +104,13 @@ scoring thresholds to use for a given value and a high level `NPMScore` wrapper
 function that shows the logic for calculating the NPM score across multiple
 nutritional groups for a data.frame of data.
 
+A quick example of running `NPMScore` across a single row of data is shown below:
 ```{r}
 NPMScore(cdrcdrinks[1,], sg_adjusted_label="sg")
 ```
+
+An example of building a tidyverse pipeline to calculate scores across all rows
+of a data.frame using `NPMScore` and `SGConverter` is shown below: 
 
 ```{r}
 library(tidyr)
