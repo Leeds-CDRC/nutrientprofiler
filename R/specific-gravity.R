@@ -51,6 +51,7 @@ SGConverter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns either the value of `weight_g` column for row or dispatches row to
 #' `sg_liquidfood_converter`
+#' @export
 sg_food_converter <- function(row) {
     return(
         ifelse(!is.na(row[["weight_g"]]),
@@ -69,6 +70,7 @@ sg_food_converter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns a numeric value of the specific gravity adjusted `volume_ml`
 #' column in `row`
+#' @export
 sg_liquidfood_converter <- function(row) {
     # if food type is not an empty string
     if (row[["food_type"]] != "") {
@@ -86,6 +88,7 @@ sg_liquidfood_converter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns dispatches row to another converter function based on value in
 #' `drink_format` column of row
+#' @export
 sg_drink_converter <- function(row) {
     stopifnot(
         "The passed data to sg_drink_converter does not have the required columns" =
@@ -111,6 +114,7 @@ sg_drink_converter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns a numeric value of the specific gravity adjusted `volume_ml`
 #' column of row based on `drink_type column`
+#' @export
 sg_ready_drink_converter <- function(row) {
     # if drink type is not an empty string
     if (row[["drink_type"]] != "") {
@@ -134,6 +138,7 @@ sg_ready_drink_converter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns a numeric value of the specific gravity adjusted volume/mass
 #' depending on `nutrition_info` column.
+#' @export
 sg_powd_drink_converter <- function(row) {
     stopifnot(
         "The passed data to sg_powd_drink_converter does not have the required columns" =
@@ -167,6 +172,7 @@ sg_powd_drink_converter <- function(row) {
 #' @param row a row from a data.frame object
 #' @returns a numeric value of the specific gravity adjusted volume
 #' depending on `nutrition_info` column.
+#' @export
 sg_cord_drink_converter <- function(row) {
     stopifnot(
         "The passed data to sg_cord_drink_converter does not have the required columns" =
