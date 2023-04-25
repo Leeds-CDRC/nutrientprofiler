@@ -10,9 +10,11 @@ sg_powd_drink_converter(row)
 \item{row}{a row from a data.frame object}
 }
 \value{
-a numeric value of the specific gravity adjusted volume/mass depending on \code{nutrition_info} column.
+a numeric value of the specific gravity adjusted volume/mass
+depending on \code{nutrition_info} column.
 }
 \description{
 This function performs a specific gravity conversion for powdered drinks
-the conversion performed is based on the value in the \code{nutrition_info} column.
+the conversion performed is based on the value in the \code{nutrition_info}
+column.
 }

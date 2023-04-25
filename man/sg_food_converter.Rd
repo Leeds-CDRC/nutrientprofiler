@@ -10,10 +10,12 @@ sg_food_converter(row)
 \item{row}{a row from a data.frame object}
 }
 \value{
-either the value of \code{weight_g} column for row or dispatches row to \code{sg_liquidfood_converter}
+either the value of \code{weight_g} column for row or dispatches row to
+\code{sg_liquidfood_converter}
 }
 \description{
 This function is run for data with the \code{product_type} "food"
-It checks if the column \code{weight_g} contains NA values to assume whether the food is liquid or solid
-And if solid returns the weight unadjusted or if liquid dispatches to an additional function
+It checks if the column \code{weight_g} contains NA values to assume whether the food is
+liquid or solid and if solid returns the weight unadjusted or if liquid dispatches
+to an additional function
 }

@@ -10,11 +10,12 @@ sg_liquidfood_converter(row)
 \item{row}{a row from a data.frame object}
 }
 \value{
-a numeric value of the specific gravity adjusted \code{volume_ml} column in \code{row}
+a numeric value of the specific gravity adjusted \code{volume_ml}
+column in \code{row}
 }
 \description{
 This function is run for data that is identified by \code{sg_food_converter} as liquid food
-It checks for a value in the \code{food_type} column and if present retrieves a specific gravity multiplier
-which is multiplies against the \code{volume_ml} column value
-If \code{food_type} is empty is returns an unadjusted \code{volume_ml} value
+It checks for a value in the \code{food_type} column and if present retrieves a
+specific gravity multiplier which is multiplies against the \code{volume_ml} column
+value. If \code{food_type} is empty is returns an unadjusted \code{volume_ml} value
 }
