@@ -91,8 +91,8 @@ a data.frame with a series of expected columns. This function is
 composed of a series of different dispatcher function which will be
 outlined below (see figure for hierarchy).</p>
 <div class="figure" style="text-align: center">
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ab6d41117647a8b710c1" style="width:960px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-ab6d41117647a8b710c1">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ab5a134294d262ac9f6e" style="width:960px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-ab5a134294d262ac9f6e">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
 SGConverter logic
 </p>
 </div>
