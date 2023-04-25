@@ -60,6 +60,23 @@ Model are specified for *kJ* for energy and *mg* of sodium for salt so
 additional steps are needed to properly adjust these values if present in the
 alternate unit.
 
+This is handled by specific adjuster functions for energy and salt that also
+take an `adjuster_type` argument to specify the units of the passed value.
+
+```{r}
+# for energy in kj
+energy_value_adjuster(10, 80, adjuster_type="kj")
+
+# for energy in kcal
+energy_value_adjuster(60, 300, adjuster_type="kj")
+
+# for salt in grams
+salt_adjuster(3, 100, adjuster_type="salt")
+
+# for salt in mg of sodium
+salt_adjuster(60, 100, adjuster_type="sodium")
+```
+
 ## Scoring function 
 
 

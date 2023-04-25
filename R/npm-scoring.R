@@ -208,6 +208,7 @@ fruit_veg_nut_scorer <- function(value) {
 #' @param adjuster_type a character value of either `kj` or `kcal` to determine 
 #' which adjustment to perform
 #' @return a numeric value of adjusted nutritional data
+#' @export
 energy_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") {
     stopifnot(
         "Invalid type passed to energy_value_adjuster, can only be 'kj' or 'kcal'" =
@@ -232,6 +233,7 @@ energy_value_adjuster <- function(value, adjusted_weight, adjuster_type = "kj") 
 #' @param adjusted_weight a numeric value corresponding to the total 
 #' weight of the food/drink after specific gravity adjustment
 #' @return a numeric value of adjusted nutritional data
+#' @export
 generic_adjuster <- function(value, adjusted_weight) {
 
     stopifnot(
@@ -258,6 +260,7 @@ generic_adjuster <- function(value, adjusted_weight) {
 #' weight of the food/drink after specific gravity adjustment
 #' @param adjuster_type a character of either "salt" or "sodium" to help determine the required adjustment
 #' @return a numeric value with appropriate adjustment made
+#' @export
 salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
     stopifnot(
         "Invalid type passed to salt_adjuster, can only be 'salt' or 'sodium'" =
