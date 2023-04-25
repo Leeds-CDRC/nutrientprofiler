@@ -1,0 +1,42 @@
+---
+title: "Specific Gravity Adjustment"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Specific Gravity Adjustment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+When attempting to calculate a Nutrient Profile Model volumes and masses need to
+be adjusted by the specific gravity of the product to ensure a correct reading.
+This is managed directly by the `SGConverter` high level function that operates
+row-by-row on a data.frame with a series of expected columns. This function is
+composed of a series of different dispatcher function which will be outlined
+below.
+
+```{r setup}
+library(nutrientprofiler)
+```
+
+The central logic for specific gravity conversion is multiplying the
+volume/weight of a product by a specific gravity multiplier. This is distilled
+in he `generic_specific_gravity` function. 
+
+```{r}
+generic_specific_gravity(100, 1.01)
+```
+
+In practise this package uses the `SGtab` named vector which contains a series
+of named products and their associated specific gravity. This variable is not
+directly accessible to users but is used by other specific gravity functions to
+determine the appropriate specific gravity adjustments.
+
+
+
