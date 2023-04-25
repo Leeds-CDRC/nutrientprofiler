@@ -18,13 +18,29 @@
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/nutrientprofiler.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a>
+    <a class="dropdown-item" href="../articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/Leeds-CDRC/nutrientprofiler/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -35,9 +51,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="specific-gravity-conversion">Specific Gravity Conversion<a class="anchor" aria-label="anchor" href="#specific-gravity-conversion"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Functions related to specific gravity conversion</p>
 
       
     </div><div id="" class="section level2">
@@ -47,79 +63,9 @@
 
       <dl><dt>
           
-          <code><a href="A_scorer.html">A_scorer()</a></code> 
-        </dt>
-        <dd>A score function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="C_scorer.html">C_scorer()</a></code> 
-        </dt>
-        <dd>C score function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="NPMAssess.html">NPMAssess()</a></code> 
-        </dt>
-        <dd>NPM assess function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="NPMScore.html">NPMScore()</a></code> 
-        </dt>
-        <dd>NPM scoring dispatcher</dd>
-      </dl><dl><dt>
-          
-          <code><a href="NPM_assess.html">NPM_assess()</a></code> 
-        </dt>
-        <dd>NPM Assess function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="NPM_score_function.html">NPM_score_function()</a></code> 
-        </dt>
-        <dd>The NPM scoring dispatch function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="NPM_total.html">NPM_total()</a></code> 
-        </dt>
-        <dd>NPM_total</dd>
-      </dl><dl><dt>
-          
           <code><a href="SGConverter.html">SGConverter()</a></code> 
         </dt>
         <dd>Specific Gravity converter function</dd>
-      </dl><dl><dt>
-          
-          <code><a href="SGtab.html">SGtab</a></code> 
-        </dt>
-        <dd>specific gravity conversion named vector</dd>
-      </dl><dl><dt>
-          
-          <code><a href="energy_value_adjuster.html">energy_value_adjuster()</a></code> 
-        </dt>
-        <dd>Function for adjusting energy information for A score calculation</dd>
-      </dl><dl><dt>
-          
-          <code><a href="fruit_veg_nut_scorer.html">fruit_veg_nut_scorer()</a></code> 
-        </dt>
-        <dd>Fruit, Vegetable and nut scorer</dd>
-      </dl><dl><dt>
-          
-          <code><a href="generic_adjuster.html">generic_adjuster()</a></code> 
-        </dt>
-        <dd>Function for generically adjusting nutritional measurement by total weight</dd>
-      </dl><dl><dt>
-          
-          <code><a href="generic_specific_gravity.html">generic_specific_gravity()</a></code> 
-        </dt>
-        <dd>Generic specific gravity converter</dd>
-      </dl><dl><dt>
-          
-          <code><a href="salt_adjuster.html">salt_adjuster()</a></code> 
-        </dt>
-        <dd>Function for adjusting the salt input value</dd>
-      </dl><dl><dt>
-          
-          <code><a href="scoring_function.html">scoring_function()</a></code> 
-        </dt>
-        <dd>a template scoring function</dd>
       </dl><dl><dt>
           
           <code><a href="sg_cord_drink_converter.html">sg_cord_drink_converter()</a></code> 
@@ -150,8 +96,117 @@
           <code><a href="sg_ready_drink_converter.html">sg_ready_drink_converter()</a></code> 
         </dt>
         <dd>Specific gravity drink converter for ready to consume drinks</dd>
+      </dl><dl><dt>
+          
+          <code><a href="generic_specific_gravity.html">generic_specific_gravity()</a></code> 
+        </dt>
+        <dd>Generic specific gravity converter</dd>
+      </dl></div><div class="section level2">
+      <h2 id="nutrient-profile-model-scoring">Nutrient Profile Model Scoring<a class="anchor" aria-label="anchor" href="#nutrient-profile-model-scoring"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions related to Nutrient Profile Model scoring for specific nutrients</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="NPMScore.html">NPMScore()</a></code> 
+        </dt>
+        <dd>NPM scoring dispatcher</dd>
+      </dl><dl><dt>
+          
+          <code><a href="NPM_score_function.html">NPM_score_function()</a></code> 
+        </dt>
+        <dd>The NPM scoring dispatch function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="scoring_function.html">scoring_function()</a></code> 
+        </dt>
+        <dd>a template scoring function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="fruit_veg_nut_scorer.html">fruit_veg_nut_scorer()</a></code> 
+        </dt>
+        <dd>Fruit, Vegetable and nut scorer</dd>
+      </dl><dl><dt>
+          
+          <code><a href="energy_value_adjuster.html">energy_value_adjuster()</a></code> 
+        </dt>
+        <dd>Function for adjusting energy information for A score calculation</dd>
+      </dl><dl><dt>
+          
+          <code><a href="generic_adjuster.html">generic_adjuster()</a></code> 
+        </dt>
+        <dd>Function for generically adjusting nutritional measurement by total weight</dd>
+      </dl><dl><dt>
+          
+          <code><a href="salt_adjuster.html">salt_adjuster()</a></code> 
+        </dt>
+        <dd>Function for adjusting the salt input value</dd>
+      </dl></div><div class="section level2">
+      <h2 id="nutrient-profile-model-assessment">Nutrient Profile Model Assessment<a class="anchor" aria-label="anchor" href="#nutrient-profile-model-assessment"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions relating to Nutrient Profile Model assessment</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="NPMAssess.html">NPMAssess()</a></code> 
+        </dt>
+        <dd>NPM assess function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="NPM_assess.html">NPM_assess()</a></code> 
+        </dt>
+        <dd>NPM Assess function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="NPM_total.html">NPM_total()</a></code> 
+        </dt>
+        <dd>NPM_total</dd>
+      </dl><dl><dt>
+          
+          <code><a href="A_scorer.html">A_scorer()</a></code> 
+        </dt>
+        <dd>A score function</dd>
+      </dl><dl><dt>
+          
+          <code><a href="C_scorer.html">C_scorer()</a></code> 
+        </dt>
+        <dd>C score function</dd>
+      </dl></div><div class="section level2">
+      <h2 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h2>
+      
+      <p class="section-desc"></p><p>Miscellaneous items included in this package</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="cdrcdrinks.html">cdrcdrinks</a></code> 
+        </dt>
+        <dd>Example dataset called CDRC Drinks</dd>
+      </dl><dl><dt>
+          
+          <code><a href="SGtab.html">SGtab</a></code> 
+        </dt>
+        <dd>specific gravity conversion named vector</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
