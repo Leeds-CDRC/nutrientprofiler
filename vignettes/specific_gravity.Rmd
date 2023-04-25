@@ -142,10 +142,10 @@ specific gravity multipler from the `SGtab` for
 `"Cordial/squash ready to drink"` is passed to the `generic_specific_gravity`
 function. 
 For `"preparation instructions given"` the expectation is that there is an
-additional column in the row `volume_ml_water` that specifies the volume of
+additional column in the row `volume_water_ml` that specifies the volume of
 water used to dilute the cordial. If `"preparation instructions given"` is found
 in `nutrition_info` column it computes the sum of `volume_ml` and
-`volume_ml_water` columns and passes those to `generic_specific_gravity` along
+`volume_water_ml` columns and passes those to `generic_specific_gravity` along
 with the specific gravity multipler from the `SGtab` for  `"Cordial/squash ready to drink"`.
 For `"preparation instructions not given"` the `volume_ml` column value is
 passed to `generic_specific_gravity` function along with the specific gravity
@@ -178,7 +178,7 @@ For `"preparation instructions given"` the expectation is that there is an
 additional column in the row `weight_g` that specifies the weight in grams of
 the powdered drink used. If `"preparation instructions given"` is found
 in `nutrition_info` column it computes the sum of `weight_g` and
-`volume_ml_water` columns and passes those to `generic_specific_gravity` along
+`volume_water_ml` columns and passes those to `generic_specific_gravity` along
 with the specific gravity multipler from the `SGtab` for  `"Cordial/squash ready to drink"`.
 For `"preparation instructions not given"` the `weight_g` column value is
 returned unadjusted.
