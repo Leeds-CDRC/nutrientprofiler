@@ -73,3 +73,27 @@ sum of the fibre score and the fruit, vegetables and nut score from the A score.
 This follows the logic defined in the [Technical Guidance for Nutrient Profile
 modelling](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf).
 
+## Nutrient Profile Model Assessment 
+
+After determining an overall score for the product within the Nutrient Profile
+Model the final step is to assess this score to determine if the product passes
+or fails. This is a simple test of whether the score is above or below a
+specific threshold where the threshold differs if the product is a food or
+drink.
+
+If the product is a food an NPM score of 4 or more leads to a failure, whilst
+for a drink a product fails the NPM is it scores 1 or more.
+
+`NPM_assess` works by accepting two arguments: `NPM_score` and `type`. `type`
+determines if the product is a food or drink by accepting either `food` or
+`drink` whilst `NPM_score` should be a numeric value calculated from the prior
+`NPM_total` step. The function returns a character vector with a single value of
+either `"PASS"` or `"FAIL"`.
+
+```{r}
+# pass
+NPM_assess(3, "food")
+
+# fail
+NPM_assess(6, type = "drink")
+```

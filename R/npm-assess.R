@@ -102,6 +102,7 @@ NPM_total <- function(a_score, c_score, fvn_score, fibre_score) {
 #' @param NPM_score, a numeric value for the NPM score
 #' @param type, a character value of either "food" or "drink" to determine how to assess the score
 #' @returns a character value of either "PASS" or "FAIL"
+#' @export
 NPM_assess <- function(NPM_score, type) {
     assessment <- switch(tolower(type),
         "food" = ifelse(NPM_score >= 4, "FAIL", "PASS"),
