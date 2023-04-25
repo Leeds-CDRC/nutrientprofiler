@@ -61,6 +61,9 @@ Therefore the `NPM_total` function takes 4 arguments: `a_score`, `c_score`,
 
 ```{r}
 NPM_total(7, 2, 1, 1)
+
+# example using keyword arguments
+NPM_total(a_score = 10, c_score = 4, fvn_score = 1, fibre_score = 2)
 ```
 
 This function works by subtracting the C score from the A score. However, if the A
