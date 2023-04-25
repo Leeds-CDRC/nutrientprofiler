@@ -1,6 +1,4 @@
-# nutrientprofiler R package
-
-> :warning: This project is a working-in-progress so breaking changes may be introduced without notice
+# 🍎📦 nutrientprofiler R package
 
 Welcome to the nutrientprofiler R package repository!
 
