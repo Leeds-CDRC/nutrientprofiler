@@ -50,8 +50,10 @@ function. This is a high level function that is designed to operate on each row 
 a data.frame parsing multiple columns to determine how to calculate the adjusted 
 specific gravity score.
 
-> !:warning: The `SGConverter` function has been specifically designed with an
+```{r eval=FALSE, class.source="bg-warning"}
+Warning: The `SGConverter` function has been specifically designed with an
 existing dataset in mind and expects specific column names to work.
+```
 
 ```{r}
 # using dplyr
