@@ -32,8 +32,9 @@ library(nutrientprofiler)
 
 Nutritional values need to be adjusted before scoring to ensure:
 
-- They are standardised based on the specific gravity adjusted weight/volume of
-the product 
+- The nutritional information is adjusted based on their nutrient denisty which
+is standardised to 100g of the product rather than the total amount to enable 
+better comparisons between products
 - They are converted into the appropriate unit for scoring thresholds
 
 All adjuster functions are built ontop of the `generic_adjuster` function. 
