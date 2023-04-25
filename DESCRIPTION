@@ -2,8 +2,12 @@ Package: nutrientprofiler
 Title: Nutrient Model Profiler
 Version: 0.2.2
 Authors@R: 
-    person("Alex", "Coleman", , "a.coleman1@leeds.ac.uk", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-7723-3222"))
+    c(
+    person("Alex", "Coleman", , "a.coleman1@leeds.ac.uk", role = c("aut"),
+           comment = c(ORCID = "0000-0001-7723-3222")),
+    person("Vicki", "Jenneson", , "v.l.jenneson@leeds.ac.uk", role = c("aut", "cre"), 
+            comment = c(ORCID = "0000-0003-2468-8009"))
+    )
 Description: This package implements functions to help assess 
     product information against the UK Nutrient Profiling Model (2004/5).
     These scores can be used as part of scoping HFSS when determining product placement.
