@@ -79,5 +79,67 @@ salt_adjuster(60, 100, adjuster_type="sodium")
 
 ## Scoring function 
 
+The adjuster functions return an adjusted value for nutritional information to
+ensure we can calculate the NPM Score based on 100g of the product. We use this
+adjusted value in the subsequent step for actually calculating a score for each
+of our nutrient groups. This is performed using the `NPM_score_function` which
+acts as a dispatcher function that takes `value` and `type` arguments to
+determine which adjustment function to call and which scoring thresholds to use.
+This function also takes optional additional arguments such as specifying the
+`adjusted_weight` that can be passed into the adjuster functions and the
+`adjuster_type` argument  for some types such as `energy` and `salt`.
 
+```{r}
+# calculate a score for a protein value
+NPM_score_function(80, adjusted_weight=100, "protein")
+```
 
+Under the hood this function is calling the `generic_adjuster` from above to
+adjust the nutritional value using the `adjusted_weight`, next it passes this
+adjusted value to the `scoring_function`. The `scoring_function` determines the
+score of a value based on provided score thresholds.
+
+```{r}
+# create thesholds vector from largest to smallest
+THRESHOLDS <- c(3, 2, 1)
+
+# score the value 1 against the provided thresholds
+# returns 0
+scoring_function(1, THRESHOLDS)
+
+# returns 2
+scoring_function(2.1, THRESHOLDS)
+```
+
+The `scoring_function` behaves by taking a vector of thresholds in descending
+order. First it sets the score to be the total number of thresholds available (i.e. 3 in the above
+example). It takes the value we have provided and checks if this value is
+greater than each item in the thresholds vector, if it is greater than the item
+from thresholds it returns the score corresponding to that item. If the value
+isn't greater than the item then the score, set earlier, is deducted 1. The
+continues for each item in the thresholds until the only option left is our
+value not being greater than the final item in our thresholds leading to a score
+of 0.
+
+### Fruit, vegetables and nuts scoring 
+
+The one exception to this scoring function is for fruit, vegetables and nuts.
+This nutritional information is presented as a percentage and the scoring for
+this specified in the Nutrient Profile Model doesn't score this in a continuous
+manner so this package includes a specific `fruit_veg_nut_scorer`. This function
+takes value and returns a score (either 0, 1, 2 or 5) depending on if the value
+meets a specific percentage threshold.
+
+```{r}
+# scores a 5
+fruit_veg_nut_scorer(81)
+
+# scores a 2
+fruit_veg_nut_scorer(70)
+
+# scores a 1
+fruit_veg_nut_scorer(45)
+
+# scores a 0
+fruit_veg_nut_scorer(20)
+```

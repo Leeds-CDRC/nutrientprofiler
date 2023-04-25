@@ -124,7 +124,7 @@ NPMScore <- function(row, sg_adjusted_label) {
 #' @param type, a character string that specifies the type of the value passed to control scoring logic
 #' @param ..., option named arguments to pass to adjuster functions, most commonly `adjusted_weight`
 #' @returns a numeric score value or vector of scores 
-
+#' @export
 NPM_score_function <- function(value, type, ...) {
     stopifnot(
         "The passed type to NPM_score_function does not match expected types " =
@@ -161,6 +161,7 @@ NPM_score_function <- function(value, type, ...) {
 #' @export
 #' @param value a passed numeric value
 #' @param thresholds a vector of thresholds to use to score against in order of highest to lowest
+#' @export
 scoring_function <- function(value, thresholds) {
     stopifnot("thresholds has no length" = length(thresholds) > 1)
     # TODO: linter warning to use seq_along
@@ -184,6 +185,7 @@ scoring_function <- function(value, thresholds) {
 #' 
 #' @param value a numeric value of the percentage of fruit, nuts and vegetables
 #' @return a numeric score value
+#' @export
 fruit_veg_nut_scorer <- function(value) {
     score <- if(value > 80) {
         5
