@@ -31,3 +31,16 @@ understand how this function operates.
 ```{r setup}
 library(nutrientprofiler)
 ```
+
+## A and C score calculators
+
+The first component of `NPMAssess` is the step to calculate the A and C scores.
+This involves two functions: `A_scorer` and `C_scorer` that accept a number of
+arguments corresponding to the appropriate nutrient score and sum them.
+
+The `A_scorer` takes 4 arguments: `energy_score`, `sugar_score`, `salt_score` and
+`fat_score`. These are scores calculated in the previous `NPMScore` step and are
+summed in the `A_scorer` function to return a compound A score. The `C_scorer`
+takes 3 arguments: `fvn_score` (fruit, vegetable and nut score), `protein_score`
+and `fibre_score` and calculates the sum of these to return a C score.
+
