@@ -50,3 +50,23 @@ A_scorer(energy_score = 3, sugar_score = 5, salt_score = 1, fat_score = 2)
 C_scorer(fvn_score = 2, protein_score = 3, fibre_score = 1)
 ```
 
+## Nutrient Profile Model Score 
+
+After computing the A and C scores we're able to calculate the overall Nutrient
+Profile Model Score of the product. The method for computing the score is
+conditional on the size of the A and C score and can in some circumstances take
+into account the fibre score and the fruit, vegetables and nut score. 
+Therefore the `NPM_total` function takes 4 arguments: `a_score`, `c_score`,
+`fvn_score`, `fibre_score`.
+
+```{r}
+NPM_total(7, 2, 1, 1)
+```
+
+This function works by subtracting the C score from the A score. However, if the A
+score is greater than or equal to 11 and the fruit, vegetable and nut score is
+less than 5, the function performs a different calculation and substracts the
+sum of the fibre score and the fruit, vegetables and nut score from the A score.
+This follows the logic defined in the [Technical Guidance for Nutrient Profile
+modelling](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf).
+
