@@ -97,7 +97,83 @@ will explore the component functions of <code>NPMAssess</code> to
 understand how this function operates.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://leeds-cdrc.github.io/nutrientprofiler/">nutrientprofiler</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<div class="section level2">
+<h2 id="a-and-c-score-calculators">A and C score calculators<a class="anchor" aria-label="anchor" href="#a-and-c-score-calculators"></a>
+</h2>
+<p>The first component of <code>NPMAssess</code> is the step to
+calculate the A and C scores. This involves two functions:
+<code>A_scorer</code> and <code>C_scorer</code> that accept a number of
+arguments corresponding to the appropriate nutrient score and sum
+them.</p>
+<p>The <code>A_scorer</code> takes 4 arguments:
+<code>energy_score</code>, <code>sugar_score</code>,
+<code>salt_score</code> and <code>fat_score</code>. These are scores
+calculated in the previous <code>NPMScore</code> step and are summed in
+the <code>A_scorer</code> function to return a compound A score. The
+<code>C_scorer</code> takes 3 arguments: <code>fvn_score</code> (fruit,
+vegetable and nut score), <code>protein_score</code> and
+<code>fibre_score</code> and calculates the sum of these to return a C
+score.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/A_scorer.html">A_scorer</a></span><span class="op">(</span>energy_score <span class="op">=</span> <span class="fl">3</span>, sugar_score <span class="op">=</span> <span class="fl">5</span>, salt_score <span class="op">=</span> <span class="fl">1</span>, fat_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 11</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/C_scorer.html">C_scorer</a></span><span class="op">(</span>fvn_score <span class="op">=</span> <span class="fl">2</span>, protein_score <span class="op">=</span> <span class="fl">3</span>, fibre_score <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 6</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="nutrient-profile-model-score">Nutrient Profile Model Score<a class="anchor" aria-label="anchor" href="#nutrient-profile-model-score"></a>
+</h2>
+<p>After computing the A and C scores we’re able to calculate the
+overall Nutrient Profile Model Score of the product. The method for
+computing the score is conditional on the size of the A and C score and
+can in some circumstances take into account the fibre score and the
+fruit, vegetables and nut score. Therefore the <code>NPM_total</code>
+function takes 4 arguments: <code>a_score</code>, <code>c_score</code>,
+<code>fvn_score</code>, <code>fibre_score</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/NPM_total.html">NPM_total</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># example using keyword arguments</span></span>
+<span><span class="fu"><a href="../reference/NPM_total.html">NPM_total</a></span><span class="op">(</span>a_score <span class="op">=</span> <span class="fl">10</span>, c_score <span class="op">=</span> <span class="fl">4</span>, fvn_score <span class="op">=</span> <span class="fl">1</span>, fibre_score <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p>This function works by subtracting the C score from the A score.
+However, if the A score is greater than or equal to 11 and the fruit,
+vegetable and nut score is less than 5, the function performs a
+different calculation and substracts the sum of the fibre score and the
+fruit, vegetables and nut score from the A score. This follows the logic
+defined in the <a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf" class="external-link">Technical
+Guidance for Nutrient Profile modelling</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="nutrient-profile-model-assessment">Nutrient Profile Model Assessment<a class="anchor" aria-label="anchor" href="#nutrient-profile-model-assessment"></a>
+</h2>
+<p>After determining an overall score for the product within the
+Nutrient Profile Model the final step is to assess this score to
+determine if the product passes or fails. This is a simple test of
+whether the score is above or below a specific threshold where the
+threshold differs if the product is a food or drink.</p>
+<p>If the product is a food an NPM score of 4 or more leads to a
+failure, whilst for a drink a product fails the NPM is it scores 1 or
+more.</p>
+<p><code>NPM_assess</code> works by accepting two arguments:
+<code>NPM_score</code> and <code>type</code>. <code>type</code>
+determines if the product is a food or drink by accepting either
+<code>food</code> or <code>drink</code> whilst <code>NPM_score</code>
+should be a numeric value calculated from the prior
+<code>NPM_total</code> step. The function returns a character vector
+with a single value of either <code>"PASS"</code> or
+<code>"FAIL"</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># pass</span></span>
+<span><span class="fu"><a href="../reference/NPM_assess.html">NPM_assess</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"food"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "PASS"</span></span>
+<span></span>
+<span><span class="co"># fail</span></span>
+<span><span class="fu"><a href="../reference/NPM_assess.html">NPM_assess</a></span><span class="op">(</span><span class="fl">6</span>, type <span class="op">=</span> <span class="st">"drink"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "FAIL"</span></span></code></pre></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
