@@ -19,7 +19,25 @@ be adjusted by the specific gravity of the product to ensure a correct reading.
 This is managed directly by the `SGConverter` high level function that operates
 row-by-row on a data.frame with a series of expected columns. This function is
 composed of a series of different dispatcher function which will be outlined
-below.
+below (see figure for hierarchy).
+
+```{r diagram-mermaid, fig.align='center', fig.cap="SGConverter logic", fig.dim=c(10, 6), echo=FALSE}
+library(DiagrammeR)
+DiagrammeR::mermaid("
+graph TB;
+  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');
+  1 --> 3(sg_drink_converter<br>'drink_format');
+  3 --> 4(sg_ready_drink_converter<br>'drink_type');
+  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');
+  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');
+  6 --> 7{ };
+  2 --> 10{ };
+  2 --> 11(sg_liquidfood_converter<br>'food_type');
+  11 --> 13{ };
+  4 --> 14{ };
+  5 --> 16{ };
+")
+```
 
 ```{r setup}
 library(nutrientprofiler)
