@@ -81,6 +81,24 @@ column in the row and multiplying it by the specific gravity value in the
 `SGtab` which is indexed out of the vector using the `food_type` column value
 from the passed row.
 
+```{r}
+# example of how sg_food_converter behaves
+library(dplyr)
+
+data <- data.frame(weight_g = c(100, NA, NA), 
+                  volume_ml = c(NA, 10, 100),  
+                  product_type = c("food","food","food"), 
+                  food_type = c("","Ice cream", "Semi-skimmed milk"))
+
+sg_food_converter(data[1, ])
+
+# on all rows with dplyr
+data %>%
+  rowwise() %>%
+  mutate(sg = sg_food_converter(pick(everything()))) %>%
+  select(sg)
+```
+
 ### Calculating specific gravity for drinks 
 
 The logic for calculating specific gravity for drinks is slightly more
@@ -98,6 +116,20 @@ string. If it does not contain an empty string it calls the
 specific gravity multiplier indexed from `SGtab` based on the value in
 `drink_type`. If `drink_type` does contain an empty string it just returns the
 `volume_ml` column value.
+
+```{r}
+# example of how sg_ready_drink_converter behaves
+data <- data.frame(volume_ml = c(30, 10, 100),
+                  drink_type = c("Energy drink","Ice cream", "Semi-skimmed milk"))
+             
+sg_ready_drink_converter(data[1, ])
+
+# on all rows with dplyr
+data %>%
+  rowwise() %>%
+  mutate(sg = sg_ready_drink_converter(pick(everything()))) %>%
+  select(sg)
+```
 
 For `"cordial"` it dispatches to `sg_cord_drink_converter`. This function checks
 the row for a `nutrition_info` column to help determine how it should proceed.
@@ -119,6 +151,20 @@ For `"preparation instructions not given"` the `volume_ml` column value is
 passed to `generic_specific_gravity` function along with the specific gravity
 multiplier indexed from `SGtab` for `"Cordial/squash undiluted"`.
 
+```{r}
+# example of how sg_cord_drink_converter behaves
+data <- data.frame(volume_ml = c(30, 10, 100),
+                   volume_water_ml = c(0, 90, NA),
+                   nutrition_info = c("as consumed","preparation instructions given", "preparation instructions not given"))
+
+sg_cord_drink_converter(data[1,])
+
+data %>%
+  rowwise() %>%
+  mutate(sg = sg_cord_drink_converter(pick(everything()))) %>%
+  select(sg)     
+```
+
 If the `drink_format` column value is `"powdered"` it dispatches to the
 `sg_powd_drink_converter` function. This again checks the row for values in the
 `nutrition_info` column to help determine how to compute the specific gravity
@@ -136,6 +182,21 @@ in `nutrition_info` column it computes the sum of `weight_g` and
 with the specific gravity multipler from the `SGtab` for  `"Cordial/squash ready to drink"`.
 For `"preparation instructions not given"` the `weight_g` column value is
 returned unadjusted.
+
+```{r}
+# example of how sg_powd_drink_converter behaves
+data <- data.frame(volume_ml = c(90, NA, NA),
+                   weight_g = c(NA, 10, 100),
+                   volume_water_ml = c(0, 90, NA),
+                   nutrition_info = c("as consumed","preparation instructions given", "preparation instructions not given"))
+
+sg_powd_drink_converter(data[1,])
+
+data %>%
+  rowwise() %>%
+  mutate(sg = sg_powd_drink_converter(pick(everything()))) %>%
+  select(sg)     
+```
 
 ## Summary
 
