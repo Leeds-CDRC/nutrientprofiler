@@ -123,3 +123,55 @@ cdrcdrinks %>%
   protein_score, fat_score, fibre_score)
 ```
 
+## Nutrient Profile Model assessment
+
+After calculating the scores for specific nutrients for our product next we need
+to perform the actual Nutrient Profile Model assessment. This involves combining
+individual nutrient scores to calculate an A score and a C score and use these
+compound to calculate a total Nutrient Profile Model score and assess this to
+determine a pass or fail.
+
+This package implements this logic in a high-level wrapper function called
+`NPMAssess` which operates on a row of a data.frame. It expects the columns
+generated in the previous `NPMScore` step to allow it to calculate the A score
+and C score and can be used as follows:
+
+```{r}
+# create NPM_score data.frame from NPMScore
+# using the specific gravity `sg` column created above
+npm_scores <- do.call(
+        "rbind",
+        lapply(
+            seq_len(nrow(cdrcdrinks)),
+            function(i) NPMScore(cdrcdrinks[i, ], sg_adjusted_label = "sg")
+        )
+    )
+
+# append NPM Score columns to original data
+combo_df <- cbind(cdrcdrinks, npm_scores)
+
+# test NPMAssess on this data
+NPMAssess(combo_df[1, ])
+```
+
+We can also use tidyverse functions to build an entire pipeline for running
+Nutrient Profile Model assessments.
+
+```{r}
+# using tidyr
+library(tidyr)
+
+cdrcdrinks %>% 
+  rowwise() %>% 
+  mutate( sg = SGConverter(pick(everything()))) %>% 
+  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
+  unnest(test) %>% 
+  rowwise() %>%
+  mutate(assess = NPMAssess(pick(everything()))) %>%
+  unnest(assess) %>%
+  select(product_type, NPM_score, NPM_assessment)
+```
+
+
+The building blocks of `NPMAssess` are explained in more detail in the [Nutrient
+Profile Model Assessment vignette](./nutrientprofile_assessment.Rmd)
