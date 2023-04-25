@@ -122,12 +122,9 @@ product needs to be adjusted to account for it’s specific gravity.</p>
 <code>SGConverter</code> function. This is a high level function that is
 designed to operate on each row of a data.frame parsing multiple columns
 to determine how to calculate the adjusted specific gravity score.</p>
-<blockquote>
-<p>!:warning: The <code>SGConverter</code> function has been
-specifically designed with an existing dataset in mind and expects
-specific column names to work.</p>
-</blockquote>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r bg-warning"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Warning<span class="sc">:</span> The <span class="st">`</span><span class="at">SGConverter</span><span class="st">`</span> <span class="cf">function</span> has been specifically designed with an</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>existing dataset <span class="cf">in</span> mind and expects specific column names to work.</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using dplyr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -170,8 +167,8 @@ node and each column name the function uses to dispatch to underlying
 functions is specified in single quotes. If a function returns a value
 it is marked with an empty diamond.</p>
 <div class="figure" style="text-align: center">
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-e64451c4e3a1414edd1e" style="width:960px;height:576px;"></div>
-<script type="application/json" data-for="htmlwidget-e64451c4e3a1414edd1e">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0e188e1651353f124c30" style="width:960px;height:576px;"></div>
+<script type="application/json" data-for="htmlwidget-0e188e1651353f124c30">{"x":{"diagram":"\ngraph TB;\n  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');\n  1 --> 3(sg_drink_converter<br>'drink_format');\n  3 --> 4(sg_ready_drink_converter<br>'drink_type');\n  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');\n  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');\n  6 --> 7{ };\n  2 --> 10{ };\n  2 --> 11(sg_liquidfood_converter<br>'food_type');\n  11 --> 13{ };\n  4 --> 14{ };\n  5 --> 16{ };\n"},"evals":[],"jsHooks":[]}</script><p class="caption">
 SGConverter logic
 </p>
 </div>
@@ -190,7 +187,7 @@ logic for calculating the NPM score across multiple nutritional groups
 for a data.frame of data.</p>
 <p>A quick example of running <code>NPMScore</code> across a single row
 of data is shown below:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/NPMScore.html">NPMScore</a></span><span class="op">(</span><span class="va">cdrcdrinks</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, sg_adjusted_label<span class="op">=</span><span class="st">"sg"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   energy_score sugar_score fat_score protein_score salt_score fvn_score</span></span>
 <span><span class="co">#&gt; 1            0          10         2             4          0         0</span></span>
@@ -199,7 +196,7 @@ of data is shown below:</p>
 <p>An example of building a tidyverse pipeline to calculate scores
 across all rows of a data.frame using <code>NPMScore</code> and
 <code>SGConverter</code> is shown below:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cdrcdrinks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -236,7 +233,7 @@ called <code>NPMAssess</code> which operates on a row of a data.frame.
 It expects the columns generated in the previous <code>NPMScore</code>
 step to allow it to calculate the A score and C score and can be used as
 follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create NPM_score data.frame from NPMScore</span></span>
 <span><span class="co"># using the specific gravity `sg` column created above</span></span>
 <span><span class="va">npm_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span></span>
@@ -256,7 +253,7 @@ follows:</p>
 <span><span class="co">#&gt; 1      12       8         8           FAIL</span></span></code></pre></div>
 <p>We can also use tidyverse functions to build an entire pipeline for
 running Nutrient Profile Model assessments.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using tidyr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span></span>
