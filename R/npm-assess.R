@@ -54,6 +54,7 @@ NPMAssess <- function(row) {
 #' @param fat_score, numeric value for fat score
 #' @param salt_score, numeric value for salt score
 #' @return a numeric value of the A score
+#' @export
 A_scorer <- function(energy_score, sugar_score, fat_score, salt_score) {
     return(sum(energy_score, sugar_score, fat_score, salt_score))
 }
@@ -67,6 +68,7 @@ A_scorer <- function(energy_score, sugar_score, fat_score, salt_score) {
 #' @param protein_score, numeric value for protein score
 #' @param fibre_score, numeric value for fibre score
 #' @return a numeric value of the C score
+#' @export
 C_scorer <- function(fvn_score, protein_score, fibre_score) {
     return(sum(fvn_score, protein_score, fibre_score))
 }
