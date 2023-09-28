@@ -273,7 +273,7 @@ salt_adjuster <- function(value, adjusted_weight, adjuster_type = "sodium") {
         generic_adjuster(value, adjusted_weight)
     } else {
         # x10 here because salt adjustment should multiply value by 1000 not 100
-        generic_adjuster((value * 10), adjusted_weight)  
+        generic_adjuster(((value * 4)*100), adjusted_weight)  
     }
 
     return(salt_adjusted)
