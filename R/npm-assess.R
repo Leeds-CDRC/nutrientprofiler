@@ -1,4 +1,4 @@
-#' NPM assess function
+#' NPMAssess function
 #'
 #' This function aims to apply the various scoring functions
 #' across a data.frame on a row by row basis.
@@ -14,7 +14,7 @@ NPMAssess <- function(row) {
     stopifnot(
         "Score columns not detected. Please ensure you have called NPMScore on your data" =
             c(
-                "energy_score", "sugar_score", "fat_score",
+                "energy_score", "sugar_score", "satfat_score",
                 "protein_score", "fvn_score", "fibre_score", "salt_score"
             ) %in% names(row)
     )
@@ -22,7 +22,7 @@ NPMAssess <- function(row) {
     A_score <- A_scorer(
         energy_score = row[["energy_score"]],
         sugar_score = row[["sugar_score"]],
-        fat_score = row[["fat_score"]],
+        satfat_score = row[["satfat_score"]],
         salt_score = row[["salt_score"]]
     )
 
@@ -47,16 +47,16 @@ NPMAssess <- function(row) {
 #' A score function
 #'
 #' A scores are defined as the scores for
-#' energy, sugars, fat and salt summed together
+#' energy, sugars, sat fat and salt summed together
 #'
 #' @param energy_score, numeric value for energy score
 #' @param sugar_score, numeric value for sugar score
-#' @param fat_score, numeric value for fat score
+#' @param satfat_score, numeric value for sat fat score
 #' @param salt_score, numeric value for salt score
 #' @return a numeric value of the A score
 #' @export
-A_scorer <- function(energy_score, sugar_score, fat_score, salt_score) {
-    return(sum(energy_score, sugar_score, fat_score, salt_score))
+A_scorer <- function(energy_score, sugar_score, satfat_score, salt_score) {
+    return(sum(energy_score, sugar_score, satfat_score, salt_score))
 }
 
 #' C score function

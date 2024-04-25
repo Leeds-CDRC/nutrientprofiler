@@ -1,5 +1,5 @@
 test_data <- read.csv(text = "
-name,brand,product_category,product_type,food_type,drink_format,drink_type,nutrition_info,energy_measurement_kj,energy_measurement_kcal,sugar_measurement_g,fat_measurement_g,salt_measurement_g,sodium_measurement_mg,fibre_measurement_nsp,fibre_measurement_aoac,protein_measurement_g,fruit_nut_measurement_percent,weight_g,volume_ml,volume_water_ml
+name,brand,product_category,product_type,food_type,drink_format,drink_type,nutrition_info,energy_measurement_kj,energy_measurement_kcal,sugar_measurement_g,satfat_measurement_g,salt_measurement_g,sodium_measurement_mg,fibre_measurement_nsp,fibre_measurement_aoac,protein_measurement_g,fvn_measurement_percent,weight_g,volume_ml,volume_water_ml
 lembas,,,Food,,,,,266,,50,3,,0.6,3,,7,0,100,,
 zeno's icecream,,,Food,Ice cream,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
 mystic rush,,,Drink,,Ready,Carbonated/juice drink,,,194,11,0,,100,,0,0,0,,100,

@@ -28,7 +28,7 @@ test_that("NPM_assess assesses the NPM score correctly", {
 assess_row <- data.frame(
     energy_score = c(5, 3, 4, 6),
     sugar_score = c(4, 4, 6, 5),
-    fat_score = c(8, 1, 0, 2),
+    satfat_score = c(8, 1, 0, 2),
     protein_score = c(4, 6, 0, 2),
     fvn_score = c(0, 1, 5, 1),
     fibre_score = c(1, 8, 5, 3),

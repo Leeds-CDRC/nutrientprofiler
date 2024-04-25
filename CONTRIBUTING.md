@@ -36,7 +36,7 @@ When working locally you should use the following workflow to help develop the c
 5. Make a change to the package files
 6. Test this in your R session by running `load_all()` to load the package (check here for any errors)
 7. Check your changes pass tests by running `test()`
-8. If you're package passes the tests and you've updated the appropriate
+8. If your package passes the tests and you've updated the appropriate
    documentation you should now run `check()` locally to make sure all
    appropriate roxygen2 files are created/update and any functions you've now
    tagged with @export are exported to NAMESPACE
