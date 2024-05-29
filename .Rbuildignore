@@ -3,7 +3,10 @@
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
 ^docs$
+^.vscode$
+^scratch$
 ^pkgdown$
 ^\.github$
 ^\.devcontainer$
 ^CONTRIBUTING\.md$
+^LICENSE-gpl-3\.0\.txt$
