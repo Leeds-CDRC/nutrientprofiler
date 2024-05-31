@@ -10,3 +10,5 @@
 ^\.devcontainer$
 ^CONTRIBUTING\.md$
 ^LICENSE-gpl-3\.0\.txt$
+^doc$
+^Meta$
