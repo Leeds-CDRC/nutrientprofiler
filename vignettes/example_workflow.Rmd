@@ -147,6 +147,10 @@ Again, chasnge the suggested filename to suit your specific installation.
 
 
 
+
+<!-- 
+
+
 The `nutrientprofiler` package aims to provide a series of R functions that 
 implement UK Nutrient Profiling Model scoring that can be applied across product 
 datasets.
@@ -307,4 +311,4 @@ cdrcdrinks %>%
 
 
 The building blocks of `NPMAssess` are explained in more detail in the [Nutrient
-Profile Model Assessment vignette](./nutrientprofile_assessment.Rmd)
+Profile Model Assessment vignette](./nutrientprofile_assessment.Rmd) -->
