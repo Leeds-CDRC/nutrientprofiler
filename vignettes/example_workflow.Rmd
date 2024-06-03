@@ -150,10 +150,7 @@ Again, change the suggested filename to suit your specific installation.
 Once `nutrientprofiler` has been installed on your system, it can be imported and used interactively
 or run within scripts on bulk data.
 
->>> Ensure data is formatted to match the example csv files with same column names etc.
->>> If data contains the column headers "fat_measurement_g" or "fruit_nut_measurement_percent"
->>> these can be converted using the `replace_var_names` function.
-
+>>> Ensure data is formatted to match the example csv files with same column names
 
 Assuming the data that you want to analyse is stored in `"data/example_data.csv"` and you want to
 save the results to`"results/example_data_results.csv"` with all the original columns plus the results
@@ -206,4 +203,32 @@ npm_testcases = read_excel("data/example_data.xlsx", sheet = 1)
 The most common errors to arise are likely to be related to incorrect column names in your data, or
 incorrect datatypes for the values in these columns.
 
-You can check the names of the columns using `names(npm_data)`
+You can check the names of the columns using `names(npm_testcases)`.
+
+You can replace column names using a script like this:
+
+```R
+# load required libraries
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+# read in the data
+npm_testcases = read.csv("data/example_data.csv")
+
+# Function to rename variables
+replace_var_names <- function(data_frame){
+    if ("fat_measurement_g" %in% names(data_frame)){
+        data_frame <- rename(data_frame, satfat_measurement_g = fat_measurement_g)
+    }
+    if ("fruit_nut_measurement_percent" %in% names(data_frame)){
+        data_frame <- rename(data_frame, fvn_measurement_percent = fruit_nut_measurement_percent)
+    }
+}
+
+# Call the function on the example data
+replaced_names = replace_var_names(npm_testcases)
+```
+
+The example shown above uses a function so that this can be reused with multiple data sets that
+have the same column naming issues.
