@@ -116,7 +116,7 @@ format.
 On the secure computing platform, once the archive has been transferred, you can then install the package.
 The installation method differs depending on the filetype.
 
-### 3.1 Install `.tar.gz` archives
+#### 3.1 Install `.tar.gz` archives
 
 Using an appropriate relative path for the archive, you can install it from source:
 
@@ -133,7 +133,7 @@ Change the suggested filename to suit your specific installation:
 install.packages("./nutrientprofiler-VarEdits.tar.gz", repos = NULL, type="source")
 ```
 
-### 3.2 Install `.zip` archives
+#### 3.2 Install `.zip` archives
 
 In order to install the package from a `.zip` file, you need to use the `devtools` package:
 
@@ -143,162 +143,33 @@ install.packages("devtools")
 library(devtools)
 devtools::install_local("./nutrientprofiler-v1.0.0.zip")
 ```
-Again, chasnge the suggested filename to suit your specific installation.
+Again, change the suggested filename to suit your specific installation.
+
+## Example workflow for processing data in bulk
+
+Once `nutrientprofiler` has been installed on your system, it can be imported and used interactively
+or run within scripts on bulk data.
+
+>>> Ensure data is formatted to match the example csv files with same column names etc.
+>>> If data contains the column headers "fat_measurement_g" or "fruit_nut_measurement_percent"
+>>> these can be converted using the `replace_var_names` function.
 
 
+Assuming the data that you want to analyse is stored in `"data/example_data.csv"` and you want to
+save the results to`"results/example_data_results.csv"` with all the original columns plus the results
+columns, you can use a script like this:
 
-
-<!-- 
-
-
-The `nutrientprofiler` package aims to provide a series of R functions that 
-implement UK Nutrient Profiling Model scoring that can be applied across product 
-datasets.
-
-This is broken up into 3 parts within the package: 
-
-- Specific gravity conversions
-- Scoring the different nutritional components of the NPM score
-- Calculating the NPM score and NPM assessment logic
-
-To start we load the package the with command below.
-```{r setup}
-library(nutrientprofiler)
-```
-
-We can also load some example data to help us with the following examples.
-This data was created specifically for this package and so is potentially 
-quite different to how your real world data might look.
-
-```{r}
-dim(cdrcdrinks)
-cdrcdrinks[1, ]
-```
-
-## Specific gravity conversions
-
-When trying to determine the NPM score the volume or weight of the product needs
-to be adjusted to account for it's specific gravity. 
-
-To adjust product weights or volumes for specific gravity we use the `SGConverter`
-function. This is a high level function that is designed to operate on each row of 
-a data.frame parsing multiple columns to determine how to calculate the adjusted 
-specific gravity score.
-
-```{r eval=FALSE, class.source="bg-warning"}
-Warning: The `SGConverter` function has been specifically designed with an
-existing dataset in mind and expects specific column names to work.
-```
-
-```{r}
-# using dplyr
+```R
+# load required libraries
+library(tidyr)
 library(dplyr)
-cdrcdrinks %>%
-  rowwise() %>%
-  mutate(out = SGConverter(pick(everything()))) %>%
-  select(out)
+library(nutrientprofiler)
 
-# using base R
-cdrcdrinks["sg"] <- unlist(lapply(seq_len(nrow(cdrcdrinks)), function(i) SGConverter(cdrcdrinks[i, ])))
-```
+# read in the data
+npm_testcases = read.csv("data/example_data.csv")
 
-The below figure attempts to outline the hierarchy of function calls that `SGConverter` 
-initiates. The logic for determining how to adjust values for specific gravity is 
-complicated by the potential options around whether a drink is ready-to-drink,
-a powdered preparation, or a cordial, within both the powdered and cordial options
-additional consideration must be given to the preparation instructions that are provided.
-In the below figure each function is named in each node and each column name the function 
-uses to dispatch to underlying functions is specified in single quotes. If a function returns
-a value it is marked with an empty diamond.
-
-```{r diagram-mermaid, fig.align='center', fig.cap="SGConverter logic", fig.dim=c(10, 6), echo=FALSE}
-library(DiagrammeR)
-DiagrammeR::mermaid("
-graph TB;
-  1(SGConverter<br>'product_type') --> 2(sg_food_converter<br>'weight_g');
-  1 --> 3(sg_drink_converter<br>'drink_format');
-  3 --> 4(sg_ready_drink_converter<br>'drink_type');
-  3 --> 5(sg_powd_drink_converter<br>'nutrition_info');
-  3 --> 6(sg_cord_drink_converter<br>'nutrition_info');
-  6 --> 7{ };
-  2 --> 10{ };
-  2 --> 11(sg_liquidfood_converter<br>'food_type');
-  11 --> 13{ };
-  4 --> 14{ };
-  5 --> 16{ };
-")
-```
-
-## Nutrient profile model scoring
-
-The next part of this package is a series of functions for handling Nutrient
-Profile Model scoring. These specifically look at functions for adjusting units
-into the expected unit as documented for the [Nutrient Profile
-Model](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf),
-a generic scoring function for returning a score for a value given a number of
-thresholds, a scoring dispatcher function that determines what adjuster and
-scoring thresholds to use for a given value and a high level `NPMScore` wrapper
-function that shows the logic for calculating the NPM score across multiple
-nutritional groups for a data.frame of data.
-
-A quick example of running `NPMScore` across a single row of data is shown below:
-```{r}
-NPMScore(cdrcdrinks[1,], sg_adjusted_label="sg")
-```
-
-An example of building a tidyverse pipeline to calculate scores across all rows
-of a data.frame using `NPMScore` and `SGConverter` is shown below: 
-
-```{r}
-library(tidyr)
-
-cdrcdrinks %>% 
-  rowwise() %>% 
-  mutate( sg = SGConverter(pick(everything()))) %>% 
-  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
-  unnest(test) %>% select(energy_score, sugar_score, salt_score, fvn_score,
-  protein_score, satfat_score, fibre_score)
-```
-
-## Nutrient Profile Model assessment
-
-After calculating the scores for specific nutrients for our product next we need
-to perform the actual Nutrient Profile Model assessment. This involves combining
-individual nutrient scores to calculate an A score and a C score and use these
-compound to calculate a total Nutrient Profile Model score and assess this to
-determine a pass or fail.
-
-This package implements this logic in a high-level wrapper function called
-`NPMAssess` which operates on a row of a data.frame. It expects the columns
-generated in the previous `NPMScore` step to allow it to calculate the A score
-and C score and can be used as follows:
-
-```{r}
-# create NPM_score data.frame from NPMScore
-# using the specific gravity `sg` column created above
-npm_scores <- do.call(
-        "rbind",
-        lapply(
-            seq_len(nrow(cdrcdrinks)),
-            function(i) NPMScore(cdrcdrinks[i, ], sg_adjusted_label = "sg")
-        )
-    )
-
-# append NPM Score columns to original data
-combo_df <- cbind(cdrcdrinks, npm_scores)
-
-# test NPMAssess on this data
-NPMAssess(combo_df[1, ])
-```
-
-We can also use tidyverse functions to build an entire pipeline for running
-Nutrient Profile Model assessments.
-
-```{r}
-# using tidyr
-library(tidyr)
-
-cdrcdrinks %>% 
+# Analyse all entries, including specific gravity conversion, NPM scoring and assessment
+npm_testcases_results <- npm_testcases %>% 
   rowwise() %>% 
   mutate( sg = SGConverter(pick(everything()))) %>% 
   mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
@@ -306,9 +177,33 @@ cdrcdrinks %>%
   rowwise() %>%
   mutate(assess = NPMAssess(pick(everything()))) %>%
   unnest(assess) %>%
-  select(product_type, NPM_score, NPM_assessment)
+  select(everything(), energy_score, sugar_score, salt_score, fvn_score,
+  protein_score, satfat_score, fibre_score, NPM_score, NPM_assessment)
+
+# Save results to a csv file
+write.csv(npm_testcases_results, "results/example_data_results.csv", row.names = FALSE)
 ```
 
+This only requires slight modification if the desired input file is instead in `"data/example_data.xlsx"`:
 
-The building blocks of `NPMAssess` are explained in more detail in the [Nutrient
-Profile Model Assessment vignette](./nutrientprofile_assessment.Rmd) -->
+```R
+# load required libraries
+install.packages("readxl") # If this is not already installed in the workspace
+
+library(tidyr)
+library(dplyr)
+library(readxl)
+library(nutrientprofiler)
+
+# read in the data on the first sheet of the spreadsheet (sheet = 1)
+npm_testcases = read_excel("data/example_data.xlsx", sheet = 1)
+
+# The rest of the wokflow is the same...
+```
+
+## Troubleshooting
+
+The most common errors to arise are likely to be related to incorrect column names in your data, or
+incorrect datatypes for the values in these columns.
+
+You can check the names of the columns using `names(npm_data)`
