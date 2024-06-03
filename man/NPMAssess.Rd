@@ -2,7 +2,7 @@
 % Please edit documentation in R/npm-assess.R
 \name{NPMAssess}
 \alias{NPMAssess}
-\title{NPM assess function}
+\title{NPMAssess function}
 \usage{
 NPMAssess(row)
 }
