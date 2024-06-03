@@ -5,6 +5,9 @@ name: r-check
 # this is an example of working action
 # not deployed whilst repo is private
 on:
+  push:
+    branches:
+    - murphyqm-patch-03
   pull_request:
     branches:
     - main
