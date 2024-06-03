@@ -53,7 +53,7 @@ reproducibility can still be ensured by recording the download link used and the
 
 From your local desktop you can run the following R snippet to download the `v1.0.0` release of the package:
 
-```R
+```
 # download the v1.0.0 release as a .tar.gz archive
 # to your current directory
 download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v1.0.0.tar.gz",
@@ -66,7 +66,7 @@ Alternatively, this can be downloaded directly from the
 A different release can be specified by changing the release tag. Make sure to also update
 the destination filename to prevent confusion:
 
-```R
+```
 # replace <tag> with the required version number
 download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/<tag>.tar.gz",
               dest = "./nutrientprofiler-<tag>.tar.gz")
@@ -77,7 +77,7 @@ If required, zip file archives are also available on the
 using the following R script below. Please note that these `.zip` archives require a slightly different
 installation to `.tar.gz`; please read through the isntallation steps first.
 
-```R
+```
 # download the <tag> release as a zip archive
 # to your current directory
 download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/<tag>.zip",
@@ -93,7 +93,7 @@ in the url with `heads/branch-name` (and rename the destination file something s
 
 For example, the following downloads the current package on the "VarEdits" branch of the repository:
 
-```R
+```
 # replace "tags/version-number" with "heads/branch-name":
 # in this example, we replaced "tags/v1.0.0" with "heads/VarEdits"
 download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/heads/VarEdits.tar.gz",
@@ -120,7 +120,7 @@ The installation method differs depending on the filetype.
 
 Using an appropriate relative path for the archive, you can install it from source:
 
-```R
+```
 # install the package directly from source
 install.packages("./nutrientprofiler-v1.0.0.tar.gz", repos = NULL, type="source")
 ```
@@ -128,7 +128,7 @@ install.packages("./nutrientprofiler-v1.0.0.tar.gz", repos = NULL, type="source"
 
 Change the suggested filename to suit your specific installation:
 
-```R
+```
 # install the package directly from source
 install.packages("./nutrientprofiler-VarEdits.tar.gz", repos = NULL, type="source")
 ```
@@ -137,7 +137,7 @@ install.packages("./nutrientprofiler-VarEdits.tar.gz", repos = NULL, type="sourc
 
 In order to install the package from a `.zip` file, you need to use the `devtools` package:
 
-```R
+```
 # install and load devtools
 install.packages("devtools")
 library(devtools)
@@ -150,13 +150,13 @@ Again, change the suggested filename to suit your specific installation.
 Once `nutrientprofiler` has been installed on your system, it can be imported and used interactively
 or run within scripts on bulk data.
 
->>> Ensure data is formatted to match the example csv files with same column names
+**Ensure data is formatted to match the example csv files with same column names.**
 
 Assuming the data that you want to analyse is stored in `"data/example_data.csv"` and you want to
 save the results to`"results/example_data_results.csv"` with all the original columns plus the results
 columns, you can use a script like this:
 
-```R
+```
 # load required libraries
 library(tidyr)
 library(dplyr)
@@ -183,7 +183,7 @@ write.csv(npm_testcases_results, "results/example_data_results.csv", row.names =
 
 This only requires slight modification if the desired input file is instead in `"data/example_data.xlsx"`:
 
-```R
+```
 # load required libraries
 install.packages("readxl") # If this is not already installed in the workspace
 
@@ -207,7 +207,7 @@ You can check the names of the columns using `names(npm_testcases)`.
 
 You can replace column names using a script like this:
 
-```R
+```
 # load required libraries
 library(tidyr)
 library(dplyr)
