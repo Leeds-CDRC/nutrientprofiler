@@ -103,6 +103,17 @@ file can also be downloaded from the project [GitHub page](https://github.com/Le
 by navigating to the required branch and then using the green "Code" button to open the "Clone" option menu,
 and selecting the "Download zip" option.
 
+For added reproducibility, you can specify the git commit tag to ensure you are using a specific version:
+
+```R
+# use the unique commit id after "archive/" to specify a specific commit on a branch
+# use the first 8 characters of the commit id to tag your downloaded archive
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/8502784c9e1402505530d87db001fc23fb0fb6df.tar.gz",
+              dest = "./nutrientprofiler-8502784.tar.gz")
+```
+
+Again, make sure to modify the installation command to match the archive name you've supplied.
+
 ### 2. Transferring your code to the secure platform
 
 This step will vary depending on the data transfer policies and process enforced by your institution. While
