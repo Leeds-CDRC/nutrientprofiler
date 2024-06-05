@@ -171,7 +171,7 @@ library(tidyr)
 library(dplyr)
 library(nutrientprofiler)
 # read in the data
-npm_testcases = read.csv("data/example_data.csv")
+npm_testcases <- read.csv("data/example_data.csv")
 # Analyse all entries, including specific gravity conversion, NPM scoring and assessment
 npm_testcases_results <- npm_testcases %>% 
   rowwise() %>% 
@@ -197,7 +197,7 @@ library(dplyr)
 library(readxl)
 library(nutrientprofiler)
 # read in the data on the first sheet of the spreadsheet (sheet = 1)
-npm_testcases = read_excel("data/example_data.xlsx", sheet = 1)
+npm_testcases <- read_excel("data/example_data.xlsx", sheet = 1)
 # The rest of the wokflow is the same...
 ```
 
@@ -216,7 +216,7 @@ library(tidyr)
 library(dplyr)
 library(nutrientprofiler)
 # read in the data
-npm_testcases = read.csv("data/example_data.csv")
+npm_testcases <- read.csv("data/example_data.csv")
 # Function to rename variables
 replace_var_names <- function(data_frame){
     if ("fat_measurement_g" %in% names(data_frame)){
@@ -227,7 +227,7 @@ replace_var_names <- function(data_frame){
     }
 }
 # Call the function on the example data
-replaced_names = replace_var_names(npm_testcases)
+replaced_names <- replace_var_names(npm_testcases)
 ```
 
 The example shown above uses a function so that this can be reused with multiple data sets that
