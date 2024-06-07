@@ -21,7 +21,7 @@ and assessment with `nutrientprofiler`.
 You can see what parameters are expected in more detail in the [Example dataset reference](../reference/cdrcdrinks.html).
 The order of parameters in the loaded data do not matter.
 
-```{r setup}
+```{r setup, echo=FALSE}
 library(nutrientprofiler)
 
 irregular_data <- cdrcdrinks
