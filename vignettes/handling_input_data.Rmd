@@ -1,0 +1,87 @@
+---
+title: "Handling input data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Handling input data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Input data is likely to be messy and to not contain the required column names for `nutrientprofiler`.
+This vignette provides some advice and guidelines on how to pre-process your data to allow analysis
+and assessment with `nutrientprofiler`.
+
+You can see what parameters are expected in more detail in the [Example dataset reference](../reference/cdrcdrinks.html).
+
+```{r setup}
+library(nutrientprofiler)
+
+irregular_data <- cdrcdrinks
+names(irregular_data)[names(irregular_data) == "fvn_measurement_percent"] <- "fruit_nutrition_percent"
+```
+
+## Loading an example template
+
+When possible, it is a good idea to ensure your data is in the required format before yourload it in to R. This can be achieved by using a template.
+
+The `nutrientprofiler` package offers an example dataset, `cdrcdrinks`. This can be saved out as an
+example csv file and then edited and loaded with real data:
+
+```R
+# Save an example csv file to your current working directory
+write.csv(cdrcdrinks, "template_full.csv", row.names = FALSE)
+```
+
+Alternatively, just the headers can be saved, providing a blank csv file which can be opened in
+Excel or your editor of choice:
+
+```R
+# Save an example csv file to your current working directory
+write.csv(t(names(cdrcdrinks)), "template_headings.csv", row.names = FALSE)
+```
+
+## Checking column names and renaming parameters
+
+If raw data has been acquired with different column names than required, a reproducible
+workflow can be set up to rename these parameters as required.
+
+The first step is to check the existing column names:
+
+```{r}
+inputDataCheck(cdrcdrinks)
+```
+
+If the dataframe contains names as expected, you'll get a message telling you to proceed with analysis,
+as with the example dataset above.
+
+However, lets say we have loaded in a dataset from csv `irregular_data` that does not contain the
+exact columns required:
+
+```{r}
+inputDataCheck(irregular_data)
+```
+
+This provides you with the name of the column(s) that do not match an expected column name
+(`"fruit_nutrition_percent"` in this example), and provides you with a prompt to use the
+`parameterRename()` function.
+
+You can copy this hint and replace `<INSERT DATA COLUMN NAME HERE>` with the data that matches
+the listed `missing_column_name`:
+
+```{r}
+irregular_data <- parameterRename(missing_column_name = 'fvn_measurement_percent', associated_data_column = 'fruit_nutrition_percent', data_frame = irregular_data)
+```
+
+You can now check again if the required parameters are available.
+
+```{r}
+inputDataCheck(irregular_data)
+```
+
