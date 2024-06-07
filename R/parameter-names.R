@@ -66,3 +66,42 @@ parameterRename <- function(missing_column_name, associated_data_column, data_fr
     }
     return(data_frame)
 }
+
+
+#' List the missing parameters function
+#'
+#' This function returns the parameters that your input data file is missing.
+#'
+#' @param data_frame a data.frame object, loaded from a csv or Excel
+#' @return missing_column_names a vector object with missing column names
+#' @seealso [inputDataCheck()]
+#' @export
+listMissingParameters <- function(data_frame){
+    expected_column_names <- c("name", "brand", "product_category",
+    "product_type", "food_type", "drink_format","drink_type",
+    "nutrition_info", "energy_measurement_kj", "energy_measurement_kcal",
+    "sugar_measurement_g", "satfat_measurement_g", "salt_measurement_g",
+    "sodium_measurement_mg", "fibre_measurement_nsp", "fibre_measurement_aoac",
+    "protein_measurement_g", "fvn_measurement_percent", "weight_g",
+    "volume_ml", "volume_water_ml")
+    data_names <- names(data_frame)
+    missing_column_names <- setdiff(expected_column_names, data_names)
+    return(c(missing_column_names))
+}
+
+
+#' Fill the missing parameters function
+#'
+#' This function creates columns filled with `NA` for a provided
+#' vector of missing parameter names.
+#' Please attempt to rename parameters before filling in columns.
+#'
+#' @param data_frame a data.frame object, loaded from a csv or Excel
+#' @param missing_parameters a vector object of missing column/parameter names
+#' @return data_frame a data.frame object, with new columns added filled with NA
+#' @seealso [inputDataCheck()]
+#' @export
+fillMissingParameters <- function(data_frame, missing_parameters){
+    data_frame[, c(missing_parameters)] <- NA
+    return(data_frame)
+}

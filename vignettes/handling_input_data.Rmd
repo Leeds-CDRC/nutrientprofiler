@@ -19,12 +19,16 @@ This vignette provides some advice and guidelines on how to pre-process your dat
 and assessment with `nutrientprofiler`.
 
 You can see what parameters are expected in more detail in the [Example dataset reference](../reference/cdrcdrinks.html).
+The order of parameters in the loaded data do not matter.
 
 ```{r setup}
 library(nutrientprofiler)
 
 irregular_data <- cdrcdrinks
 names(irregular_data)[names(irregular_data) == "fvn_measurement_percent"] <- "fruit_nutrition_percent"
+
+missing_data <- cdrcdrinks
+missing_data <- missing_data[-c(2, 3)]
 ```
 
 ## Loading an example template
@@ -85,3 +89,34 @@ You can now check again if the required parameters are available.
 inputDataCheck(irregular_data)
 ```
 
+## Missing data
+
+Some of the parameters are optional, but still need an allocated column in the input data table.
+This column can be simply filled with `NA` values. `nutrientprofiler` provides some simple functions
+to help achieve this quickly.
+
+You can see if we run the `inputDataCheck` there are no returns for "unmatched columns", suggesting
+that the data is missing as opposed to unlabelled:
+
+```{r}
+inputDataCheck(missing_data)
+```
+
+We can store the list of missing parameters by using the `listMissingParameters` function:
+```{r}
+missing_params <- listMissingParameters(missing_data)
+
+print(missing_params)
+```
+
+If we are happy that these are optional parameters that can be filled with `NA` values,
+we can pass this list (or a subset of it) to the `fillMissingParameters` function:
+
+```{r}
+filled_data <- fillMissingParameters(missing_data, missing_params)
+
+filled_data
+```
+
+This then allows the data to be processed in bulk without triggerring errors related to
+missing data.
