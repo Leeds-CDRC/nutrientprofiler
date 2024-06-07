@@ -9,7 +9,13 @@
 #' @seealso [parameterRename()]
 #' @export
 inputDataCheck <- function(data_frame){
-    expected_column_names <- names(cdrcdrinks)
+    expected_column_names <- c("name", "brand", "product_category",
+    "product_type", "food_type", "drink_format","drink_type",
+    "nutrition_info", "energy_measurement_kj", "energy_measurement_kcal",
+    "sugar_measurement_g", "satfat_measurement_g", "salt_measurement_g",
+    "sodium_measurement_mg", "fibre_measurement_nsp", "fibre_measurement_aoac",
+    "protein_measurement_g", "fvn_measurement_percent", "weight_g",
+    "volume_ml", "volume_water_ml")
     data_names <- names(data_frame)
     missing_column_names <- setdiff(expected_column_names, data_names)
     extra_data_names <- setdiff(data_names, expected_column_names)
@@ -44,7 +50,13 @@ inputDataCheck <- function(data_frame){
 #' @seealso [inputDataCheck()]
 #' @export
 parameterRename <- function(missing_column_name, associated_data_column, data_frame){
-    expected_column_names <- names(cdrcdrinks)
+    expected_column_names <- c("name", "brand", "product_category",
+    "product_type", "food_type", "drink_format","drink_type",
+    "nutrition_info", "energy_measurement_kj", "energy_measurement_kcal",
+    "sugar_measurement_g", "satfat_measurement_g", "salt_measurement_g",
+    "sodium_measurement_mg", "fibre_measurement_nsp", "fibre_measurement_aoac",
+    "protein_measurement_g", "fvn_measurement_percent", "weight_g",
+    "volume_ml", "volume_water_ml")
     if (missing_column_name %in% expected_column_names){
         print(paste("Replacing", associated_data_column, "with", missing_column_name))
         names(data_frame)[names(data_frame) == associated_data_column] <- missing_column_name
