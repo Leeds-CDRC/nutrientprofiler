@@ -40,3 +40,5 @@ reference:
   contents:
   - cdrcdrinks
   - SGtab
+  - inputDataCheck
+  - parameterRename
