@@ -59,7 +59,7 @@ ReqParamCheck <- function(data_frame) {
     report_data$volume_water_ml[1] <- list(
         which(((data_frame$volume_water_ml == "") | is.na(data_frame$volume_water_ml)) & 
         ((data_frame$drink_format == "Cordial") | (data_frame$drink_format == "Powdered")) &
-        ((data_frame$nutrition_info != "As consumed")))
+        ((data_frame$nutrition_info == "preparation instructions given")))
     )
     return(report_data)
 }
