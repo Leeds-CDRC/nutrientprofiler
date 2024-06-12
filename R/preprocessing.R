@@ -108,3 +108,20 @@ AutoDefaultParamNote <- function(data_frame, test_report) {
     }
     return(data_frame)
 }
+
+ManualParamUpdate <- function(data_frame, parameter_name, index_list, value) {
+    if (!("manual_params_used" %in% names(data_frame))) {
+        data_frame[,"manual_params_used"] = NA
+    }
+    for (i in index_list) {
+        if (is.na(data_frame[i, "manual_params_used"])) {
+                    data_frame[i, "manual_params_used"] <- list(parameter_name)
+                } else {
+                    data_frame[i, "manual_params_used"] <- paste(
+                        as.character(c(data_frame[i, "manual_params_used"], parameter_name)), collapse=", "
+                        )
+        }
+        data_frame[i, parameter_name] <- value
+    }
+    return(data_frame)
+}
