@@ -1,6 +1,6 @@
 Package: nutrientprofiler
 Title: Nutrient Model Profiler
-Version: 2.0.0-alpha
+Version: 2.0.0
 Authors@R: 
     c(
     person("Alex", "Coleman", , "a.coleman1@leeds.ac.uk", role = c("aut"),
