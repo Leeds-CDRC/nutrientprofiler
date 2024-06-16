@@ -202,10 +202,10 @@ CheckValues <- function(data_frame) {
     name_list <- c(names(data_frame))
     count_list <- c()
     variables_list <- c()
-    for (i in names(npm_testcases)) {
-        count <- length(unique(npm_testcases[[i]]))
+    for (i in names(data_frame)) {
+        count <- length(unique(data_frame[[i]]))
         count_list <- c(count_list, count)
-        variables <- paste(unique(npm_testcases[[i]]), collapse=", ")
+        variables <- paste(unique(data_frame[[i]]), collapse=", ")
         variables_list <- c(variables_list, variables)
     }
     results <- data.frame(

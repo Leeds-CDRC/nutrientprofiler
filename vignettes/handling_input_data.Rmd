@@ -211,3 +211,5 @@ updated_data_results <- updated_data %>%
   select(everything(), energy_score, sugar_score, salt_score, fvn_score,
   protein_score, satfat_score, fibre_score, NPM_score, NPM_assessment)
 ```
+
+## Checking for incorrect data

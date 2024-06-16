@@ -45,7 +45,79 @@ example_data <- read.csv("data/example_data.csv")
 
 While there are an array of functions to check parameter names and missing parameters, it is useful to be able to manually check your input data with base R or a library like tidyr or dplyr additionally.
 
+You can check what column names are in your loaded dataframe using base R:
 ```{r}
 # Print out your data column names
 names(example_data)
 ```
+
+You can compare these parameter names to the expected parameters that `nutrientprofiler` uses for analysis using the `inputDataCheck()` function:
+
+```{r}
+inputDataCheck(example_data)
+```
+
+If required, parameter names can be fixed at this point using the `parameterRename()` and `fillMissingParameters()` functions.
+
+Next, you can use the `CheckValues()` function to produce an overview of the values stored in your dataframe:
+
+```{r}
+overview_of_values <- CheckValues(example_data)
+print(overview_of_values)
+```
+
+You can read these and compare them to the parameter table provided in the documentation, and can save the output to a csv file for future reference:
+
+```R
+write.csv(overview_of_values, "path/to/output/file.csv", row.names=FALSE)
+```
+
+In this example, we have a few values with typos that will cause issues:
+
+```{r}
+print(overview_of_values[6,])
+print(overview_of_values[7,])
+print(overview_of_values[8,])
+```
+
+We have `Powder` instead of `Powdered`; `Carbted/juice drink` instead of `Carbonated/juice drink`; and `Prep. instructions not given` instead of `Preparation instructions not given`. For clear cases of typos like this, we can easily replace all incorrect values:
+
+```{r}
+example_data$drink_format[example_data$drink_format=="Powder"] <- "Powdered"
+example_data$drink_type[example_data$drink_type=="Carbted/juice drink"] <- "Carbonated/juice drink"
+example_data$nutrition_info[example_data$nutrition_info=="Prep. instructions not given"] <- "Preparation instructions not given"
+```
+
+After updating these in place, you can check again if you have captured all the incorrect values:
+
+```{r}
+CheckValues(example_data)
+```
+
+**Note that for a large dataset with thousands of values, the number of unique values for numerical parameters such as `weight_g` will be very high. Instead of printing the full table, you should instead use subsets for your initial overview:**
+
+```{r}
+overview_of_values[c("Parameter_name", "Count_unique_values")]
+```
+
+This allows you to identify the categorical parameters and to print these rows indicidually:
+
+```{r}
+# Printing using the row index
+print(overview_of_values[6,])
+
+# Printing using the parameter name
+print(overview_of_values[which(overview_of_values$Parameter_name == "drink_format"),])
+```
+
+In order to check numeric values, you can use max and minimum values (and measures of average if desired) to check that the values are within the expected bounds by using basic mathematical functions on the column of interest in the original product data dataframe:
+
+```{r}
+print("protein_measurement_g values")
+print(paste("Max:", max(example_data$protein_measurement_g)))
+print(paste("Min.:", min(example_data$protein_measurement_g)))
+print(paste("Mean:", mean(example_data$protein_measurement_g)))
+print(paste("Median:", median(example_data$protein_measurement_g)))
+```
+
+Individual values can be interrogated, plotted against other parameters using a graphics library like `ggplot`, and replaced in a similar way to described above for the character-type entries.
