@@ -188,3 +188,30 @@ ManualParamUpdate <- function(data_frame, parameter_name, index_list, value) {
     }
     return(data_frame)
 }
+
+#' Check parameter values function
+#'
+#' A function that takes an input dataframe and counts unique occurrences
+#' for each parameter and lists all included values. This allows you to check that no
+#' values have misspelled or invalid entries.
+#'
+#' @param data_frame a data.frame object with product data
+#' @return results a data.frame object with each named parameter and the unique occurrences of values
+#' @export
+CheckValues <- function(data_frame) {
+    name_list <- c(names(data_frame))
+    count_list <- c()
+    variables_list <- c()
+    for (i in names(npm_testcases)) {
+        count <- length(unique(npm_testcases[[i]]))
+        count_list <- c(count_list, count)
+        variables <- paste(unique(npm_testcases[[i]]), collapse=", ")
+        variables_list <- c(variables_list, variables)
+    }
+    results <- data.frame(
+        "Parameter_name" = name_list,
+        "Count_unique_values" = count_list,
+        "Unique_values" = variables_list
+    )
+    return(results)
+}
