@@ -47,6 +47,7 @@ reference:
   - AutoDefaultParamCheck
   - AutoDefaultParamNote
   - ManualParamUpdate
+  - CheckValues
 - title: Miscellaneous
   desc: >
     Miscellaneous items included in this package
