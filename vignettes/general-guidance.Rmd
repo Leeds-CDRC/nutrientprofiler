@@ -1,0 +1,51 @@
+---
+title: "General guidance on using this package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{General guidance}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE}
+library(nutrientprofiler)
+example_data <- read.csv(text = "
+name,brand,product_category,product_type,food_type,drink_format,drink_type,nutrition_info,energy_measurement_kj,energy_measurement_kcal,sugar_measurement_g,satfat_measurement_g,salt_measurement_g,sodium_measurement_mg,fibre_measurement_nsp,fibre_measurement_aoac,protein_measurement_g,fvn_measurement_percent,weight_g,volume_ml,volume_water_ml
+lembas,,,Food,,,,,266,,50,3,,0.6,3,,7,0,100,,
+zeno's icecream,,,Food,Ice cream,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
+mystic rush,,,Drink,,Ready,Carbted/juice drink,,,194,11,0,,100,,0,0,0,,100,
+delta ringer drink,,,Drink,,Powdered,,Preparation instructions given,188,,15,0,,100,,0,0.5,3,25,,100
+welter water,,,Drink,,Cordial,,As consumed,,205,19,0,0.1,,,0,0.1,6,,100,
+janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
+beta ringer drink,,,Drink,,Powder,,As consumed,188,,15,0,,100,,0,0.5,3,,50,
+zeta ringer drink,,,Drink,,Powdered,,Prep. instructions not given,188,,15,0,,100,,0,0.5,3,25,,
+heavyweight water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,20,100
+bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,,,0,0.1,6,,100,")
+```
+
+For this guidance, we are going to use an example dataset called `example_data`. Please see the detailed documentation on what parameter names and values are expected or required, and to see the workflows explaining how to load in data.
+
+This example data has a few typos in certain categories. This documentations steps through one example workflow for filtering and checking your input data before using the `nutrientprofiler` library to analyse it.
+
+```R
+# load in required libraries
+library(nutrientprofiler)
+# read in the data
+example_data <- read.csv("data/example_data.csv")
+```
+
+## Pre-processing your data
+
+While there are an array of functions to check parameter names and missing parameters, it is useful to be able to manually check your input data with base R or a library like tidyr or dplyr additionally.
+
+```{r}
+# Print out your data column names
+names(example_data)
+```
