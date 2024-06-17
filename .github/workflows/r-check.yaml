@@ -5,6 +5,9 @@ name: r-check
 # this is an example of working action
 # not deployed whilst repo is private
 on:
+  push:
+    branches:
+    - murphyqm-patch-03
   pull_request:
     branches:
     - main
@@ -15,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        R: [ '3.5.3', '3.6.1','release' ]
+        R: ['3.6.1','release' ]
     name: R ${{ matrix.R }} check
     steps:
     - uses: actions/checkout@v3

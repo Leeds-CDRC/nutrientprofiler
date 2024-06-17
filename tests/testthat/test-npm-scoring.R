@@ -11,9 +11,9 @@ test_data_sugar <- data.frame(
   "expected_score" = c(0, 10, 5, 4)
 )
 
-test_data_fat <- data.frame(
+test_data_satfat <- data.frame(
   "sg_adjusted_weight" = c(120, 50, 80, 30),
-  "fat_measurement_g" = c(20, 4, 3.8, 0),
+  "satfat_measurement_g" = c(20, 4, 3.8, 0),
   "expected_score" = c(10, 7, 4, 0)
 )
 
@@ -96,10 +96,10 @@ test_that("NPM sugar score that returns 0", {
 })
 
 
-# testing NPM_score_function for fat
-test_that("NPM fat score that returns 0", {
-  out <- NPM_score_function(test_data_fat[, "fat_measurement_g"],  "fat", adjusted_weight=test_data_fat[,"sg_adjusted_weight"])
-  expect_equal(out, test_data_fat[, "expected_score"])
+# testing NPM_score_function for satfat
+test_that("NPM satfat score that returns 0", {
+  out <- NPM_score_function(test_data_satfat[, "satfat_measurement_g"],  "satfat", adjusted_weight=test_data_satfat[,"sg_adjusted_weight"])
+  expect_equal(out, test_data_satfat[, "expected_score"])
 })
 
 test_that("NPM scoring function for fruit, nuts and veg", {
@@ -138,20 +138,20 @@ test_that("NPMScore returns a data frame with correct column names", {
     salt_measurement_g = 30,
     protein_measurement_g = 40,
     fibre_measurement_nsp = 50,
-    fat_measurement_g = 60,
-    fruit_nut_measurement_percent = 70,
+    satfat_measurement_g = 60,
+    fvn_measurement_percent = 70,
     adjusted_weight = 104,
     name = "test product"
   )
-  
+
   # call the function
   result <- NPMScore(row, "adjusted_weight")
-  
+
   # check if the result is a matrix
   expect_true(is.data.frame(result))
-  
+
   # check if the column names are correct
-  expect_equal(colnames(result), c("energy_score", "sugar_score", "fat_score", "protein_score","salt_score", "fvn_score", "fibre_score"))
+  expect_equal(colnames(result), c("energy_score", "sugar_score", "satfat_score", "protein_score","salt_score", "fvn_score", "fibre_score"))
 })
 
 test_that("NPMScore returns NA for invalid measurements", {
@@ -165,8 +165,8 @@ test_that("NPMScore returns NA for invalid measurements", {
     protein_measurement_g = NA,
     fibre_measurement_nsp = NA,
     fibre_measurement_aoac = NA,
-    fat_measurement_g = NA,
-    fruit_nut_measurement_percent = NA,
+    satfat_measurement_g = NA,
+    fvn_measurement_percent = NA,
     adjusted_weight = 104,
     name = "test NA product"
   )
@@ -179,12 +179,12 @@ test_that("NPMScore returns NA for invalid measurements", {
   expect_match(warns, "Unable to calculate 'salt' score for product test NA product defaulting to NA", all = FALSE)
   expect_match(warns, "Unable to calculate 'protein' score for product test NA product defaulting to NA", all = FALSE)
   expect_match(warns, "Unable to calculate 'fibre' score for product test NA product defaulting to NA", all = FALSE)
-  expect_match(warns, "Unable to calculate 'fat' score for product test NA product defaulting to NA", all = FALSE)
-  expect_match(warns, "Unable to calculate 'fruit/veg/nut' score for product test NA product defaulting to NA", all = FALSE)    
+  expect_match(warns, "Unable to calculate 'satfat' score for product test NA product defaulting to NA", all = FALSE)
+  expect_match(warns, "Unable to calculate 'fruit/veg/nut' score for product test NA product defaulting to NA", all = FALSE)
 
   # call the function
   result <- suppressWarnings(NPMScore(row, "adjusted_weight"))
-  
+
   # check if the result contains only NA values
   expect_equal(nrow(result), 1)
   expect_true(all(is.na(result)))

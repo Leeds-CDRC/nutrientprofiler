@@ -1,0 +1,133 @@
+---
+title: "Preprocessing input data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Preprocessing input data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r, echo=FALSE}
+library(nutrientprofiler)
+example_data <- read.csv(text = "
+name,brand,product_category,product_type,food_type,drink_format,drink_type,nutrition_info,energy_measurement_kj,energy_measurement_kcal,sugar_measurement_g,satfat_measurement_g,salt_measurement_g,sodium_measurement_mg,fibre_measurement_nsp,fibre_measurement_aoac,protein_measurement_g,fvn_measurement_percent,weight_g,volume_ml,volume_water_ml
+lembas,,,Food,,,,,266,,50,3,,0.6,3,,7,0,100,,
+zeno's icecream,,,Food,Ice cream,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
+mystic rush,,,Drink,,Ready,Carbted/juice drink,,,194,11,0,,100,,0,0,0,,100,
+delta ringer drink,,,Drink,,Powdered,,Preparation instructions given,188,,15,0,,100,,0,0.5,3,25,,100
+welter water,,,Drink,,Cordial,,As consumed,,205,19,0,0.1,,,0,0.1,6,,100,
+janus's drink,,,Food,,,,,,24,21,11,0.08,,,0.7,3.5,0,,100,
+beta ringer drink,,,Drink,,Powder,,As consumed,188,,15,0,,100,,0,0.5,3,,50,
+zeta ringer drink,,,Drink,,Powdered,,Prep. instructions not given,188,,15,0,,100,,0,0.5,3,25,,
+heavyweight water,,,Drink,,Cordial,,Preparation instructions given,,205,19,0,0.1,,,0,0.1,6,,20,100
+bantam water,,,Drink,,Cordial,,Preparation instructions not given,,205,19,0,0.1,,,0,0.1,6,,100,")
+```
+
+For this guidance, we are going to use an example dataset called `example_data`. Please see the detailed documentation on what parameter names and values are expected or required, and to see the workflows explaining how to load in data.
+
+This example data has a few typos in certain categories. This documentations steps through one example workflow for filtering and checking your input data before using the `nutrientprofiler` library to analyse it.
+
+```R
+# load in required libraries
+library(nutrientprofiler)
+# read in the data
+example_data <- read.csv("data/example_data.csv")
+```
+
+## Checking input data column names
+
+While there are an array of functions to check parameter names and missing parameters, it is useful to be able to manually check your input data with base R or a library like tidyr or dplyr additionally.
+
+You can check what column names are in your loaded dataframe using base R:
+```{r}
+# Print out your data column names
+names(example_data)
+```
+
+You can compare these parameter names to the expected parameters that `nutrientprofiler` uses for analysis using the `inputDataCheck()` function:
+
+```{r}
+inputDataCheck(example_data)
+```
+
+If required, parameter names can be fixed at this point using the `parameterRename()` and `fillMissingParameters()` functions.
+
+## Checking input data values
+
+Next, you can use the `CheckValues()` function to produce an overview of the values stored in your dataframe:
+
+```{r}
+overview_of_values <- CheckValues(example_data)
+print(overview_of_values)
+```
+
+You can read these and compare them to the parameter table provided in the documentation, and can save the output to a csv file for future reference:
+
+```R
+write.csv(overview_of_values, "path/to/output/file.csv", row.names=FALSE)
+```
+
+In this example, we have a few values with typos that will cause issues:
+
+```{r}
+print(overview_of_values[6,])
+print(overview_of_values[7,])
+print(overview_of_values[8,])
+```
+
+We have `Powder` instead of `Powdered`; `Carbted/juice drink` instead of `Carbonated/juice drink`; and `Prep. instructions not given` instead of `Preparation instructions not given`. For clear cases of typos like this, we can easily replace all incorrect values.
+
+## Fixing typos
+
+We can easily fix typos in the dataset using the following script. This is kept separate from applying new values or applying defaults as is described in the [Handling Input Data article](../articles/handling_input_data.html#fill-missing-data), where an additional column is added to record where values were overwritten.
+
+```{r}
+example_data$drink_format[example_data$drink_format=="Powder"] <- "Powdered"
+example_data$drink_type[example_data$drink_type=="Carbted/juice drink"] <- "Carbonated/juice drink"
+example_data$nutrition_info[example_data$nutrition_info=="Prep. instructions not given"] <- "Preparation instructions not given"
+```
+
+After updating these in place, you can check again if you have captured all the incorrect values:
+
+```{r}
+CheckValues(example_data)
+```
+
+**Note that for a large dataset with thousands of values, the number of unique values for numerical parameters such as `weight_g` will be very high. Instead of printing the full table, you should instead use subsets for your initial overview.** You can subset the overview table using code like this:
+
+```{r}
+overview_of_values[c("Parameter_name", "Count_unique_values")]
+```
+
+This allows you to identify the categorical parameters (with manageable numbers of unique values) and to print these rows individually:
+
+```{r}
+# Printing using the row index
+print(overview_of_values[6,])
+
+# Printing using the parameter name
+print(overview_of_values[which(overview_of_values$Parameter_name == "drink_format"),])
+```
+
+## Check validity of numeric data
+
+In order to check numeric values, you can use max and minimum values (and measures of average if desired) to check that the values are within the expected bounds by using basic mathematical functions on the column of interest in the original product data dataframe:
+
+```{r}
+print("protein_measurement_g values")
+print(paste("Max:", max(example_data$protein_measurement_g)))
+print(paste("Min.:", min(example_data$protein_measurement_g)))
+print(paste("Mean:", mean(example_data$protein_measurement_g)))
+print(paste("Median:", median(example_data$protein_measurement_g)))
+```
+
+Individual values can be interrogated, plotted against other parameters using a graphics library like `ggplot`, and replaced in a similar way to described above for the character-type entries.
+
+Please see the [Handling Input Data](../articles/handling_input_data.html) for further pre-processing steps beyond this point.

@@ -17,13 +17,13 @@
 #'   \item{energy_measurement_kj}{Energy measurement in KJ}
 #'   \item{energy_measurement_kcal}{Energy measurement in kcal}
 #'   \item{sugar_measurement_g}{Sugar content measured in in grams}
-#'   \item{fat_measurement_g}{The fat content measured in grams}
+#'   \item{satfat_measurement_g}{The saturated fat content measured in grams}
 #'   \item{salt_measurement_g}{The salt content measured in grams}
 #'   \item{sodium_measurement_mg}{The salt content measured in mg of sodium}
 #'   \item{fibre_measurement_nsp}{The fibtre measurement using NSP}
 #'   \item{fibre_measurement_aoac}{The fibre measurement using AOAC}
 #'   \item{protein_measurement_g}{The protein emasurement of the product}
-#'   \item{fruit_nut_measurement_percent}{The percent of fruit and nuts in the product}
+#'   \item{fvn_measurement_percent}{The percent of fruit/veg/nuts in the product}
 #'   \item{weight_g}{The mass of the product if solid}
 #'   \item{volume_ml}{The volume of the product if liquid}
 #'   \item{volume_water_ml}{The volume of water for diluted products}

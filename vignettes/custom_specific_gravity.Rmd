@@ -1,0 +1,161 @@
+---
+title: "Custom specific gravity"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Custom specific gravity}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE}
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+example_data <- cdrcdrinks
+example_data["custom_sg_adjusted"] <- NA
+example_data$custom_sg_adjusted[[9]] <- 125
+
+example_data_2 <- cdrcdrinks
+example_data_2["custom_sg_conversion"] <- NA
+example_data_2$custom_sg_conversion[[9]] <- 0.83
+```
+
+This article walks through how you can apply custom specific gravity conversion factors or adjusted volumes to your input data. Please ensure you have read and understood the [Specific gravity](../articles/specific_gravity.html) article and the workflow of the various underlying functions before applying custom values.
+
+Note that the examples given below show automatic calculation of the majority of the data, and then adjustment of a single row with custom values. This adjustment could be made more automated by building a loop to check if the custom column contains a non-null value, and if so applying the custom calculation. Similarly, the automated calculation could be skipped entirely and a column filled with custom values could instead be used.
+
+These examples follow a very similar process to the examples given in the [Workflow](../articles/workflows.html#example-workflow-for-processing-data-in-bulk) article, except the analysis and calculation has been broken into two stages: first, the specific gravity conversion is done, *then* the NPM scoring and assessment is done. This allows for adjustment of specific gravity values between these two steps.
+
+## Where adjusted volume has been provided
+
+As always, we need to load in the data set and the required libraries:
+
+```R
+# load required libraries
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+# read in the data
+example_data <- read.csv("data/example_data.csv")
+```
+
+This dataset has a column called `custom_sg_adjusted` that is empty except for products where a final adjusted volume based on specific gravity has been provided.
+
+```{r}
+example_data
+```
+
+Now, we calculate specific gravities as usual, initially ignoring the custom values, before then modifying the output to include our custom values:
+
+```{r}
+example_data_sg_calc <- example_data %>% 
+  rowwise() %>% 
+  mutate( sg = SGConverter(pick(everything()))) %>% 
+  select(everything(), sg)
+
+print("Before setting custom values:")
+print(example_data_sg_calc$sg)
+
+example_data_sg_calc$sg[[9]] <- example_data_sg_calc$custom_sg_adjusted[[9]]
+
+print("After setting custom values:")
+print(example_data_sg_calc$sg)
+```
+
+We can then continue with our analysis using the newly updated specific gravity values:
+
+```{r}
+example_data_results <- example_data_sg_calc %>% 
+  rowwise() %>% 
+  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
+  unnest(test) %>% 
+  rowwise() %>%
+  mutate(assess = NPMAssess(pick(everything()))) %>%
+  unnest(assess) %>%
+  select(everything(), energy_score, sugar_score, salt_score, fvn_score,
+  protein_score, satfat_score, fibre_score, NPM_score, NPM_assessment)
+```
+
+Our results table looks much the same as for previous examples, with the addition of the `custom_sg_adjusted` column to record where manual modification has occurred.
+```{r}
+names(example_data_results)
+
+example_data_results[c("name", "sg", "custom_sg_adjusted", "NPM_score", "NPM_assessment")]
+```
+
+## Where a custom conversion factor has been provided
+
+Again, we load the required libraries and data:
+
+```R
+# load required libraries
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+# read in the data
+example_data_2 <- read.csv("data/example_data_2.csv")
+```
+
+This dataset has a column called `custom_sg_conversion` that is empty except for products where a custom specific gravity conversion factor has been provided.
+
+```{r}
+example_data_2
+```
+
+Now, we calculate specific gravities as usual, initially ignoring the custom values.
+```{r}
+example_data_sg_calc_2 <- example_data_2 %>% 
+  rowwise() %>% 
+  mutate( sg = SGConverter(pick(everything()))) %>% 
+  select(everything(), sg)
+```
+
+We can use the function `generic_specific_gravity()` to calculate the adjusted volumes. The value we want to modify is a cordial, and the nutrition information provided assumes the product has been prepared as instructed (`nutrition_info == "Preparation instructions given"`); This means we need to calculate the adjusted specific gravity weight by adding the volume (ml) and the volume of water (ml) provided and using these as parameters along with our custom conversion factor in the `generic_specific_gravity()` function.
+
+```{r}
+print("Before setting custom values:")
+print(example_data_sg_calc_2$sg)
+
+example_data_sg_calc_2[9,]
+# example_data_sg_calc$sg[[9]] <- example_data_sg_calc$custom_sg_adjusted[[9]]
+
+row <- example_data_sg_calc_2[9,]
+
+example_data_sg_calc_2$sg[[9]] <- generic_specific_gravity((as.numeric(row[["volume_water_ml"]]) + as.numeric(row[["volume_ml"]])),
+            row[["custom_sg_conversion"]])
+
+print("After setting custom values:")
+print(example_data_sg_calc_2$sg)
+```
+
+We can then continue with our analysis using the newly updated specific gravity values:
+
+```{r}
+example_data_results_2 <- example_data_sg_calc_2 %>% 
+  rowwise() %>% 
+  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
+  unnest(test) %>% 
+  rowwise() %>%
+  mutate(assess = NPMAssess(pick(everything()))) %>%
+  unnest(assess) %>%
+  select(everything(), energy_score, sugar_score, salt_score, fvn_score,
+  protein_score, satfat_score, fibre_score, NPM_score, NPM_assessment)
+```
+
+Our results table looks much the same as for previous examples, with the addition of the `custom_sg_conversion` column to record where manual modification has occurred.
+
+```{r}
+names(example_data_results_2)
+
+example_data_results_2[c("name", "sg", "custom_sg_conversion", "NPM_score", "NPM_assessment")]
+```
