@@ -1,8 +1,8 @@
 ---
-title: "General guidance on using this package"
+title: "Preprocessing input data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{General guidance}
+  %\VignetteIndexEntry{Preprocessing input data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -41,7 +41,7 @@ library(nutrientprofiler)
 example_data <- read.csv("data/example_data.csv")
 ```
 
-## Pre-processing your data
+## Checking input data column names
 
 While there are an array of functions to check parameter names and missing parameters, it is useful to be able to manually check your input data with base R or a library like tidyr or dplyr additionally.
 
@@ -58,6 +58,8 @@ inputDataCheck(example_data)
 ```
 
 If required, parameter names can be fixed at this point using the `parameterRename()` and `fillMissingParameters()` functions.
+
+## Checking input data values
 
 Next, you can use the `CheckValues()` function to produce an overview of the values stored in your dataframe:
 
@@ -94,13 +96,13 @@ After updating these in place, you can check again if you have captured all the 
 CheckValues(example_data)
 ```
 
-**Note that for a large dataset with thousands of values, the number of unique values for numerical parameters such as `weight_g` will be very high. Instead of printing the full table, you should instead use subsets for your initial overview:**
+**Note that for a large dataset with thousands of values, the number of unique values for numerical parameters such as `weight_g` will be very high. Instead of printing the full table, you should instead use subsets for your initial overview.** You can subset the overview table using code like this:
 
 ```{r}
 overview_of_values[c("Parameter_name", "Count_unique_values")]
 ```
 
-This allows you to identify the categorical parameters and to print these rows indicidually:
+This allows you to identify the categorical parameters (with manageable numbers of unique values) and to print these rows individually:
 
 ```{r}
 # Printing using the row index
