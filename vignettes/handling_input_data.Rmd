@@ -18,8 +18,8 @@ Input data is likely to be messy and to not contain the required column names fo
 This vignette provides some advice and guidelines on how to pre-process your data to allow analysis
 and assessment with `nutrientprofiler`.
 
-You can see what parameters are expected in more detail in the [Example dataset reference](../reference/cdrcdrinks.html).
-The order of parameters in the loaded data do not matter.
+You can see what parameters are expected in more detail in the [Parameter guide documentation](../articles/parameter_guide.html) or the [Example dataset reference](../reference/cdrcdrinks.html).
+The order of parameters/columns in the loaded data do not matter.
 
 ```{r setup, echo=FALSE}
 library(nutrientprofiler)
@@ -31,8 +31,6 @@ missing_data <- cdrcdrinks
 missing_data <- missing_data[-c(2, 3)]
 
 incomplete_data <- cdrcdrinks
-# incomplete_data[2,"product_type"] <- ""
-# incomplete_data[3,"product_type"] <- NA
 
 incomplete_data[1,"sugar_measurement_g"] <- ""
 incomplete_data[2,"sugar_measurement_g"] <- ""
@@ -128,6 +126,10 @@ filled_data
 
 This then allows the data to be processed in bulk without triggerring errors related to
 missing data.
+
+## Data validity
+
+Please see the article on [Preprocessing input data](../articles/preprocessing.html) to see advice on how to check whether parameters are valid and within the range expected, and to fix any typos in the dataset.
 
 ## Missing data
 

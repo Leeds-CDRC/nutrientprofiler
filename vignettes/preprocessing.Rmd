@@ -82,7 +82,11 @@ print(overview_of_values[7,])
 print(overview_of_values[8,])
 ```
 
-We have `Powder` instead of `Powdered`; `Carbted/juice drink` instead of `Carbonated/juice drink`; and `Prep. instructions not given` instead of `Preparation instructions not given`. For clear cases of typos like this, we can easily replace all incorrect values:
+We have `Powder` instead of `Powdered`; `Carbted/juice drink` instead of `Carbonated/juice drink`; and `Prep. instructions not given` instead of `Preparation instructions not given`. For clear cases of typos like this, we can easily replace all incorrect values.
+
+## Fixing typos
+
+We can easily fix typos in the dataset using the following script. This is kept separate from applying new values or applying defaults as is described in the [Handling Input Data article](../articles/handling_input_data.html#fill-missing-data), where an additional column is added to record where values were overwritten.
 
 ```{r}
 example_data$drink_format[example_data$drink_format=="Powder"] <- "Powdered"
@@ -112,6 +116,8 @@ print(overview_of_values[6,])
 print(overview_of_values[which(overview_of_values$Parameter_name == "drink_format"),])
 ```
 
+## Check validity of numeric data
+
 In order to check numeric values, you can use max and minimum values (and measures of average if desired) to check that the values are within the expected bounds by using basic mathematical functions on the column of interest in the original product data dataframe:
 
 ```{r}
@@ -123,3 +129,5 @@ print(paste("Median:", median(example_data$protein_measurement_g)))
 ```
 
 Individual values can be interrogated, plotted against other parameters using a graphics library like `ggplot`, and replaced in a similar way to described above for the character-type entries.
+
+Please see the [Handling Input Data](../articles/handling_input_data.html) for further pre-processing steps beyond this point.
