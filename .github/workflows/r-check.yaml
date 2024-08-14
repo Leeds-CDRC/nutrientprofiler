@@ -7,10 +7,11 @@ name: r-check
 on:
   push:
     branches:
-    - murphyqm-patch-03
+    - main
   pull_request:
     branches:
     - main
+  workflow_dispatch:
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
