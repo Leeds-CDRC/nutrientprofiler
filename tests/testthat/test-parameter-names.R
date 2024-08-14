@@ -10,4 +10,8 @@ test_that("inputDataCheck assesses parameter names correctly", {
     expect_output(inputDataCheck(test_data),"All required column names found. Proceed with analysis.")
 })
 
+test_that("inputDataCheck find missing parameter names", {
+    expect_output(inputDataCheck(test_data_incomplete),"The provided dataframe is missing the following required column names:")
+})
+
 
