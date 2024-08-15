@@ -10,6 +10,8 @@ It is also recommended that you install [Docker](https://www.docker.com/) and
 [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers)
 setup or edit the code directly via GitHub Codespaces.
 
+Alternatively, you can use conda to manage your R packages; see instructions below.
+
 If you're unfamiliar with using `git` why not check out the fantastic
 [Carpentries introductory course](https://swcarpentry.github.io/git-novice/).
 
@@ -19,6 +21,27 @@ To get working on this project you will need the [`devtools`](https://devtools.r
 # Install devtools from CRAN
 install.packages("devtools")
 ```
+
+#### Using conda
+
+You can install R and manage your packages and dependencies using conda
+(see the open source Miniforge installer [here](https://github.com/conda-forge/miniforge)).
+The file `conda-dev-env.yml` contains a minimal list of packages (including `devtools`),
+allowing you to create an environment with conda:
+
+```bash
+conda env create -f conda-dev-env.yml
+```
+
+Once you've agreed to the installation, you can activate your environment
+called `np-r-env`:
+
+```bash
+conda activate np-r-env
+```
+
+You will now be able to launch an interactive R session from the terminal,
+or run `.R` files with the `Rscript` command.
 
 ### Development workflow
 
