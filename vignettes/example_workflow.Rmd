@@ -1,0 +1,232 @@
+---
+title: "Example HPC workflow and troubleshooting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example workflow and troubleshooting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette walks you through a variety of different installation options and workflows for
+analysing data in bulk on a high performance computing (HPC) platform.
+
+## Loading package onto an "airgapped" HPC system
+
+If working on a secure or "airgapped" system without internet access, using the R `remotes` package to
+install `nutrientprofiler` will not work.
+
+Instead, if there is a file/data transfer process available, the zipped package can be
+transferred to the secure computational platform and installed locally. 
+
+This process can be broken down into 3 steps:
+
+1. Downloading the package/zipped archive to your local system
+2. Transferring the files to the secure system (after any required security checks)
+3. Installing without internet access on the secure system.
+
+The instructions here assume access to some form of archived CRAN mirror so that other commonly used
+packages are available. Please check through the packages listed in the code snippets and ensure you have
+access to these on your system.
+
+### 1. Downloading the package to your local machine
+
+You can download a specific tagged release (see the 
+[GitHub releases](https://github.com/Leeds-CDRC/nutrientprofiler/releases) page) or a development
+pre-release version of the code from a specific branch of the repository.
+
+Tagged releases allow for better reproducibility; however, if a pre-release version needs to be used,
+reproducibility can still be ensured by recording the download link used and the access date.
+
+
+#### 1.1 Downloading a tagged release
+
+**The recommended method is to download the most recent tagged release as a `.tar.gz` archive.**
+
+From your local desktop you can run the following R snippet to download the `v1.0.0` release of the package:
+
+```
+# download the v1.0.0 release as a .tar.gz archive
+# to your current directory
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v1.0.0.tar.gz",
+              dest = "./nutrientprofiler-v1.0.0.tar.gz")
+```
+
+Alternatively, this can be downloaded directly from the
+[GitHub releases](https://github.com/Leeds-CDRC/nutrientprofiler/releases) page.
+
+A different release can be specified by changing the release tag. Make sure to also update
+the destination filename to prevent confusion:
+
+```
+# replace <tag> with the required version number
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/<tag>.tar.gz",
+              dest = "./nutrientprofiler-<tag>.tar.gz")
+```
+
+If required, zip file archives are also available on the 
+[GitHub releases](https://github.com/Leeds-CDRC/nutrientprofiler/releases) page or can be downloaded
+using the following R script below. Please note that these `.zip` archives require a slightly different
+installation to `.tar.gz`; please read through the isntallation steps first.
+
+```
+# download the <tag> release as a zip archive
+# to your current directory
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/<tag>.zip",
+              dest = "./nutrientprofiler-<tag>.zip")
+```
+
+#### 1.2 Downloading the current development version or a specific branch
+
+If you want to install a pre-release version of a specific version on a branch, replace `tags/version-number`
+in the url with `heads/branch-name` (and rename the destination file something sensible).
+
+**Please record the date of download and most recent commit identifier as the branch may be updated or changed following your download and installation.**
+
+For example, the following downloads the current package on the "VarEdits" branch of the repository:
+
+```
+# replace "tags/version-number" with "heads/branch-name":
+# in this example, we replaced "tags/v1.0.0" with "heads/VarEdits"
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/heads/VarEdits.tar.gz",
+              dest = "./nutrientprofiler-VarEdits.tar.gz")
+```
+
+Again, a zip file version can be downloaded by replacing `tar.gz` in the snippet above with `zip`. A zip
+file can also be downloaded from the project [GitHub page](https://github.com/Leeds-CDRC/nutrientprofiler)
+by navigating to the required branch and then using the green "Code" button to open the "Clone" option menu,
+and selecting the "Download zip" option.
+
+### 2. Transferring your code to the secure platform
+
+This step will vary depending on the data transfer policies and process enforced by your institution. While
+the package archive can be unzipped for testing, it should be saved on the secure system in it's original compressed
+format.
+
+### 3. Installation
+
+On the secure computing platform, once the archive has been transferred, you can then install the package.
+The installation method differs depending on the filetype.
+
+#### 3.1 Install `.tar.gz` archives
+
+Using an appropriate relative path for the archive, you can install it from source:
+
+```
+# install the package directly from source
+install.packages("./nutrientprofiler-v1.0.0.tar.gz", repos = NULL, type="source")
+```
+
+
+Change the suggested filename to suit your specific installation:
+
+```
+# install the package directly from source
+install.packages("./nutrientprofiler-VarEdits.tar.gz", repos = NULL, type="source")
+```
+
+#### 3.2 Install `.zip` archives
+
+In order to install the package from a `.zip` file, you need to use the `devtools` package:
+
+```
+# install and load devtools
+install.packages("devtools")
+library(devtools)
+devtools::install_local("./nutrientprofiler-v1.0.0.zip")
+```
+Again, change the suggested filename to suit your specific installation.
+
+## Example workflow for processing data in bulk
+
+Once `nutrientprofiler` has been installed on your system, it can be imported and used interactively
+or run within scripts on bulk data.
+
+**Ensure data is formatted to match the example csv files with same column names.**
+
+Assuming the data that you want to analyse is stored in `"data/example_data.csv"` and you want to
+save the results to`"results/example_data_results.csv"` with all the original columns plus the results
+columns, you can use a script like this:
+
+```
+# load required libraries
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+# read in the data
+npm_testcases = read.csv("data/example_data.csv")
+
+# Analyse all entries, including specific gravity conversion, NPM scoring and assessment
+npm_testcases_results <- npm_testcases %>% 
+  rowwise() %>% 
+  mutate( sg = SGConverter(pick(everything()))) %>% 
+  mutate(test = NPMScore(pick(everything()), sg_adjusted_label="sg")) %>% 
+  unnest(test) %>% 
+  rowwise() %>%
+  mutate(assess = NPMAssess(pick(everything()))) %>%
+  unnest(assess) %>%
+  select(everything(), energy_score, sugar_score, salt_score, fvn_score,
+  protein_score, satfat_score, fibre_score, NPM_score, NPM_assessment)
+
+# Save results to a csv file
+write.csv(npm_testcases_results, "results/example_data_results.csv", row.names = FALSE)
+```
+
+This only requires slight modification if the desired input file is instead in `"data/example_data.xlsx"`:
+
+```
+# load required libraries
+install.packages("readxl") # If this is not already installed in the workspace
+
+library(tidyr)
+library(dplyr)
+library(readxl)
+library(nutrientprofiler)
+
+# read in the data on the first sheet of the spreadsheet (sheet = 1)
+npm_testcases = read_excel("data/example_data.xlsx", sheet = 1)
+
+# The rest of the wokflow is the same...
+```
+
+## Troubleshooting
+
+The most common errors to arise are likely to be related to incorrect column names in your data, or
+incorrect datatypes for the values in these columns.
+
+You can check the names of the columns using `names(npm_testcases)`.
+
+You can replace column names using a script like this:
+
+```
+# load required libraries
+library(tidyr)
+library(dplyr)
+library(nutrientprofiler)
+
+# read in the data
+npm_testcases = read.csv("data/example_data.csv")
+
+# Function to rename variables
+replace_var_names <- function(data_frame){
+    if ("fat_measurement_g" %in% names(data_frame)){
+        data_frame <- rename(data_frame, satfat_measurement_g = fat_measurement_g)
+    }
+    if ("fruit_nut_measurement_percent" %in% names(data_frame)){
+        data_frame <- rename(data_frame, fvn_measurement_percent = fruit_nut_measurement_percent)
+    }
+}
+
+# Call the function on the example data
+replaced_names = replace_var_names(npm_testcases)
+```
+
+The example shown above uses a function so that this can be reused with multiple data sets that
+have the same column naming issues.

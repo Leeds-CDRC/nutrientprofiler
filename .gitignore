@@ -1,4 +1,9 @@
 .Rproj.user
 docs
 inst/doc
+.Rhistory
+scratch
+.vscode
+/doc/
+/Meta/
 scratch.R
