@@ -4,6 +4,8 @@ name: r-check
 # Only run this when the master branch changes
 # this is an example of working action
 # not deployed whilst repo is private
+
+# test version
 on:
   push:
     branches:
@@ -19,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        R: ['3.6.1','release' ]
+        R: ['4.3.0','release' ]
     name: R ${{ matrix.R }} check
     steps:
     - uses: actions/checkout@v3
