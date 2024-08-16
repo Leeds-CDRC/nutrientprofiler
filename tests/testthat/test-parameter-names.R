@@ -22,3 +22,12 @@ test_that("listMissingParameters lists missing parameter names", {
     expect_output(print(listMissingParameters(test_data_incomplete)), 
     "satfat_measurement_g")
 })
+
+
+test_that("fillMissingParameters add provided parameters to dataset", {
+    df <- fillMissingParameters(test_data_incomplete, listMissingParameters(test_data_incomplete))
+    expect_output(print(df$satfat_measurement_g),
+    "NA")
+    expect_output(print(df$incorrect_column_name),
+    "NULL")
+})
