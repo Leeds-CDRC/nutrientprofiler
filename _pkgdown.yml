@@ -34,6 +34,20 @@ reference:
   - NPM_total
   - A_scorer
   - C_scorer
+- title: Preprocessing
+  desc: >
+    Functions related to processing and preparation of datasets
+  contents:
+  - inputDataCheck
+  - parameterRename
+  - listMissingParameters
+  - fillMissingParameters
+  - ReqParamCheck
+  - SaveReport
+  - AutoDefaultParamCheck
+  - AutoDefaultParamNote
+  - ManualParamUpdate
+  - CheckValues
 - title: Miscellaneous
   desc: >
     Miscellaneous items included in this package

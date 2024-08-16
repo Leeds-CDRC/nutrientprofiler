@@ -1,0 +1,7 @@
+name: np-r-env
+channels:
+  - conda-forge
+dependencies:
+  - r-essentials
+  - r-remotes
+  - r-devtools

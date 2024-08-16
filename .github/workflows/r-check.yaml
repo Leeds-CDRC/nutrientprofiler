@@ -7,11 +7,13 @@ name: r-check
 
 # test version
 on:
+  push:
+    branches:
+    - main
   pull_request:
     branches:
     - main
-  push:
-    branches: [murphyqm-patch-01]
+  workflow_dispatch:
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -19,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        R: ['3.6.1','release' ]
+        R: ['4.3.0','release' ]
     name: R ${{ matrix.R }} check
     steps:
     - uses: actions/checkout@v3
