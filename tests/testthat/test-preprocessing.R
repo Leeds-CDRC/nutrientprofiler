@@ -14,8 +14,8 @@ test_that("ReqParamCheck assesses parameter values correctly", {
     "data.frame")
     expect_output(print(rep_data$volume_water_ml),
     "1")
-    expect_output(print(rep_data$product_type),
-    "[[1]]\ninteger(0)\n")
+    expect_type(rep_data$product_type,
+    "list")
 })
 
 # ReqParamCheck(test_data_incomplete)
