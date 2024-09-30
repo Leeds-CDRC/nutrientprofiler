@@ -13,7 +13,7 @@ Authors@R:
 Description: This package implements functions to help assess 
     product information against the UK Nutrient Profiling Model (2004/5).
     These scores can be used as part of scoping HFSS when determining product placement.
-License: MIT + file LICENSE
+License: AGPL + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
