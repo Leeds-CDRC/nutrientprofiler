@@ -17,7 +17,15 @@ install.packages("remotes")
 remotes::install_github("Leeds-CDRC/nutrientprofiler")
 ```
 
-You can also download the package as an archive from GitHub and install them
+You can also specify a version of the nutrientprofiler package:
+
+```R
+install.packages("remotes")
+
+remotes::install_github("leeds-cdrc/nutrientprofiler@v1.0.0")
+```
+
+You can also download the package as an archive from GitHub and install 
 from source using the following steps. The steps below show how to do this
 directly within R but you can also download an archive of the respository
 directly from the [GitHub releases](https://github.com/Leeds-CDRC/nutrientprofiler/releases) page.
