@@ -2,7 +2,7 @@
 title: "Example HPC workflow and troubleshooting"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Example workflow and troubleshooting}
+  %\VignetteIndexEntry{Example HPC workflow and troubleshooting}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
