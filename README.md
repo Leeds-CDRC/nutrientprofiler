@@ -108,8 +108,7 @@ Copyright (C) 2024 University of Leeds
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
-by the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+by the Free Software Foundation, version 3.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -117,8 +116,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 A copy of the GNU Affero General Public License is supplied
-along with this program in the `LICENSE` file in the repository.
+along with this program in the `LICENSE` file in the [repository](https://github.com/Leeds-CDRC/nutrientprofiler/).
 You can also find the full text at https://www.gnu.org/licenses.
 
-You can contact us by raising an issue on our GitHub repository (https://github.com/Leeds-CDRC/NPM-Calculator/issues/new - login required) or by emailing
+You can contact us by raising an issue on our GitHub repository (https://github.com/Leeds-CDRC/nutrientprofiler/issues/new - login required) or by emailing
 us at info@cdrc.ac.uk.
