@@ -39,13 +39,14 @@ This involves two functions: `A_scorer` and `C_scorer` that accept a number of
 arguments corresponding to the appropriate nutrient score and sum them.
 
 The `A_scorer` takes 4 arguments: `energy_score`, `sugar_score`, `salt_score` and
-`fat_score`. These are scores calculated in the previous `NPMScore` step and are
-summed in the `A_scorer` function to return a compound A score. The `C_scorer`
-takes 3 arguments: `fvn_score` (fruit, vegetable and nut score), `protein_score`
-and `fibre_score` and calculates the sum of these to return a C score.
+`satfat_score`. These are scores calculated in the previous `NPMScore` step and
+are summed in the `A_scorer` function to return a compound A score. The
+`C_scorer` takes 3 arguments: `fvn_score` (fruit, vegetable and nut score),
+`protein_score` and `fibre_score` and calculates the sum of these to return a C
+score.
 
 ```{r}
-A_scorer(energy_score = 3, sugar_score = 5, salt_score = 1, fat_score = 2)
+A_scorer(energy_score = 3, sugar_score = 5, salt_score = 1, satfat_score = 2)
 
 C_scorer(fvn_score = 2, protein_score = 3, fibre_score = 1)
 ```

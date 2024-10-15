@@ -1,7 +1,8 @@
 # Test for valid input
+# Incorrect test?: expect_equal(salt_adjuster(2, 50, "salt"), 40)
 test_that("salt_adjuster returns the correct output for valid input", {
   expect_equal(salt_adjuster(50, 1000, "sodium"), 5)
-  expect_equal(salt_adjuster(2, 50, "salt"), 40)
+  expect_equal(salt_adjuster(2.4, 200, "salt"), 480)
 })
 
 # Test for invalid type

@@ -10,6 +10,8 @@ It is also recommended that you install [Docker](https://www.docker.com/) and
 [devcontainer](https://code.visualstudio.com/docs/devcontainers/containers)
 setup or edit the code directly via GitHub Codespaces.
 
+Alternatively, you can use conda to manage your R packages; see instructions below.
+
 If you're unfamiliar with using `git` why not check out the fantastic
 [Carpentries introductory course](https://swcarpentry.github.io/git-novice/).
 
@@ -19,6 +21,27 @@ To get working on this project you will need the [`devtools`](https://devtools.r
 # Install devtools from CRAN
 install.packages("devtools")
 ```
+
+#### Using conda
+
+You can install R and manage your packages and dependencies using conda
+(see the open source Miniforge installer [here](https://github.com/conda-forge/miniforge)).
+The file `conda-dev-env.yml` contains a minimal list of packages (including `devtools`),
+allowing you to create an environment with conda:
+
+```bash
+conda env create -f conda-dev-env.yml
+```
+
+Once you've agreed to the installation, you can activate your environment
+called `np-r-env`:
+
+```bash
+conda activate np-r-env
+```
+
+You will now be able to launch an interactive R session from the terminal,
+or run `.R` files with the `Rscript` command.
 
 ### Development workflow
 
@@ -36,7 +59,7 @@ When working locally you should use the following workflow to help develop the c
 5. Make a change to the package files
 6. Test this in your R session by running `load_all()` to load the package (check here for any errors)
 7. Check your changes pass tests by running `test()`
-8. If you're package passes the tests and you've updated the appropriate
+8. If your package passes the tests and you've updated the appropriate
    documentation you should now run `check()` locally to make sure all
    appropriate roxygen2 files are created/update and any functions you've now
    tagged with @export are exported to NAMESPACE
