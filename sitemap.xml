@@ -1,105 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/404.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofile_assessment.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofile_scoring.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofiler.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/specific_gravity.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/index.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/A_scorer.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/C_scorer.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPMAssess.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPMScore.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_assess.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_score_function.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_total.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGConverter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGtab.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/cdrcdrinks.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/energy_value_adjuster.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/fruit_veg_nut_scorer.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/generic_adjuster.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/generic_specific_gravity.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/salt_adjuster.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/scoring_function.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_cord_drink_converter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_drink_converter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_food_converter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_liquidfood_converter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_powd_drink_converter.html</loc>
-  </url>
-  <url>
-    <loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_ready_drink_converter.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/404.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/CONTRIBUTING.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/LICENSE-text.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/LICENSE.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/custom_specific_gravity.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/handling_input_data.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/index.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofile_assessment.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofile_scoring.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofiler.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/parameter_guide.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/preprocessing.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/specific_gravity.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/articles/workflows.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/authors.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/index.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/A_scorer.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/AutoDefaultParamCheck.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/AutoDefaultParamNote.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/C_scorer.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/CheckValues.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/ManualParamUpdate.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPMAssess.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPMScore.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_assess.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_score_function.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/NPM_total.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/ReqParamCheck.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGConverter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SGtab.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/SaveReport.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/cdrcdrinks.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/energy_value_adjuster.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/fillMissingParameters.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/fruit_veg_nut_scorer.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/generic_adjuster.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/generic_specific_gravity.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/index.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/inputDataCheck.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/listMissingParameters.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/parameterRename.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/salt_adjuster.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/scoring_function.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_cord_drink_converter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_drink_converter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_food_converter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_liquidfood_converter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_powd_drink_converter.html</loc></url>
+<url><loc>https://leeds-cdrc.github.io/nutrientprofiler/reference/sg_ready_drink_converter.html</loc></url>
 </urlset>
+

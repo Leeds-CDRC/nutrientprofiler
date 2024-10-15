@@ -5,70 +5,57 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="This package implements functions to help assess 
-    product information against the UK Nutrient Profiling Model (2004/5).
-    These scores can be used as part of scoping HFSS when determining product placement.">
 <title>Nutrient Model Profiler • nutrientprofiler</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Nutrient Model Profiler">
-<meta property="og:description" content="This package implements functions to help assess 
-    product information against the UK Nutrient Profiling Model (2004/5).
-    These scores can be used as part of scoping HFSS when determining product placement.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Nutrient Model Profiler">
+<meta name="description" content="This package implements functions to help assess product information against the UK Nutrient Profiling Model (2004/5). These scores can be used as part of scoping HFSS when determining product placement.">
+<meta property="og:description" content="This package implements functions to help assess product information against the UK Nutrient Profiling Model (2004/5). These scores can be used as part of scoping HFSS when determining product placement.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">nutrientprofiler</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="articles/nutrientprofiler.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="articles/nutrientprofiler.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a>
-    <a class="dropdown-item" href="articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a>
-    <a class="dropdown-item" href="articles/specific_gravity.html">Specific Gravity Adjustment</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/custom_specific_gravity.html">Custom specific gravity</a></li>
+    <li><a class="dropdown-item" href="articles/handling_input_data.html">Handling input data</a></li>
+    <li><a class="dropdown-item" href="articles/nutrientprofile_assessment.html">Nutrient Profile Model Assessment</a></li>
+    <li><a class="dropdown-item" href="articles/nutrientprofile_scoring.html">Nutrient Profile Model Scoring</a></li>
+    <li><a class="dropdown-item" href="articles/parameter_guide.html">Parameter guide</a></li>
+    <li><a class="dropdown-item" href="articles/preprocessing.html">Preprocessing input data</a></li>
+    <li><a class="dropdown-item" href="articles/specific_gravity.html">Specific Gravity Adjustment</a></li>
+    <li><a class="dropdown-item" href="articles/workflows.html">Example HPC workflow and troubleshooting</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/Leeds-CDRC/nutrientprofiler/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/Leeds-CDRC/nutrientprofiler/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -86,8 +73,13 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Leeds-CDRC/nutrientprofiler"</span><span class="op">)</span></span></code></pre></div>
-<p>You can also download the package as an archive from GitHub and install them from source using the following steps. The steps below show how to do this directly within R but you can also download an archive of the respository directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub releases</a> page.</p>
+<p>You can also specify a version of the nutrientprofiler package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"leeds-cdrc/nutrientprofiler@v1.0.0"</span><span class="op">)</span></span></code></pre></div>
+<p>You can also download the package as an archive from GitHub and install from source using the following steps. The steps below show how to do this directly within R but you can also download an archive of the respository directly from the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/releases" class="external-link">GitHub releases</a> page.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># download the repository as a .tar.gz archive</span></span>
 <span><span class="co"># to your current directory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="st">"https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v0.2.2.tar.gz"</span>,</span>
@@ -96,7 +88,60 @@
 <span><span class="co"># install the package directly from source</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"./nutrientprofiler-v0.2.2.tar.gz"</span>, repos <span class="op">=</span> <span class="cn">NULL</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="navigating-the-documentation">Navigating the documentation<a class="anchor" aria-label="anchor" href="#navigating-the-documentation"></a>
+</h2>
+<p>Please see <a href="../articles/nutrientprofiler.html">Getting started</a> for an overview of how the <code>nutrientprofiler</code> package works.</p>
+<p>To learn to prepare your data for analysis, please first see <a href="../articles/preprocessing.html">Preprocessing</a> then <a href="../articles/handling_input_data.html">Handling input data</a>. For more details on valid data types for different parameters, see <a href="../articles/parameter_guide.html">Parameter guide</a>.</p>
+<p>To learn the logic of the specific gravity adjustment workflow, see <a href="../articles/specific_gravity.html">Specific Gravity</a>, and to implement custom values for this adjustment, see the guidance in the article <a href="../articles/custom_specific_gravity.html">Custom Specific Gravity</a>.</p>
 </div>
+</div>
+<div class="section level1">
+<h1 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
+</h1>
+<p>This document outlines a rough approach for local setup and contributing to this project.</p>
+<div class="section level2">
+<h2 id="local-setup">Local setup<a class="anchor" aria-label="anchor" href="#local-setup"></a>
+</h2>
+<p>To work with this project locally you will need <a href="https://git-scm.com/" class="external-link">Git</a> and <a href="https://www.r-project.org/about.html" class="external-link">R</a> installed locally. It is also recommended that you install <a href="https://www.docker.com/" class="external-link">Docker</a> and <a href="https://code.visualstudio.com/" class="external-link">VSCode</a> to enable you to utilise the <a href="https://code.visualstudio.com/docs/devcontainers/containers" class="external-link">devcontainer</a> setup or edit the code directly via GitHub Codespaces.</p>
+<p>If you’re unfamiliar with using <code>git</code> why not check out the fantastic <a href="https://swcarpentry.github.io/git-novice/" class="external-link">Carpentries introductory course</a>.</p>
+<p>To get working on this project you will need the <a href="https://devtools.r-lib.org/" class="external-link"><code>devtools</code></a> package which you can install with the following R command:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install devtools from CRAN</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="development-workflow">Development workflow<a class="anchor" aria-label="anchor" href="#development-workflow"></a>
+</h3>
+<p>When working locally you should use the following workflow to help develop the code:</p>
+<ol style="list-style-type: decimal">
+<li>Create a <a href="https://github.com/Leeds-CDRC/nutrientprofiler/fork" class="external-link">fork of the GitHub repository</a> to create your own personal copy of this repository to which you can push changes to</li>
+<li>Locally clone your fork so that you can start working on it</li>
+<li>Open an R session</li>
+<li>Load <code>devtools</code> with: <code>R     library(devtools)</code>
+</li>
+<li>Make a change to the package files</li>
+<li>Test this in your R session by running <code>load_all()</code> to load the package (check here for any errors)</li>
+<li>Check your changes pass tests by running <code>test()</code>
+</li>
+<li>If your package passes the tests and you’ve updated the appropriate documentation you should now run <code>check()</code> locally to make sure all appropriate roxygen2 files are created/update and any functions you’ve now tagged with @export are exported to NAMESPACE</li>
+<li>Commit all the changes from the <code>check()</code> run and push these to GitHub</li>
+<li>Open a <a href="https://github.com/Leeds-CDRC/nutrientprofiler/compare" class="external-link">pull request</a> against the <code>main</code> branch from your development branch. This will trigger a GitHub action that also runs the equivalent of <code>check()</code> to make sure you didn’t miss anything and ensure the package still works against different versions of R.</li>
+<li>Once the checks pass on the pull request your changes can be accepted by the maintainer.</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h1>
+<p>The nutrientprofiler package provides functions to help assess product information against the UK Nutrient Profiling Model (2004/5) and scope for HFSS legislation around product placement. It is designed to provide low level functions that implement UK Nutrient Profiling Model scoring that can be applied across product datasets.</p>
+<p>Copyright (C) 2024 University of Leeds</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, version 3.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.</p>
+<p>A copy of the GNU Affero General Public License is supplied along with this program in the <code>LICENSE</code> file in the <a href="https://github.com/Leeds-CDRC/nutrientprofiler/" class="external-link">repository</a>. You can also find the full text at <a href="https://www.gnu.org/licenses" class="external-link uri">https://www.gnu.org/licenses</a>.</p>
+<p>You can contact us by raising an issue on our GitHub repository (<a href="https://github.com/Leeds-CDRC/nutrientprofiler/issues/new" class="external-link uri">https://github.com/Leeds-CDRC/nutrientprofiler/issues/new</a> - login required) or by emailing us at <a href="mailto:info@cdrc.ac.uk" class="email">info@cdrc.ac.uk</a>.</p>
+</div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -108,7 +153,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small>AGPL + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -131,6 +176,7 @@
 <ul class="list-unstyled">
 <li>Alex Coleman <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7723-3222" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Vicki Jenneson <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2468-8009" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Maeve Murphy Quinlan <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2958-1008" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -141,21 +187,19 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Alex Coleman, Vicki Jenneson.</p>
+  <p>Developed by Alex Coleman, Vicki Jenneson, Maeve Murphy Quinlan.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
