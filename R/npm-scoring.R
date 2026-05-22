@@ -165,9 +165,10 @@ NPM_score_function <- function(value, type, ...) {
 scoring_function <- function(value, thresholds) {
     stopifnot("thresholds has no length" = length(thresholds) > 1)
     # TODO: linter warning to use seq_along
+    epsilon <- 1e-7
     score <- length(thresholds)
     for (x in 1:length(thresholds)) {
-        if (value > thresholds[x]) {
+        if (value > thresholds[x] + epsilon) {
             break
         } else {
             score <- score - 1
@@ -187,11 +188,12 @@ scoring_function <- function(value, thresholds) {
 #' @return a numeric score value
 #' @export
 fruit_veg_nut_scorer <- function(value) {
-    score <- if(value > 80) {
+    epsilon <- 1e-7
+    score <- if(value > 80 + epsilon) {
         5
-    } else if (value > 60) {
+    } else if (value > 60 + epsilon) {
        2
-    } else if (value > 40) {
+    } else if (value > 40 + epsilon) {
        1
     } else {
         0
