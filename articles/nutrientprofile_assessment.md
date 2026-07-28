@@ -1,0 +1,96 @@
+# Nutrient Profile Model Assessment
+
+For assessing individual nutrient scores of a product within the
+Nutrient Profile Model we have to complete the following steps:
+
+- Calculate compound A and C scores
+- Calculate a total Nutrient Profile Model score using A and C scores
+  taking into account Fibre and fruit, vegetables and nut scores
+- Determine whether the product passes or fails with thresholds
+  depending on whether the product is a food or drink
+
+The `nutrientprofiler` package includes a high level wrapper function
+`NPMAssess` for handling this row-by-row on a data.frame with columns
+generated from `NPMScore`. Below we will explore the component functions
+of `NPMAssess` to understand how this function operates.
+
+``` r
+
+library(nutrientprofiler)
+```
+
+## A and C score calculators
+
+The first component of `NPMAssess` is the step to calculate the A and C
+scores. This involves two functions: `A_scorer` and `C_scorer` that
+accept a number of arguments corresponding to the appropriate nutrient
+score and sum them.
+
+The `A_scorer` takes 4 arguments: `energy_score`, `sugar_score`,
+`salt_score` and `satfat_score`. These are scores calculated in the
+previous `NPMScore` step and are summed in the `A_scorer` function to
+return a compound A score. The `C_scorer` takes 3 arguments: `fvn_score`
+(fruit, vegetable and nut score), `protein_score` and `fibre_score` and
+calculates the sum of these to return a C score.
+
+``` r
+
+A_scorer(energy_score = 3, sugar_score = 5, salt_score = 1, satfat_score = 2)
+#> [1] 11
+
+C_scorer(fvn_score = 2, protein_score = 3, fibre_score = 1)
+#> [1] 6
+```
+
+## Nutrient Profile Model Score
+
+After computing the A and C scores we’re able to calculate the overall
+Nutrient Profile Model Score of the product. The method for computing
+the score is conditional on the size of the A and C score and can in
+some circumstances take into account the fibre score and the fruit,
+vegetables and nut score. Therefore the `NPM_total` function takes 4
+arguments: `a_score`, `c_score`, `fvn_score`, `fibre_score`.
+
+``` r
+
+NPM_total(7, 2, 1, 1)
+
+# example using keyword arguments
+NPM_total(a_score = 10, c_score = 4, fvn_score = 1, fibre_score = 2)
+```
+
+This function works by subtracting the C score from the A score.
+However, if the A score is greater than or equal to 11 and the fruit,
+vegetable and nut score is less than 5, the function performs a
+different calculation and substracts the sum of the fibre score and the
+fruit, vegetables and nut score from the A score. This follows the logic
+defined in the [Technical Guidance for Nutrient Profile
+modelling](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/216094/dh_123492.pdf).
+
+## Nutrient Profile Model Assessment
+
+After determining an overall score for the product within the Nutrient
+Profile Model the final step is to assess this score to determine if the
+product passes or fails. This is a simple test of whether the score is
+above or below a specific threshold where the threshold differs if the
+product is a food or drink.
+
+If the product is a food an NPM score of 4 or more leads to a failure,
+whilst for a drink a product fails the NPM is it scores 1 or more.
+
+`NPM_assess` works by accepting two arguments: `NPM_score` and `type`.
+`type` determines if the product is a food or drink by accepting either
+`food` or `drink` whilst `NPM_score` should be a numeric value
+calculated from the prior `NPM_total` step. The function returns a
+character vector with a single value of either `"PASS"` or `"FAIL"`.
+
+``` r
+
+# pass
+NPM_assess(3, "food")
+#> [1] "PASS"
+
+# fail
+NPM_assess(6, type = "drink")
+#> [1] "FAIL"
+```
