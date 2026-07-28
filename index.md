@@ -1,5 +1,7 @@
 # 🍎📦 nutrientprofiler R package
 
+[![docs](https://camo.githubusercontent.com/ccc25400b0edc270f77975557c482e3fb9572c86e44d2985ef8a1e1cb399f3c1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f63756d656e746174696f6e2d6f6e6c696e652d626c7565)](https://leeds-cdrc.github.io/nutrientprofiler/)
+
 Welcome to the nutrientprofiler R package repository!
 
 This package provides functions to help assess product information
