@@ -13,7 +13,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/Leeds-CDRC/nutrientprofiler/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/Leeds-CDRC/nutrientprofiler/blob/v2.0.1/DESCRIPTION)
 
 Coleman A, Jenneson V, Murphy Quinlan M (2026). *nutrientprofiler:
 Nutrient Model Profiler*. R package version 2.0.0,
