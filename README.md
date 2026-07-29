@@ -44,11 +44,11 @@ install.packages("./nutrientprofiler-v0.2.2.tar.gz", repos = NULL, type="source"
 
 ## Navigating the documentation
 
-Please see [Getting started](../articles/nutrientprofiler.html) for an overview of how the `nutrientprofiler` package works.
+Please see [Getting started](https://leeds-cdrc.github.io/nutrientprofiler/articles/nutrientprofiler.html) for an overview of how the `nutrientprofiler` package works.
 
-To learn to prepare your data for analysis, please first see [Preprocessing](../articles/preprocessing.html) then [Handling input data](../articles/handling_input_data.html). For more details on valid data types for different parameters, see [Parameter guide](../vignettes/nutrientprofiler.html).
+To learn to prepare your data for analysis, please first see [Preprocessing](https://leeds-cdrc.github.io/nutrientprofiler/articles/preprocessing.html) then [Handling input data](https://leeds-cdrc.github.io/nutrientprofiler/articles/handling_input_data.html). For more details on valid data types for different parameters, see [Parameter guide](https://leeds-cdrc.github.io/nutrientprofiler/articles/parameter_guide.html).
 
-To learn the logic of the specific gravity adjustment workflow, see [Specific Gravity](../articles/specific_gravity.html), and to implement custom values for this adjustment, see the guidance in the article [Custom Specific Gravity](../articles/custom_specific_gravity.html).
+To learn the logic of the specific gravity adjustment workflow, see [Specific Gravity](https://leeds-cdrc.github.io/nutrientprofiler/articles/specific_gravity.html), and to implement custom values for this adjustment, see the guidance in the article [Custom Specific Gravity](https://leeds-cdrc.github.io/nutrientprofiler/articles/custom_specific_gravity.html).
 
 # Contributing
 
