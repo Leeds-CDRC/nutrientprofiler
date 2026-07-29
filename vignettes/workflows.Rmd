@@ -15,7 +15,45 @@ knitr::opts_chunk$set(
 ```
 
 This vignette walks you through a variety of different installation options and workflows for
-analysing data in bulk on a high performance computing (HPC) platform.
+analysing data in bulk on a high performance computing (HPC) platform. In addition to detailed comprehensive instructions, we also have created a quick-start guide to help you get set up quickly.
+
+## 1. Quickstart for TRE support staff
+
+If you have been asked to install the latest version of `nutrientprofiler` on a TRE/VLE/other airgapped system, you will find the package on the [GitHub releases page](https://github.com/Leeds-CDRC/nutrientprofiler/releases).
+
+For every release, there is a `tar.gz` and a `zip` file containing the code. Please download the tar file, either directly from the web interface, e.g. by clicking [https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v2.0.1.tar.gz](https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v2.0.1.tar.gz) (warning: direct download link), or by using this little R snippet or any command line download tool of choice:
+
+```R
+# download the v2.0.1 release as a .tar.gz archive
+# to your current directory
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v2.0.1.tar.gz",
+              dest = "./nutrientprofiler-v2.0.1.tar.gz")
+```
+
+While this zipped file can be expanded/extracted for review, when it is approved *please move the original `tar.gz` file to a user-accessible area of the TRE*. This is crucial, as the unzipped folder cannot be isntalled as an R package.
+
+Additionally, the use of this package generally also requires the following supporting packages: `dplyr, tidyr, devtools, readxl, writexl`, which are all available via CRANN. We test on R 4.3.0 and the most recent R release when we update the code (currently tested again R 4.6.1).
+
+Continue reading for more detailed guidance on installing and testing different versions of the code.
+
+## 2. Quickstart for TRE users
+
+Request that the package be installed as per the above instructions. Check that you have access to the following supporting packages for your version of R: `dplyr, tidyr, devtools, readxl, writexl`, which are all available via CRANN.
+
+Once the `tar.gz` file has been moved to your user area, you can install it using R (ensure you update the file path appropriately):
+
+```R
+# install the package directly from source
+install.packages("./nutrientprofiler-v2.0.1.tar.gz", repos = NULL, type="source")
+```
+
+Once installed, you can import the package:
+
+```R
+library(nutrientprofiler)
+```
+
+Continue reading for more details on installation and workflows on HPC systems.
 
 ## Loading package onto an "airgapped" HPC system
 
@@ -39,7 +77,7 @@ access to these on your system.
 
 You can download a specific tagged release (see the 
 [GitHub releases](https://github.com/Leeds-CDRC/nutrientprofiler/releases) page) or a development
-pre-release version of the code from a specific branch of the repository.
+pre-release version of the code from a specific branch of the repository. Find the "Assets" section and download either the tar file or the zip file for any release. See below details for how to do this via the command line.
 
 Tagged releases allow for better reproducibility; however, if a pre-release version needs to be used,
 reproducibility can still be ensured by recording the download link used and the access date.
@@ -49,13 +87,13 @@ reproducibility can still be ensured by recording the download link used and the
 
 **The recommended method is to download the most recent tagged release as a `.tar.gz` archive.**
 
-From your local desktop you can run the following R snippet to download the `v1.0.0` release of the package:
+From your local desktop you can run the following R snippet to download the `v2.0.1` release of the package:
 
 ```R
-# download the v1.0.0 release as a .tar.gz archive
+# download the v2.0.1 release as a .tar.gz archive
 # to your current directory
-download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v1.0.0.tar.gz",
-              dest = "./nutrientprofiler-v1.0.0.tar.gz")
+download.file("https://github.com/Leeds-CDRC/nutrientprofiler/archive/refs/tags/v2.0.1.tar.gz",
+              dest = "./nutrientprofiler-v2.0.1.tar.gz")
 ```
 
 Alternatively, this can be downloaded directly from the
