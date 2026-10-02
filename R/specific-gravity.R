@@ -6,6 +6,7 @@ SGtab <- c(
     "Energy drink" = 1.07,
     "Cordial/squash ready to drink" = 1.03,
     "Cordial/squash undiluted" = 1.09,
+    "Other" = 1.00,
     "Ice cream" = 1.30,
     "Ice lolly" = 0.90,
     "Mayonnaise" = 0.91,
